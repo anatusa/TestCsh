@@ -1,0 +1,956 @@
+<?xml version="1.0"?>
+<!--
+	Together Fuzzy Search
+	Copyright (C) 2011 Together Teamsolutions Co., Ltd.
+
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program. If not, see http://www.gnu.org/licenses
+-->
+<project dir="." name="MAINBUILDER" default="help">
+	
+	<include buildfile="sign.build" if="${file::exists('sign.build')}" />
+	<include buildfile="properties.build" unless="${property::exists('auto.builds')}" />
+	<include buildfile="project.build"/>
+	<include buildfile="version.build"/>
+	<include buildfile="checkHttp.build"/>
+	
+	<property name="project.name" value="${app.full.name}" />
+    <property name="nsi.script" value="TFS.nsi" />
+
+    <property name="root.dir" value="${project::get-base-directory()}" />
+    <property name="output.dir" value="output" />
+    <property name="bin.dir" value="src/bin" />
+    <property name="obj.dir" value="src/obj" />
+    <property name="servref.dir" value="src/Service References" />
+    <property name="dep.dir" value="dep" />
+
+    <property name="doc.dir" value="${root.dir}/doc" />
+	<property name="tools.dir" value="${root.dir}/tools" />
+    <property name="tmp.dir" value="${root.dir}/doc/tmp" />
+
+	<property name="sign.all.flag" 			value="true" unless="${property::exists('sign.all.flag')}" />
+	<property name="sign.dll.flag" 			value="true" unless="${property::exists('sign.dll.flag')}" />
+	<property name="sign.dll.timestamp" 	value="true" unless="${property::exists('sign.dll.timestamp')}" />
+	<property name="sign.setup.flag" 		value="true" unless="${property::exists('sign.setup.flag')}" />
+	<property name="sign.setup.timestamp" 	value="true" unless="${property::exists('sign.setup.timestamp')}" />
+	
+	<property name="project.path" value="${root.dir}/src/TextFunctions.csproj" />
+	<property name="nantcontrib.dir" value="${tools.dir}/nantcontrib" />
+
+	<property name="doc.html" value="${app.name}-current.doc.html" />
+	<property name="doc.pdf" value="${app.name}-current.doc.pdf" />
+	<property name="doc.chm" value="${app.name}-current.doc.chm" />
+	<property name="test.case.pdf" value="${app.name}-current.test.pdf" />
+	<property name="test.case.xml" value="${app.name}-testcases-doc.xml" />
+	<property name="test.case.fo" value="${app.name}-testcases-doc.fo" />
+	<property name="test.case.version.pdf" value="${app.name}-${version}-${release}.test.pdf" />
+	<property name="doc.version.pdf" value="${app.name}-${version}-${release}.doc.pdf" />
+	<property name="doc.version.html" value="${app.name}-${version}-${release}.doc.html" />
+
+	<echo message=":::---------------------------------------------------------" />	
+	<echo message="::: ${project.name} (${app.name})" />
+	
+	<if test="${buildid==''}">
+		<tstamp property="build.timestamp" pattern="yyyyMMdd-HHmm" verbose="false" />
+		<property name="buildid" value="${build.timestamp}" />
+	</if>
+		
+	<if test="${buildid!=''}">
+		<property name="build.timestamp" value="${buildid}" />
+	</if>
+	<echo message="::: Build ID : ${buildid}" />
+	<echo message=":::---------------------------------------------------------" />	
+	
+	<property name="dist.dir" value="distribution/${app.name}-${version}-${release}_${build.timestamp}" />
+	<property name="distribution.dir" value="distribution" />
+    <property name="dist.community.dir" value="${dist.dir}/community" />
+    <property name="dist.internal.dir" value="${dist.dir}/internal" />
+    <property name="dist.tmp.dir" value="${dist.dir}/documentation" />
+    <property name="dist.screenshots.dir" value="${dist.dir}/screenshots" />
+    <property name="dist.source.dir" value="${dist.dir}/community" />
+    <property name="buildID.file" value="BuildID.txt" />
+	<property name="dist.debug.dir" value="${dist.dir}/debug" />
+	
+	<regex pattern="^(?'copyrightyear'\d{4})" input="${build.timestamp}" />
+	
+    <!-- NAnt Contrib setting -->
+	<!-- =================================================================== -->
+	<!-- Init															 	   -->
+	<!-- =================================================================== -->
+	<target name="init">
+		<if test="${property::exists('version')}">
+			<property name="vd1" value="${string::substring(property::get-value('version'), 0, string::last-index-of(property::get-value('version'),'.'))}"/>
+			<property name="vd2" value="${string::replace(string::substring(property::get-value('version'), string::last-index-of(property::get-value('version'), '.'), string::get-length(property::get-value('version'))-1),'.','')}"/>
+		</if>
+		<if test="${property::exists('release')}">
+			<property name="vd3" value="${release}"/>
+		</if>
+
+		<call target="sign.tool.version" />
+		
+		<if test="${not property::exists('sign.timestamp.urls')}">
+			<property name="sign.timestamp.urls" value="http://timestamp.globalsign.com/scripts/timestamp.dll http://www.trustcenter.de/codesigning/timestamp http://timestamp.digicert.com http://tsa.starfieldtech.com" />
+		</if>
+		
+		<loadtasks>
+			<fileset>
+				<include name="${nantcontrib.dir}/bin/NAnt.Contrib.Tasks.dll" />
+			</fileset>
+		</loadtasks>
+	</target>
+
+
+	<!-- =================================================================== -->
+	<!-- Prepare for compiling											 	 -->
+	<!-- =================================================================== -->
+	<target name="initBuild" depends="init">
+		<mkdir dir="${output.dir}" />
+		<!-- <exec program="${vsvars.path}" /> -->
+	</target>
+	
+	<!-- =================================================================== -->
+	<!-- Initialize output folders										 	 -->
+	<!-- =================================================================== -->
+	<target name="initDist" depends="init">
+		<mkdir dir="${dist.dir}" />
+		<mkdir dir="${dist.community.dir}" />
+		<mkdir dir="${dist.internal.dir}" />
+		<mkdir dir="${dist.tmp.dir}" />
+		<mkdir dir="${dist.source.dir}" />
+		<mkdir dir="${dist.debug.dir}" />
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- Debug														 	   -->
+	<!-- =================================================================== -->
+	<target name="debug" depends="initBuild">
+		<!-- <delete dir="${output.dir}"/>
+		<mkdir dir="${output.dir}"/> -->
+		<call target="SetNewProperties"/>
+		<call target="MSbuildVersion"/>
+
+		<echo message="Building ${string::to-upper(app.name)} Debug ..." />
+		<property name="build.Configuration" value="Debug"/>    <!-- Debug, Release -->
+		<property name="build.targets" value="Rebuild"/>          <!-- Build, Rebuild, Clean -->
+		<call target="MSbuildProcess"/>
+	
+		<call target="copy.debug.version.to.output.dir"/>
+
+		<property name="fullname" value="tfs.dll" />
+		<property name="exe.dir" value="${output.dir}/bin" />
+		<property name="exe.name" value="tfs.dll" />
+		<call target="signing.dll.conditions"/>
+	
+		<call target="SetDefaultProperties"/>
+	</target>
+  
+	<!-- =================================================================== -->
+	<!-- MSBuild Version									                 -->
+	<!-- =================================================================== -->
+	<target name="MSbuildVersion" depends="init">
+		<echo message="=================================================="/>
+		<msbuild>	
+			<arg value="/Ver" />
+		</msbuild>
+		<echo message="=================================================="/>
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- MSBuild for compiling source files									 -->
+	<!-- =================================================================== -->
+	<target name="MSbuildProcess" depends="init">
+		<echo message="Configuration : ${build.Configuration}"/>      <!-- Debug, Release -->
+		<echo message="Target        : ${build.targets} "/>           <!-- Build, Rebuild, Clean -->
+		<trycatch>
+			<try>
+				<!--  verbosity :"Quiet," "Normal" (the default value), or "Verbose." -->
+				<msbuild project="${project.path}" verbose="false"  verbosity="Quiet" failonerror="true">
+					  <arg value="/p:Configuration=${build.Configuration}" />
+					  <arg value="/t:${build.targets}" />
+					  <arg value="/v:minimal"/>						   <!--  q[uiet], m[inimal], n[ormal], d[etailed], and diag[nostic]. -->
+					  <!-- <arg value="/p:VisualStudioVersion=4.0"/> -->
+					  <arg value="/p:OutputPath=${root.dir}/src/bin/${build.Configuration}" />
+				</msbuild>
+			</try>
+			<catch property="failure">
+				<call target="SetDefaultProperties"/>
+				<fail message="${failure}" />
+			</catch>
+		</trycatch>
+	</target>
+	
+	<!-- =================================================================== -->
+	<!-- RollBackSetting for setting sources to be original files			 -->
+	<!-- =================================================================== -->
+	<target name="SetDefaultProperties">
+		<copy file="${root.dir}/tmp/AssemblyInfo.cs" tofile="${root.dir}/src/AssemblyInfo.cs" overwrite="true"/>
+		<!-- <copy file="${root.dir}/tmp/Resources.resx" tofile="${root.dir}/src/Resources.resx" overwrite="true"/> -->
+		<delete dir="${root.dir}/tmp" />	
+	</target>
+
+	<target name="SetNewProperties">
+		<mkdir dir="${root.dir}/tmp" />
+		<copy file="${root.dir}/src/AssemblyInfo.cs" tofile="${root.dir}/tmp/AssemblyInfo.cs" overwrite="true"/>
+		<copy file="${root.dir}/tmp/AssemblyInfo.cs" tofile="${root.dir}/src/AssemblyInfo.cs" overwrite="true">		
+			<filterchain>
+				<replacestring from="9,9,9,0" to="${vd1},${vd2},${vd3},0"/>
+				<replacestring from="9.9.9.0" to="${vd1}.${vd2}.${vd3}.0"/>
+            </filterchain>
+		</copy>
+	</target>
+
+	<target name="copy.debug.version.to.output.dir">
+		<echo message="Packaging binary debug..." />
+		<echo message="${root.dir}/src/bin/Debug to ${output.dir} " />
+		
+		<copy todir="${output.dir}/bin">
+			<fileset basedir="${root.dir}/src/bin/Debug">
+			    <include name="*.*" />
+				<exclude name="log.txt" />
+				<include name="*.pdb" />
+			</fileset>
+		</copy>
+    </target>
+
+	<target name="copy.release.version.to.output.dir">
+		<echo message="Packaging binary release..." />
+		<echo message="${root.dir}/src/bin/Release to ${output.dir} " />
+		
+		<copy todir="${output.dir}/bin">
+			<fileset basedir="${root.dir}/src/bin/Release">
+			    <include name="*.*" />
+				<exclude name="log.txt" />
+				<include name="*.pdb" />
+			</fileset>
+		</copy>
+    </target>
+
+	<!-- =================================================================== -->
+	<!-- Compile source files											 	   -->
+	<!-- =================================================================== -->
+	<target name="build" depends="initBuild">
+  
+		<echo message="${build.timestamp}" file="${path::combine(output.dir, buildID.file)}" />
+		<echo message="${build.timestamp}" file="${path::combine(root.dir, buildID.file)}" />
+		<call target="SetNewProperties"/>
+
+		<echo message="Building ${string::to-upper(app.name)} ..." />
+		<property name="build.Configuration" value="Release"/>  <!-- Debug, Release -->
+		<property name="build.targets" value="Rebuild"/>          <!-- Build, Rebuild, Clean -->
+		<call target="MSbuildProcess"/>
+		<echo message="Finished Building ${string::to-upper(app.name)}" />
+	  
+		<call target="copy.release.version.to.output.dir" />
+
+		<property name="fullname" value="tfs.dll" />
+		<property name="exe.dir" value="${output.dir}/bin" />
+		<property name="exe.name" value="tfs.dll" />
+		<call target="signing.dll.conditions"/>
+			
+		<call target="SetDefaultProperties"/>
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- Build source distribution											 -->
+	<!-- =================================================================== -->
+	<target name="distSources" depends="initDist">
+		<echo message="Packaging sources" />
+		<zip zipfile="${dist.source.dir}/${app.name}-${version}-${release}.src.zip">
+			<fileset basedir="." prefix="${app.name}-${version}-${release}.src">
+				<include name="**/*" />
+				<include name="SimMetrics*.zip" />
+				<exclude name="${dist.dir}/**" />
+				<exclude name="${output.dir}/**" />
+				<exclude name=".git/**" />
+				<exclude name=".gitignore" />
+				<exclude name=".cvsignore" />
+				<exclude name="sign.build" />
+				<exclude name="build.properties" />
+				<exclude name="properties.build" />
+				<exclude name="BuildID.txt" />
+				<exclude name="doc/docbook/**" />
+				<exclude name="doc/tmp/**" />
+				<exclude name="doc/tmp2/**" />
+				<exclude name="doc/log.txt" />
+				<exclude name="src/obj/**"/>
+				<exclude name="src/bin/**"/>
+			</fileset>
+		</zip>
+		
+		<copy todir="${dist.source.dir}">
+			<fileset basedir="${dep.dir}">
+				<include name="*.zip" />
+			</fileset>
+		</copy>
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- Copy files to output										         -->
+	<!-- =================================================================== -->
+	<target name="copy">
+		<copy todir="${output.dir}/sqlscript">
+			<fileset basedir="${root.dir}/sqlscript">
+				<include name="*.sql" />
+			</fileset>
+		</copy>
+
+		<copy todir="${output.dir}/licenses">
+			<fileset basedir="${root.dir}/licenses">
+				<include name="*.*" />
+				<exclude name="*.csv" />
+			</fileset>
+		</copy>
+		
+		<foreach item="File" property="filename">
+			<in>
+				<items basedir="${root.dir}/licenses">
+					<include name="*-includes.csv" />
+				</items>
+			</in>
+			<do>
+				<echo message="${filename}" />
+				<copy file="${filename}" tofile="${output.dir}/licenses/${app.name}-${version}-${release}.includes.csv" />
+			</do>
+		</foreach>
+		
+		<foreach item="File" property="filename">
+			<in>
+				<items basedir="${root.dir}/licenses">
+					<include name="*-patches.csv" />
+				</items>
+			</in>
+			<do>
+				<echo message="${filename}" />
+				<copy file="${filename}"  tofile="${output.dir}/licenses/${app.name}-${version}-${release}.patches.csv" />	
+			</do>
+		</foreach>
+		
+		<foreach item="File" property="filename">
+			<in>
+				<items basedir="${root.dir}/licenses">
+					<include name="*-restrictions.csv" />
+				</items>
+			</in>
+			<do>
+				<echo message="${filename}" />
+				<copy file="${filename}"  tofile="${output.dir}/licenses/${app.name}-${version}-${release}.restrictions.csv" />	
+			</do>
+		</foreach>
+
+	</target>
+
+    <!-- ==================================================================== -->
+	<!-- Silent Properties                                                    -->
+	<!-- ==================================================================== -->
+	<target name="create.silent.properties">
+	    <!-- Professional -->
+        <copy file="${root.dir}/installation/Windows/silent.properties"  tofile="${dist.community.dir}/${app.name}-${version}-${release}.silent.properties.txt" overwrite="true">  
+            <filterchain>
+                <replacestring from="@startup.menu.name" to="${project.name} ${version}-${release}"/>
+				<replacestring from="@install.dir" to="${environment::get-folder-path('ProgramFiles')}\${app.name}-${version}-${release}"/>
+				<replacestring from="@version" to="${version}"/>
+				<replacestring from="@release" to="${release}"/>
+				<replacestring from="@projectname" to="${project.name}"/>
+				<replacestring from="@shortname" to="${app.name}"/>
+			</filterchain>
+        </copy>
+    </target>
+	
+	
+	<!-- =================================================================== -->
+	<!-- Building binary distribution and creates NSIS installation files         -->
+	<!-- =================================================================== -->
+	<target name="distBin" depends="initDist">
+		<echo message="Packaging binary" />
+		<delete>
+			<fileset basedir="${output.dir}">
+				<include name="**/*.pdb" />
+			</fileset>
+		</delete>
+		
+		<zip zipfile="${dist.community.dir}/${app.name}-${version}-${release}.zip">
+			<fileset basedir="${output.dir}" prefix="${app.name}-${version}-${release}">
+				<include name="**/*" />
+				<exclude name="**/${doc.version.pdf}*" />
+				<exclude name="**/${doc.version.html}*" />
+				<exclude name="**/*.test.*" />
+				<exclude name="**/*.bat" />
+				<exclude name="**/*.chm" />
+			</fileset>
+		</zip>
+			
+		<call target="signing.nsis.conditions"/>
+				
+		<property name="fullname" value="${project.name} ${version}-${release}" />
+		<property name="exe.dir" value="${dist.community.dir}" />
+		<property name="exe.name" value="${app.name}-${version}-${release}.exe" />
+		<call target="signing.setup.conditions"/>
+	</target>
+  
+	<!-- =================================================================== -->
+	<!-- Make Distributions                                                  -->
+	<!-- =================================================================== -->
+	
+	<!--target name="distOther" depends="init, copy.api.document.to.dist.documentation.dir" -->
+	<target name="distOther" depends="init, copy.api.document.to.dist.documentation.dir" >
+		
+		<!--foreach item="File" property="filename">
+			<in>
+				<items basedir="${root.dir}/licenses">
+					<include name="*-includes.csv" />
+				</items>
+			</in>
+			<do>
+				<echo message="${filename}" />
+				<copy file="${filename}" tofile="${dist.internal.dir}/${app.name}-${version}-${release}.includes.csv" />
+			</do>
+		</foreach>
+		
+		<foreach item="File" property="filename">
+			<in>
+				<items basedir="${root.dir}/licenses">
+					<include name="*-patches.csv" />
+				</items>
+			</in>
+			<do>
+				<echo message="${filename}" />
+				<copy file="${filename}"  tofile="${dist.internal.dir}/${app.name}-${version}-${release}.patches.csv" />	
+			</do>
+		</foreach>
+		
+		<foreach item="File" property="filename">
+			<in>
+				<items basedir="${root.dir}/licenses">
+					<include name="*-restrictions.csv" />
+				</items>
+			</in>
+			<do>
+				<echo message="${filename}" />
+				<copy file="${filename}"  tofile="${dist.internal.dir}/${app.name}-${version}-${release}.restrictions.csv" />	
+			</do>
+		</foreach-->
+		
+		<copy todir="${dist.internal.dir}">
+			<fileset basedir="${output.dir}/licenses">
+				<include name="*.csv" />
+			</fileset>
+		</copy>
+	
+		<copy file="${root.dir}/buildID.txt" tofile="${dist.internal.dir}/buildID.txt" />
+		<copy file="${tmp.dir}/${app.name}-current.doc.chm" tofile="${dist.tmp.dir}/${app.name}-${version}-${release}.doc.chm"/>
+		<copy file="${tmp.dir}/${app.name}-${version}-${release}.test.pdf" tofile="${dist.internal.dir}/${app.name}-${version}-${release}.test.pdf" />
+		
+		<copy todir="${dist.community.dir}">
+			<fileset basedir="${tmp.dir}">
+				<include name="${app.name}-current.doc.pdf" />
+			</fileset>
+		</copy>
+    
+		<copy todir="${dist.tmp.dir}">
+			<fileset basedir="${tmp.dir}">
+				<include name="**/*" />
+				<exclude name="docbook/" />
+				<exclude name="*.xml" />
+				<exclude name="${app.name}-current.doc.*" />
+				<exclude name="${app.name}-${version}-${release}.test.pdf"/>
+			</fileset>
+		</copy>
+		<!-- want copy Together Fuzzy Search-x.y-z.chm to doc package -->
+		<zip zipfile="${dist.community.dir}/${app.name}-${version}-${release}.doc.zip" >
+			<fileset basedir="${output.dir}/doc">
+				<include name="**/*" />
+				<exclude name="**/*-current*" />
+				<exclude name="*.bat" />
+				<exclude name="**/${test.case.version.pdf}*" />
+				<exclude name="*.chm" />
+				<exclude name="docbook/" />
+				<exclude name="*.xml" />
+				<exclude name="Images/Thumbs.db" />
+			</fileset>
+		</zip>
+		<delete dir="${dist.tmp.dir}" />
+    
+		<delete>
+			<fileset basedir="${tmp.dir}">
+				<include name="${app.name}-${version}-${release}.doc.*"/>
+			</fileset>
+		</delete>
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- Make Distributions                                                  -->
+	<!-- =================================================================== -->
+	<target name="distributions" depends="clean,buildAll,distSources,distBin,distOther">
+		<call target="create.silent.properties"/>
+		<call target="debug"/>
+		
+		<zip zipfile="${dist.debug.dir}/${app.name}-${version}-${release}.debug.zip">
+			<fileset basedir="${output.dir}">
+				<include name="**/*" />
+				<exclude name="**/*.pdb"/>
+				<exclude name="**/*SimMetrics.dll"/>
+			</fileset>
+		</zip>
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- BuildAll                                                             -->
+	<!-- =================================================================== -->
+	<target name="buildAll" depends="buildNoDoc, buildDoc, buildAPI"/>
+
+	<!-- =================================================================== -->
+	<!-- DocBook                                                             -->
+	<!-- =================================================================== -->
+	<target name="buildDoc" depends="init">
+		<nant buildfile="${doc.dir}//default.build" target="buildDocBook" inheritall="true" inheritrefs="true" />
+		<nant buildfile="${doc.dir}//default.build" target="buildTestCaseDoc" inheritall="true" inheritrefs="true" />
+	</target>
+	
+	<!-- Document Specification -->
+	<!-- Document Specification -->
+	<target name="buildAPI" if="${target::has-executed('build')}">
+		<if test="${property::exists('sandcastle.dir') and string::trim(property::get-value('sandcastle.dir')) != ''}">
+			<nant buildfile="${doc.dir}/documentation.build" inheritall="true" inheritrefs="true" />
+			<copy todir="${output.dir}/doc" overwrite="true">
+				<fileset basedir="${root.dir}/doc/tmp2/output">
+					<include name="*.chm" />
+				</fileset>
+			</copy>
+			
+		</if>
+	</target>
+	
+	<target name="copy.api.document.to.dist.documentation.dir">		
+		<if test="${property::exists('sandcastle.dir') and string::trim(property::get-value('sandcastle.dir')) != ''}">
+			<copy todir="${dist.tmp.dir}" overwrite="true">
+				<fileset basedir="${root.dir}/doc/tmp2/output">
+					<include name="*.chm" />
+				</fileset>
+			</copy>
+		</if>
+	</target>
+	<!--target name="buildAPI" if="${target::has-executed('build')}">
+		<if test="${sandcastle.dir != '' and directory::exists(sandcastle.dir)}">
+			<nant buildfile="${doc.dir}/documentation.build" inheritall="true" inheritrefs="true" />
+			<copy todir="${output.dir}/doc" overwrite="true">
+				<fileset basedir="${tmp.dir}/output">
+					<include name="*.chm" />
+				</fileset>
+			</copy>
+		</if>
+	</target>
+	
+	<target name="copy.api.document.to.dist.documentation.dir" depends="buildAPI">
+		<if test="${sandcastle.dir != '' and directory::exists(sandcastle.dir)}">
+			<copy todir="${dist.tmp.dir}" overwrite="true">
+				<fileset basedir="${tmp.dir}/output">
+					<include name="*.chm" />
+				</fileset>
+			</copy>
+		</if>
+	</target-->
+	<!-- end of Document Specification -->
+	
+	<!-- =================================================================== -->
+	<!-- Build no document                                                   -->
+	<!-- =================================================================== -->
+	<target name="buildNoDoc" depends="clean, build,copy" />
+
+	<!-- =================================================================== -->
+	<!-- Install                                                   -->
+	<!-- =================================================================== -->
+	<target name="install" depends="buildAll" >
+		<copy todir="${install.dir}">
+			<fileset basedir="${output.dir}">
+				<include name="**/*" />
+			</fileset>
+		</copy>
+	</target>
+
+	<!-- ==================================================================== -->
+	<!-- Help - default target                                                -->
+	<!-- ==================================================================== -->
+	<target name="help">
+		<echo>
+			make                     - Displays the Help screen.
+			make help                - Displays the Help screen.
+			make buildAll            - Builds and configures ${string::to-upper(app.name)} with documentation.
+			make buildDoc            - Builds docbook documentation.
+			make buildNoDoc          - Builds and configures ${string::to-upper(app.name)} without documentation.
+			make clean               - Removes the output and distribution folder (in order to start a new compilation from scratch).
+			make debug               - Builds and configures ${string::to-upper(app.name)} debug version.
+			make distributions       - Builds and configures ${string::to-upper(app.name)} with all documentations and creates distribution package.
+			make install             - Installs and configures ${string::to-upper(app.name)} into directory defined by parameter install.dir in build.properties file.
+										Which can be set by using the command: configure -instdir PATH_TO_DIR.
+										(execute only after 'make buildAll').	  
+		</echo>
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- Clean                                                               -->
+	<!-- =================================================================== -->
+	<target name="clean" depends="init">
+		<delete dir="${output.dir}" includeemptydirs="True"/>
+		<delete dir="${bin.dir}" includeemptydirs="True"/>
+		<delete dir="${obj.dir}" includeemptydirs="True"/>
+		<delete dir="${servref.dir}" includeemptydirs="True"/>
+		<delete dir="${dist.dir}" includeemptydirs="True"/>
+		<delete dir="${dist.tmp.dir}" includeemptydirs="True"/>
+		<delete dir="${distribution.dir}" includeemptydirs="True"/>
+		<delete dir="${tmp.dir}" includeemptydirs="True"/>
+	
+		<delete>
+			<fileset basedir="${root.dir}">
+				<include name="BuildID.txt" />
+			</fileset>
+		</delete>
+	
+		<delete>
+			<fileset basedir="${doc.dir}">
+				<include name="log.txt" />
+			</fileset>
+		</delete>
+		
+		<delete>
+			<fileset basedir="${doc.dir}" defaultexcludes="false">
+				<include name="*~" />
+			</fileset>
+		</delete>
+
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- Sign file with timestamp                                            -->
+	<!-- =================================================================== -->
+	<target name="sign.with.timestamp">
+		<property name="count.error.timestamp" value="0" />
+		<property name="exe.return.code" value="-1" />
+		
+		<foreach item="String" in="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50" property="sign.timestamp.index.item" delim="," trim="Both">
+			<if test="${property::exists('exe.return.code') and exe.return.code != '0'}">
+				<foreach item="String" in="${sign.timestamp.urls}" property="sign.timestamp.url" delim=" " trim="Both">
+					
+					<property name="temp.str" value="${string::substring(sign.timestamp.url, string::index-of(sign.timestamp.url, ':') + 3, string::get-length(sign.timestamp.url) - string::index-of(sign.timestamp.url, ':') - 3)}" />
+					
+					<if test="${string::index-of(temp.str, '/') &gt; 0}">
+						<property name="temp.str" value="${string::substring(temp.str, 0, string::index-of(temp.str,'/'))}" />
+					</if>
+					
+					<property name="colon.index" value="${string::index-of(temp.str, ':')}" />
+					<if test="${int::parse(colon.index) &gt; -1}">
+						<property name="port.str" value="${string::substring(temp.str, string::index-of(temp.str, ':')+1, string::get-length(temp.str) - string::index-of(temp.str, ':') - 1)}" />
+						<property name="temp.str" value="${string::substring(temp.str, 0, string::index-of(temp.str, ':'))}" />
+					</if>
+					
+					<if test="${(int::parse(colon.index) &lt; 0)}">
+						<property name="port.str" value="80" />
+					</if>
+
+					<if test="${property::exists('exe.return.code') and exe.return.code != '0'}">
+						<echo message="Signing with ${sign.timestamp.url}" />
+						<waitfor timeout="30000" interval="10000" failontimeout="false" url="${temp.str}" port="${int::parse(port.str)}" />
+						<exec program="${sign.tool}" resultproperty="exe.return.code" failonerror="false">
+							<arg value="sign"/>
+							<arg value="/f"/>
+							<arg value="${sign.privatekey}"/>
+							<arg value="/p"/>
+							<arg value="${sign.pwd}"/>
+							<arg value="/t"/>
+							<arg value="${sign.timestamp.url}"/>
+							<arg value="/d"/>
+							<arg value="${fullname}"/>
+							<arg value="/du"/>
+							<arg value="http://www.together.at"/>
+							<arg value="${exe.dir}/${exe.name}"/>
+						</exec>
+					</if>
+					
+					<if test="${exe.return.code != '0'}">
+						<property name="count.error.timestamp" value="${int::parse(count.error.timestamp)+1}" />
+						<sleep seconds="2" />
+					</if>
+					
+				</foreach>
+			</if>
+		</foreach>
+		
+		<if test="${property::exists('exe.return.code') and exe.return.code != '0'}">
+			<fail message="${sign.tool} return code ${exe.return.code}. There were ${count.error.timestamp} timestamping errors." />
+		</if>
+		
+		<if test="${property::exists('exe.return.code') and exe.return.code == '0'}">
+			<echo message="${sign.tool} return code ${exe.return.code}. There were ${count.error.timestamp} timestamping errors." />
+		</if>
+	</target>
+	
+	<!-- =================================================================== -->
+	<!--  Sign file without timestamp                                          -->
+	<!-- =================================================================== -->
+	<target name="sign.without.timestamp">
+		<echo message="Signing without timestamp" />
+		<exec program="${sign.tool}" resultproperty="exe.return.code" failonerror="false">
+			<arg value="sign"/>
+			<arg value="/f"/>
+			<arg value="${sign.privatekey}"/>
+			<arg value="/p"/>
+			<arg value="${sign.pwd}"/>
+			<arg value="/d"/>
+			<arg value="${fullname}"/>
+			<arg value="/du"/>
+			<arg value="http://www.together.at"/>
+			<arg value="${exe.dir}/${exe.name}"/>
+		</exec>
+	</target>
+
+	<!-- =================================================================== -->
+	<!--  Make exe file with timestamp                                    -->
+	<!-- =================================================================== -->
+	<target name="nsis.sign.with.timestamp">
+		<property name="count.error.timestamp" value="0" />
+		<property name="exe.return.code" value="-1" />
+		<foreach item="String" in="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50" property="sign.timestamp.index.item" delim="," trim="Both">
+			<if test="${property::exists('exe.return.code') and exe.return.code != '0'}">
+				<foreach item="String" in="${sign.timestamp.urls}" property="sign.timestamp.url" delim=" " trim="Both">
+					
+					<property name="temp.str" value="${string::substring(sign.timestamp.url, string::index-of(sign.timestamp.url, ':') + 3, string::get-length(sign.timestamp.url) - string::index-of(sign.timestamp.url, ':') - 3)}" />
+						
+					<if test="${string::index-of(temp.str, '/') &gt; 0}">
+						<property name="temp.str" value="${string::substring(temp.str, 0, string::index-of(temp.str,'/'))}" />
+					</if>
+					
+					<property name="colon.index" value="${string::index-of(temp.str, ':')}" />
+					<if test="${int::parse(colon.index) &gt; -1}">
+						<property name="port.str" value="${string::substring(temp.str, string::index-of(temp.str, ':') + 1, string::get-length(temp.str) - string::index-of(temp.str, ':') - 1)}" />
+						<property name="temp.str" value="${string::substring(temp.str, 0, string::index-of(temp.str, ':'))}" />
+					</if>
+						
+					<if test="${int::parse(colon.index) &lt; 0}">
+						<property name="port.str" value="80" />
+					</if>
+
+					<if test="${property::exists('exe.return.code') and exe.return.code != '0'}">
+						<echo message="Signing with ${sign.timestamp.url}" />	
+						<if test="${property::exists('sign.tool')}">
+							<waitfor timeout="30000" interval="10000" failontimeout="false" url="${temp.str}" port="${int::parse(port.str)}" timeoutproperty="server.timeout" />
+						</if>
+							
+						<if test="${not property::exists('sign.tool')}">
+							<property name="server.timeout" value="false" />
+						</if>
+						
+						<!-- Make exe with sign with Timestamp -->
+						<echo message="Creating ${string::to-upper(app.name)} installation, please wait...." />
+						<exec program="${root.dir}/tools/nsis/makensis.exe" resultproperty="exe.return.code" failonerror="false">
+							<arg value="/V4" />
+							<arg value="/Osrc/bin/log_tfs.txt" />
+							<arg value="/DAPP_FULL_NAME=&quot;${app.full.name}&quot;" />
+							<arg value="/DSHORT_NAME=&quot;${app.name}&quot;" />
+							<arg value="/DSHORT_UPPER_NAME=&quot;${string::to-upper(app.name)}&quot;" />
+							<arg value="/DCOPYRIGHT_YEAR=${copyrightyear}" />
+							<arg value="/DVERSION=${version}" />
+							<arg value="/DRELEASE=${release}" />
+							<arg value="/DBUILDID=${buildid}" />
+							<arg line="/DSIGNTOOL_PATH=&quot;${sign.tool}&quot;" />
+							<arg line="/DKEY_PATH=&quot;${sign.privatekey}&quot;" />
+							<arg line="/DPASSWORD=&quot;${sign.pwd}&quot;" />
+							<arg line="/DFULL_NAME=&quot;${project.name} ${version}-${release}&quot;" />	
+							<arg line="/DSERVER_TIMEOUT=&quot;${server.timeout}&quot;" />
+							<arg line="/DTIMESTAMP_URL=&quot;${sign.timestamp.url}&quot;" />
+							<arg value="/DOUTPUT_DIR=&quot;../../${dist.community.dir}&quot;" />
+							<arg value="${root.dir}/installation/Windows/${nsi.script}" />
+						</exec>
+					</if>
+						
+					<if test="${exe.return.code != '0'}">
+						<property name="count.error.timestamp" value="${int::parse(count.error.timestamp)+1}" />
+						<sleep seconds="2" />
+					</if>
+						
+				</foreach>
+			</if>
+		</foreach>
+		
+		<if test="${property::exists('exe.return.code') and exe.return.code != '0'}">
+			<fail message="${root.dir}/tools/nsis/makensis.exe return code ${exe.return.code}. There were ${count.error.timestamp} timestamping errors." />
+		</if>
+		
+		<if test="${property::exists('exe.return.code') and exe.return.code == '0'}">
+			<echo message="${root.dir}/tools/nsis/makensis.exe return code ${exe.return.code}. There were ${count.error.timestamp} timestamping errors." />
+		</if>
+	</target>
+
+	<!-- =================================================================== -->
+	<!--  Make exe file without timestamp                                    -->
+	<!-- =================================================================== -->
+	<target name="nsis.sign.without.timestamp">
+		<!-- Make exe with sign with Timestamp -->
+		<echo message="Creating ${string::to-upper(app.name)} installation, please wait...." />
+		<exec program="${root.dir}/tools/nsis/makensis.exe" resultproperty="exe.return.code" failonerror="false">
+			<arg value="/V4" />
+			<arg value="/Osrc/bin/log_tfs.txt" />
+			<arg value="/DAPP_FULL_NAME=&quot;${app.full.name}&quot;" />
+			<arg value="/DSHORT_NAME=&quot;${app.name}&quot;" />
+			<arg value="/DSHORT_UPPER_NAME=&quot;${string::to-upper(app.name)}&quot;" />
+			<arg value="/DCOPYRIGHT_YEAR=${copyrightyear}" />
+							<arg value="/DVERSION=${version}" />
+			<arg value="/DRELEASE=${release}" />
+			<arg value="/DBUILDID=${buildid}" />
+			<arg line="/DSIGNTOOL_PATH=&quot;${sign.tool}&quot;" />
+			<arg line="/DKEY_PATH=&quot;${sign.privatekey}&quot;" />
+			<arg line="/DPASSWORD=&quot;${sign.pwd}&quot;" />
+			<arg line="/DFULL_NAME=&quot;${project.name} ${version}-${release}&quot;" />	
+			<arg line="/DSERVER_TIMEOUT=&quot;&quot;" />
+			<arg line="/DTIMESTAMP_URL=&quot;&quot;" />
+			<arg value="/DOUTPUT_DIR=&quot;../../${dist.community.dir}&quot;" />
+			<arg value="${root.dir}/installation/Windows/${nsi.script}" />
+		</exec>
+	</target>
+	
+	<!-- =================================================================== -->
+	<!--  Make exe file without timestamp                                    -->
+	<!-- =================================================================== -->
+	<target name="nsis.without.sign">
+		<echo message="Creating ${string::to-upper(app.name)} installation, please wait...." />
+		<exec program="${root.dir}/tools/nsis/makensis.exe" resultproperty="exe.return.code" failonerror="false">
+			<arg value="/V4" />
+			<arg value="/Osrc/bin/log_tfs.txt" />
+			<arg value="/DAPP_FULL_NAME=&quot;${app.full.name}&quot;" />
+			<arg value="/DSHORT_NAME=&quot;${app.name}&quot;" />
+			<arg value="/DSHORT_UPPER_NAME=&quot;${string::to-upper(app.name)}&quot;" />
+			<arg value="/DCOPYRIGHT_YEAR=${copyrightyear}" />
+							<arg value="/DVERSION=${version}" />
+			<arg value="/DRELEASE=${release}" />
+			<arg value="/DBUILDID=${buildid}" />
+			<arg line="/DSIGNTOOL_PATH=&quot;&quot;" />
+			<arg line="/DKEY_PATH=&quot;&quot;" />
+			<arg line="/DPASSWORD=&quot;&quot;" />
+			<arg line="/DFULL_NAME=&quot;${project.name} ${version}-${release}&quot;" />	
+			<arg line="/DSERVER_TIMEOUT=&quot;&quot;" />
+			<arg line="/DTIMESTAMP_URL=&quot;&quot;" />
+			<arg value="/DOUTPUT_DIR=&quot;../../${dist.community.dir}&quot;" />
+			<arg value="${root.dir}/installation/Windows/${nsi.script}" />
+		</exec>
+	</target>	
+
+	<!-- Sign dll file -->
+	<target name="signing.dll.conditions">
+		<choose>
+			<when test="${file::exists('sign.build') or property::exists('sign.privatekey')}">
+				<choose>
+					<when test="${sign.all.flag=='true' and sign.dll.flag=='true' and property::exists('sign.dll.timestamp')}">
+						<if test="${sign.dll.timestamp=='true'}">
+							<echo message="Signing DLL file with timestamp" />
+							<call target="sign.with.timestamp" />
+						</if>
+						<if test="${sign.dll.timestamp=='false'}">
+							<echo message="Signing DLL file without timestamp" />
+							<call target="sign.without.timestamp" />
+						</if>
+					</when>
+					<when test="${sign.all.flag=='true' and sign.dll.flag=='true'}">
+						<echo message="Signing DLL file without timestamp" />
+						<call target="sign.without.timestamp" />
+					</when>
+					
+				</choose>
+			</when>
+			<otherwise>
+				<echo message="DLL file file will not be signed" />
+			</otherwise>
+		</choose>
+	</target>
+
+	<!-- Sign .exe file -->
+	<target name="signing.setup.conditions">
+		<choose>
+			<when test="${file::exists('sign.build') or property::exists('sign.privatekey')}">
+				<choose>
+					<when test="${sign.all.flag=='true' and sign.setup.flag=='true' and property::exists('sign.setup.timestamp')}">
+						<if test="${sign.setup.timestamp=='true'}">
+							<echo message="Signing '${app.name}-${version}-${release}.exe' with timestamp" />
+							<call target="sign.with.timestamp" />
+						</if>
+						<if test="${sign.setup.timestamp=='false'}">
+							<echo message="Signing '${app.name}-${version}-${release}.exe' without timestamp" />
+							<call target="sign.without.timestamp" />
+						</if>
+					</when>
+					<when test="${sign.all.flag=='true' and sign.setup.flag=='true'}">
+						<echo message="Signing '${app.name}-${version}-${release}.exe' without timestamp" />
+						<call target="sign.without.timestamp" />
+					</when>
+				</choose>
+			</when>
+			<otherwise>
+				<echo message="'${app.name}-${version}-${release}.exe' file will not be signed" />
+			</otherwise>
+		</choose>
+	</target>
+	
+	<!-- Sign uninstall.exe file -->
+	<target name="signing.nsis.conditions">
+		<choose>
+			<when test="${file::exists('sign.build') or property::exists('sign.privatekey')}">
+				<choose>
+					<when test="${sign.all.flag=='true' and sign.setup.flag=='true' and property::exists('sign.setup.timestamp')}">
+						<if test="${sign.setup.timestamp=='true'}">
+							<echo message="Signing 'uninstall.exe' with timestamp" />
+							<call target="nsis.sign.with.timestamp" />
+						</if>
+						<if test="${sign.setup.timestamp=='false'}">
+							<echo message="Signing 'uninstall.exe' without timestamp" />
+							<call target="nsis.sign.without.timestamp" />
+						</if>
+					</when>
+					<when test="${sign.all.flag=='true' and sign.setup.flag=='true'}">
+						<echo message="Signing 'uninstall.exe' without timestamp" />
+						<call target="nsis.sign.without.timestamp" />
+					</when>
+				</choose>
+			</when>
+			<otherwise>
+				<echo message="'uninstall.exe' file will not be signed" />
+				<call target="nsis.without.sign" />
+			</otherwise>
+		</choose>
+	</target>
+
+	<target name="sign.tool.version">
+		<choose>
+			<when test="${not platform::is-win64() and file::exists(tools.dir+ '/signtool/x86/signtool.exe')}">
+				<property name="sign.tool" value="${tools.dir}/signtool/x86/signtool.exe" />
+			</when>
+			<when test="${platform::is-win64() and file::exists(tools.dir+ '/signtool/x64/signtool.exe')}">
+				<property name="sign.tool" value="${tools.dir}/signtool/x64/signtool.exe" />
+			</when>
+			<when test="${file::exists(tools.dir+ '/signtool/signtool.exe')}">
+				<property name="sign.tool" value="${tools.dir}/signtool/signtool.exe" />
+			</when>
+			<otherwise>
+				<fail message="This operating system architecture is undefined." />
+			</otherwise>		
+		</choose>
+	</target>
+	
+	<script language="C#" prefix="platform" >
+	  <code>
+		<![CDATA[
+		  [Function("is-win64")]
+		  public static bool Is64bit() {
+			  return Environment.Is64BitOperatingSystem;
+		  }
+		]]>
+	  </code>
+	</script>
+</project>
+ 

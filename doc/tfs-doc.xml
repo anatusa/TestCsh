@@ -1,0 +1,2556 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V5.0//EN"
+"../tools/docbook-dtd/dtd/docbook.dtd">
+<!--
+    Together Fuzzy Search
+    Copyright (C) 2011 Together Teamsolutions Co., Ltd.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or 
+    (at your option) any later version.
+ 
+    This program is distributed in the hope that it will be useful, 
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+    GNU General Public License for more details.
+ 
+    You should have received a copy of the GNU General Public License
+    along with this program. If not, see http://www.gnu.org/licenses
+-->
+<book version="5.0" xml:id="tfs" xml:lang="en"
+      xmlns="http://docbook.org/ns/docbook">
+  <title><inlinemediaobject>
+      <imageobject>
+        <imagedata contentdepth="100%" fileref="Images/tfs.jpg" scalefit="1"
+                   valign="middle" width="100%"/>
+      </imageobject>
+    </inlinemediaobject> <replaceable> <?coverdetail ?> </replaceable></title>
+
+  <titleabbrev>Together Fuzzy Search</titleabbrev>
+
+  <info>
+    <title>Together Fuzzy Search</title>
+
+    <subtitle>User Manual</subtitle>
+
+    <authorgroup>
+      <author>
+        <personname><firstname>Together Teamsolutions Co.,
+        Ltd.</firstname></personname>
+      </author>
+    </authorgroup>
+
+    <copyright>
+      <year>@COPYRIGHT@</year>
+
+      <holder>Together Teamsolutions Co., Ltd.</holder>
+    </copyright>
+
+    <legalnotice>
+      <para>Permission is granted to copy, distribute and/or modify this
+      document under the terms of the GNU Free Documentation License, Version
+      1.3 or any later version published by the Free Software Foundation; with
+      the invariant sections being "Introduction", "Installation Guide", "User
+      Guide", "Similarity metrics", "Build Guide", "Release Notes", "Appendix
+      A. GNU Free Documentation License", the front-cover and back-cover
+      texts. A copy of the license is included in the section entitled "GNU
+      Free Documentation License".</para>
+
+      <para>Together Teamsolutions Co., Ltd. DISCLAIMS ALL WARRANTIES, EXPRESS
+      OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF
+      THE INFORMATION HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED
+      WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR
+      PURPOSE.</para>
+
+      <para>While every precaution has been taken in the preparation of this
+      document, the publisher assumes no responsibility for errors or
+      omissions, or for damages resulting from the use of the information
+      contained in this document.</para>
+
+      <para>The Together logos are registered trademarks of GrECo
+      International Holding AG.</para>
+    </legalnotice>
+  </info>
+
+  <toc/>
+
+  <chapter>
+    <title>Introduction</title>
+
+    <para>Together Fuzzy Search TFS is a .NET library used with SQL
+    Server.</para>
+
+    <para>TFS is used for fuzzy text comparisons and can evaluate the
+    performance and the accuracy of two strings by each metric.</para>
+  </chapter>
+
+  <chapter>
+    <title>Installation Guide</title>
+
+    <para/>
+
+    <sect1>
+      <title>Prerequisites</title>
+
+      <itemizedlist>
+        <listitem>
+          <para>Microsoft Windows 7 or Microsoft Windows 8 or Microsoft
+          Windows Server 2008 R2 or Microsoft Windows Server 2012</para>
+        </listitem>
+
+        <listitem>
+          <para>Microsoft SQL Server 2014</para>
+        </listitem>
+
+        <listitem>
+          <para><link
+          xlink:href="https://www.microsoft.com/en-us/download/details.aspx?id=48137"
+          xmlns:xlink="http://www.w3.org/1999/xlink">Microsoft .NET Framework
+          4.6</link></para>
+        </listitem>
+      </itemizedlist>
+    </sect1>
+
+    <sect1>
+      <title>Installation</title>
+
+      <orderedlist>
+        <listitem>
+          <para>Double click on the setup file (tfs-@VERSION@-@RELEASE@.exe)
+          for start the installation.</para>
+        </listitem>
+
+        <listitem>
+          <para>First screen show the Setup Wizard screen and click Next
+          button. Remark: In figures, X.Y-Z is Version-Release. The current
+          version-release is @VERSION@-@RELEASE@.</para>
+
+          <figure>
+            <title>Welcome Setup Wizard Screen</title>
+
+            <mediaobject>
+              <imageobject>
+                <imagedata align="center" contentdepth="100%"
+                           fileref="Images/tfs-install-welcome.JPG"
+                           scalefit="1" width="100%"/>
+              </imageobject>
+            </mediaobject>
+          </figure>
+
+          <!--PAGEBREAK-->
+
+          <?breakafter ?>
+        </listitem>
+
+        <listitem>
+          <para>License Agreement. Please review the license agreement before
+          installing application and check "I accept the terms of the License
+          Agreement" and click 'Next' button</para>
+
+          <figure>
+            <title>License Agreement Screen</title>
+
+            <mediaobject>
+              <imageobject>
+                <imagedata align="center" contentdepth="100%"
+                           fileref="Images/tfs-install-license-agreement.JPG"
+                           scalefit="1" width="100%"/>
+              </imageobject>
+            </mediaobject>
+          </figure>
+
+          <!--PAGEBREAK-->
+
+          <?breakafter ?>
+        </listitem>
+
+        <listitem>
+          <para>Choose Install Location screen. Choose the destination folder
+          path for install the application and click Next button to next
+          step.</para>
+
+          <figure>
+            <title>Choose Install Locations</title>
+
+            <mediaobject>
+              <imageobject>
+                <imagedata align="center" contentdepth="100%"
+                           fileref="Images/tfs-install-location.JPG"
+                           scalefit="1" width="100%"/>
+              </imageobject>
+            </mediaobject>
+          </figure>
+
+          <!--PAGEBREAK-->
+
+          <?breakafter ?>
+        </listitem>
+
+        <listitem>
+          <para>Choose Start Options and Click Next button.</para>
+
+          <figure>
+            <title>Choose Start Options.</title>
+
+            <mediaobject>
+              <imageobject>
+                <imagedata align="center" contentdepth="100%"
+                           fileref="Images/tfs-install-start-option.JPG"
+                           scalefit="1" width="100%"/>
+              </imageobject>
+            </mediaobject>
+          </figure>
+
+          <!--PAGEBREAK-->
+
+          <?breakafter ?>
+        </listitem>
+
+        <listitem>
+          <para>Installation complete. TFS installation is completed
+          successfully. Click Next button to last page.</para>
+
+          <figure>
+            <title>Installation Complete Screen</title>
+
+            <mediaobject>
+              <imageobject>
+                <imagedata align="center" contentdepth="100%"
+                           fileref="Images/tfs-install-complete.JPG"
+                           scalefit="1" width="100%"/>
+              </imageobject>
+            </mediaobject>
+          </figure>
+
+          <!--PAGEBREAK-->
+
+          <?breakafter ?>
+        </listitem>
+
+        <listitem>
+          <para>Completing the Setup Wizard. The application has been
+          installed on your computer and click 'Finish' to close this
+          wizard.</para>
+
+          <figure>
+            <title>Completing Setup Wizard Screen.</title>
+
+            <mediaobject>
+              <imageobject>
+                <imagedata align="center" contentdepth="100%"
+                           fileref="Images/tfs-install-completing.JPG"
+                           scalefit="1" width="100%"/>
+              </imageobject>
+            </mediaobject>
+          </figure>
+
+          <note>
+            <para>If you use Adobe Reader version 10.0 or later when you check
+            on "Show Documentation". The document cannot open by the installer
+            if Adobe Reader has enabled "Protected Mode". If you want to open
+            the document after the installation. Please disable "Protected
+            Mode". For more details, please see <link
+            xlink:href="https://www.adobe.com/devnet-docs/acrobatetk/tools/AppSec/protectedmode.html"
+            xmlns:xlink="http://www.w3.org/1999/xlink">https://www.adobe.com/devnet-docs/acrobatetk/tools/AppSec/protectedmode.html</link></para>
+          </note>
+        </listitem>
+      </orderedlist>
+    </sect1>
+
+    <sect1>
+      <title>How to do a silent installation</title>
+
+      <para>TFS supports silent installation. To perform a silent installation
+      the @APPNAME@-@VERSION@-@RELEASE@.silent.properties file must be in the
+      same directory of your installation file. The following lists the
+      properties which can be set.</para>
+
+      <programlisting>
+# Where to install @APPFULLNAME@ (default value is C:\Program Files\@APPNAME@-@VERSION@-@RELEASE@
+inst.dir=C:\Program Files\@APPNAME@-@VERSION@-@RELEASE@)
+# Startup menu name (default value - @APPFULLNAME@ @VERSION@-@RELEASE@)
+startup.menu.name=@APPFULLNAME@ @VERSION@-@RELEASE@
+# Create start menu entry (on/off)
+create.start.menu.entry=on</programlisting>
+
+      <para>Use the following command at the installation directory to do
+      silent uninstallation.</para>
+
+      <programlisting>uninstall /SILENT</programlisting>
+    </sect1>
+
+    <sect1>
+      <title>How to install the debug version</title>
+
+      <para>You can download the debug version from TFS's homepage. If you
+      have already the file. Extract the zip file to the your install
+      directory of TFS. If it's success then you can use the debug
+      version.</para>
+    </sect1>
+
+    <!--PAGEBREAK-->
+
+    <?breakafter ?>
+
+    <sect1>
+      <title>Installing TFS function for Microsoft SQL server</title>
+
+      <para>To manually install the package, record the path to your DLL files
+      (SimMetrics.dll and tfs.dll). In this case we suppose that DLL files are
+      in installation folder of TFS (e.g. 'C:\Program
+      Files\@APPNAME@-@VERSION@-@RELEASE@'). Using SQL Server Management
+      Studio open the connection to the database where you want to install
+      this function, open Query Editor and execute next SQL commands. We need
+      to make sure that our target SQL server is CLR Enabled so we need to
+      run:</para>
+
+      <programlisting>
+EXEC sp_configure 'clr enabled', 1
+RECONFIGURE</programlisting>
+
+      <para>Install the library and the functions onto Microsoft SQL Server.
+      Check if the path of your DLL is correct.</para>
+
+      <programlisting>
+CREATE ASSEMBLY [TFS]
+AUTHORIZATION [dbo]
+FROM 'c:\Program Files\@APPNAME@-@VERSION@-@RELEASE@\bin\tfs.dll'
+WITH PERMISSION_SET = SAFE
+GO
+CREATE FUNCTION Levenstein(@firstword NVARCHAR(255),@secondword NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.Levenstein
+GO
+CREATE FUNCTION NeedlemanWunch(@firstword NVARCHAR(255),@secondword NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.NeedlemanWunch
+GO
+CREATE FUNCTION SmithWaterman(@firstword NVARCHAR(255),@secondword NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.SmithWaterman
+GO
+CREATE FUNCTION SmithWatermanGotoh(@firstword NVARCHAR(255),@secondword 
+NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.SmithWatermanGotoh
+GO
+CREATE FUNCTION SmithWatermanGotohWindowedAffine(@firstword NVARCHAR(255),@secondword 
+NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.SmithWatermanGotohWindowedAffine
+GO
+CREATE FUNCTION Jaro(@firstword NVARCHAR(255),@secondword NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.Jaro
+GO
+CREATE FUNCTION JaroWinkler(@firstword NVARCHAR(255),@secondword NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.JaroWinkler
+GO
+CREATE FUNCTION ChapmanLengthDeviation(@firstword NVARCHAR(255),@secondword 
+NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.ChapmanLengthDeviation
+GO
+CREATE FUNCTION ChapmanMeanLength(@firstword NVARCHAR(255),@secondword 
+NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.ChapmanMeanLength
+GO
+CREATE FUNCTION QGramsDistance(@firstword NVARCHAR(255),@secondword NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.QGramsDistance
+GO
+CREATE FUNCTION BlockDistance(@firstword NVARCHAR(255),@secondword NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.BlockDistance
+GO
+CREATE FUNCTION CosineSimilarity(@firstword NVARCHAR(255),@secondword NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.CosineSimilarity
+GO
+CREATE FUNCTION DiceSimilarity(@firstword NVARCHAR(255),@secondword NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.DiceSimilarity
+GO
+CREATE FUNCTION EuclideanDistance(@firstword NVARCHAR(255),@secondword NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.EuclideanDistance
+GO
+CREATE FUNCTION JaccardSimilarity(@firstword NVARCHAR(255),@secondword NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.JaccardSimilarity
+GO
+CREATE FUNCTION MatchingCoefficient(@firstword NVARCHAR(255),@secondword NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.MatchingCoefficient
+GO
+CREATE FUNCTION MongeElkan(@firstword NVARCHAR(255),@secondword NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.MongeElkan
+GO
+CREATE FUNCTION OverlapCoefficient(@firstword NVARCHAR(255),@secondword NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.OverlapCoefficient
+GO</programlisting>
+
+      <para>Uninstall</para>
+
+      <programlisting>
+DROP FUNCTION Levenstein
+GO
+DROP FUNCTION NeedlemanWunch
+GO
+DROP FUNCTION SmithWaterman
+GO
+DROP FUNCTION SmithWatermanGotoh
+GO
+DROP FUNCTION SmithWatermanGotohWindowedAffine
+GO
+DROP FUNCTION Jaro
+GO
+DROP FUNCTION JaroWinkler
+GO
+DROP FUNCTION ChapmanLengthDeviation
+GO
+DROP FUNCTION ChapmanMeanLength
+GO
+DROP FUNCTION QGramsDistance
+GO
+DROP FUNCTION BlockDistance
+GO
+DROP FUNCTION CosineSimilarity
+GO
+DROP FUNCTION DiceSimilarity
+GO
+DROP FUNCTION EuclideanDistance
+GO
+DROP FUNCTION JaccardSimilarity
+GO
+DROP FUNCTION MatchingCoefficient
+GO
+DROP FUNCTION MongeElkan
+GO
+DROP FUNCTION OverlapCoefficient
+GO
+DROP ASSEMBLY [TFS]
+GO</programlisting>
+    </sect1>
+  </chapter>
+
+  <chapter>
+    <title>User Guide</title>
+
+    <para/>
+
+    <sect1>
+      <title>TFS function for Microsoft SQL server</title>
+
+      <para>To manually install the package, record the path to your DLL files
+      (SimMetrics.dll and tfs.dll). In this case we suppose that DLL files are
+      in installation folder of TFS (e.g. 'C:\Program
+      Files\@APPNAME@-@VERSION@-@RELEASE@'). Using SQL Server Management
+      Studio open the connection to the database where you want to install
+      this function, open Query Editor and execute next SQL commands. We need
+      to make sure that our target SQL server is CLR Enabled so we need to
+      run:</para>
+
+      <programlisting>
+EXEC sp_configure 'clr enabled', 1
+RECONFIGURE</programlisting>
+
+      <para>Install the library and the functions onto Microsoft SQL Server.
+      Check if the path of your DLL is correct.</para>
+
+      <programlisting>
+CREATE ASSEMBLY [TFS]
+AUTHORIZATION [dbo]
+FROM 'c:\Program Files\@APPNAME@-@VERSION@-@RELEASE@\bin\tfs.dll'
+WITH PERMISSION_SET = SAFE
+GO
+CREATE FUNCTION Levenstein(@firstword NVARCHAR(255),@secondword NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.Levenstein
+GO
+CREATE FUNCTION NeedlemanWunch(@firstword NVARCHAR(255),@secondword NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.NeedlemanWunch
+GO
+CREATE FUNCTION SmithWaterman(@firstword NVARCHAR(255),@secondword NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.SmithWaterman
+GO
+CREATE FUNCTION SmithWatermanGotoh(@firstword NVARCHAR(255),@secondword 
+NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.SmithWatermanGotoh
+GO
+CREATE FUNCTION SmithWatermanGotohWindowedAffine(@firstword NVARCHAR(255),@secondword 
+NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.SmithWatermanGotohWindowedAffine
+GO
+CREATE FUNCTION Jaro(@firstword NVARCHAR(255),@secondword NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.Jaro
+GO
+CREATE FUNCTION JaroWinkler(@firstword NVARCHAR(255),@secondword NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.JaroWinkler
+GO
+CREATE FUNCTION ChapmanLengthDeviation(@firstword NVARCHAR(255),@secondword 
+NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.ChapmanLengthDeviation
+GO
+CREATE FUNCTION ChapmanMeanLength(@firstword NVARCHAR(255),@secondword 
+NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.ChapmanMeanLength
+GO
+CREATE FUNCTION QGramsDistance(@firstword NVARCHAR(255),@secondword NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.QGramsDistance
+GO
+CREATE FUNCTION BlockDistance(@firstword NVARCHAR(255),@secondword NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.BlockDistance
+GO
+CREATE FUNCTION CosineSimilarity(@firstword NVARCHAR(255),@secondword NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.CosineSimilarity
+GO
+CREATE FUNCTION DiceSimilarity(@firstword NVARCHAR(255),@secondword NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.DiceSimilarity
+GO
+CREATE FUNCTION EuclideanDistance(@firstword NVARCHAR(255),@secondword NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.EuclideanDistance
+GO
+CREATE FUNCTION JaccardSimilarity(@firstword NVARCHAR(255),@secondword NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.JaccardSimilarity
+GO
+CREATE FUNCTION MatchingCoefficient(@firstword NVARCHAR(255),@secondword NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.MatchingCoefficient
+GO
+CREATE FUNCTION MongeElkan(@firstword NVARCHAR(255),@secondword NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.MongeElkan
+GO
+CREATE FUNCTION OverlapCoefficient(@firstword NVARCHAR(255),@secondword NVARCHAR(255))
+RETURNS float EXTERNAL NAME TFS.StringMetrics.OverlapCoefficient
+GO</programlisting>
+
+      <para>Uninstall</para>
+
+      <programlisting>
+DROP FUNCTION Levenstein
+GO
+DROP FUNCTION NeedlemanWunch
+GO
+DROP FUNCTION SmithWaterman
+GO
+DROP FUNCTION SmithWatermanGotoh
+GO
+DROP FUNCTION SmithWatermanGotohWindowedAffine
+GO
+DROP FUNCTION Jaro
+GO
+DROP FUNCTION JaroWinkler
+GO
+DROP FUNCTION ChapmanLengthDeviation
+GO
+DROP FUNCTION ChapmanMeanLength
+GO
+DROP FUNCTION QGramsDistance
+GO
+DROP FUNCTION BlockDistance
+GO
+DROP FUNCTION CosineSimilarity
+GO
+DROP FUNCTION DiceSimilarity
+GO
+DROP FUNCTION EuclideanDistance
+GO
+DROP FUNCTION JaccardSimilarity
+GO
+DROP FUNCTION MatchingCoefficient
+GO
+DROP FUNCTION MongeElkan
+GO
+DROP FUNCTION OverlapCoefficient
+GO
+DROP ASSEMBLY [TFS]
+GO</programlisting>
+    </sect1>
+  </chapter>
+
+  <chapter>
+    <title>Similarity metrics</title>
+
+    <sect1>
+      <title>SoundEx of SQL2008</title>
+
+      <para>SoundEx is one such algorithm built in to SQL server, but it
+      doesn’t really perform well on calculating string value distances since
+      it is a phonetic encoding algorithm. Vowels are ignored and the
+      resulting value consists of a letter followed by 3 digits calculated
+      like so:</para>
+
+      <orderedlist>
+        <listitem>
+          <para>Replace consonants with digits as follows (but do not change
+          the first letter):</para>
+
+          <itemizedlist>
+            <listitem>
+              <para>b, f, p, v =&gt; 1</para>
+            </listitem>
+
+            <listitem>
+              <para>c, g, j, k, q, s, x, z =&gt; 2</para>
+            </listitem>
+
+            <listitem>
+              <para>d, t =&gt; 3</para>
+            </listitem>
+
+            <listitem>
+              <para>l =&gt; 4</para>
+            </listitem>
+
+            <listitem>
+              <para>m, n =&gt; 5</para>
+            </listitem>
+
+            <listitem>
+              <para>r =&gt; 6</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+
+        <listitem>
+          <para>Collapse adjacent identical digits into a single digit of that
+          value.</para>
+        </listitem>
+
+        <listitem>
+          <para>Remove all non-digits after the first letter.</para>
+        </listitem>
+
+        <listitem>
+          <para>Return the starting letter and the first three remaining
+          digits. If needed, append zeroes to make it a letter and three
+          digits.</para>
+        </listitem>
+      </orderedlist>
+
+      <para>So let's try SoundEx with a few variations and see how it
+      performs</para>
+
+      <programlisting>select Soundex('LLoyds') -- returns L432
+select Soundex('Loyds') -- returns L320
+select Soundex('Brighton') -- returns B623
+select Soundex('Bristol') -- returns B623
+</programlisting>
+
+      <para>As you can see, Soundex (SQL2008) returned the same code for
+      Brighton and Bristol, while at the same time it returned a different
+      code for Loyds and LLoyds. Such results make you think twice before
+      employing this function in a production environment. So, is this all
+      that is available to us? Of course not.</para>
+
+      <para/>
+    </sect1>
+
+    <sect1>
+      <title>SoundEx of SQL2012</title>
+
+      <para>Additional Soundex Coding Rules for SQL2012</para>
+
+      <orderedlist>
+        <listitem>
+          <para>Names With Double Letters</para>
+
+          <para>If the surname has any double letters, they should be treated
+          as one letter.</para>
+
+          <para>For example:</para>
+
+          <itemizedlist>
+            <listitem>
+              <para>Gutierrez is coded G-362 (G, 3 for the T, 6 for the first
+              R, second R ignored, 2 for the Z).</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+
+        <listitem>
+          <para>Names with Letters Side-by-Side that have the Same Soundex
+          Code Number</para>
+
+          <para>If the surname has different letters side-by-side that have
+          the same number in the soundex coding guide, they should be treated
+          as one letter.</para>
+
+          <para>For examples:</para>
+
+          <itemizedlist>
+            <listitem>
+              <para>Pfister is coded as P-236 (P, F ignored, 2 for the S, 3
+              for the T, 6 for the R).</para>
+            </listitem>
+
+            <listitem>
+              <para>Jackson is coded as J-250 (J, 2 for the C, K ignored, S
+              ignored, 5 for the N, 0 added).</para>
+            </listitem>
+
+            <listitem>
+              <para>Tymczak is coded as T-522 (T, 5 for the M, 2 for the C, Z
+              ignored, 2 for the K). Since the vowel "A" separates the Z and
+              K, the K is coded.</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+
+        <listitem>
+          <para>Names with Prefixes</para>
+
+          <para>If a surname has a prefix, such as Van, Con, De, Di, La, or
+          Le, code both with and without the prefix because the surname might
+          be listed under either code. Note, however, that Mc and Mac are not
+          considered prefixes.</para>
+
+          <para>For example:</para>
+
+          <itemizedlist>
+            <listitem>
+              <para>VanDeusen might be coded two ways: V-532 (V, 5 for N, 3
+              for D, 2 for S) or D-250 (D, 2 for the S, 5 for the N, 0
+              added)</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+
+        <listitem>
+          <para>Consonant Separators</para>
+
+          <para>If a vowel (A, E, I, O, U) separates two consonants that have
+          the same soundex code, the consonant to the right of the vowel is
+          coded.</para>
+
+          <para>For example:</para>
+
+          <itemizedlist>
+            <listitem>
+              <para>Tymczak is coded as T-522 (T, 5 for the M, 2 for the C, Z
+              ignored (see "Side-by-Side" rule above), 2 for the K). Since the
+              vowel "A" separates the Z and K, the K is coded.</para>
+            </listitem>
+          </itemizedlist>
+
+          <para>If "H" or "W" separate two consonants that have the same
+          soundex code, the consonant to the right of the vowel is not
+          coded.</para>
+
+          <para>For example:</para>
+
+          <itemizedlist>
+            <listitem>
+              <para>Ashcraft is coded A-261 (A, 2 for the S, C ignored, 6 for
+              the R, 1 for the F). It is not coded A-226.</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </orderedlist>
+
+      <para>So let's try SoundEx with a few variations and see how it
+      performs</para>
+
+      <programlisting>select Soundex('LLoyds') -- returns L320
+select Soundex('Loyds') -- returns L320
+select Soundex('Brighton') -- returns B623
+select Soundex('Bristol') -- returns B623
+</programlisting>
+
+      <para/>
+    </sect1>
+
+    <sect1>
+      <title>SimMetrics</title>
+
+      <para>The <link xlink:href="http://nlp.shef.ac.uk/wig/"
+      xmlns:xlink="http://www.w3.org/1999/xlink">Web Intelligence Group</link>
+      within the University of Sheffield has released a wonderful library over
+      at source forge just for this purpose. <link
+      xlink:href="http://sourceforge.net/projects/simmetrics/"
+      xmlns:xlink="http://www.w3.org/1999/xlink">SimMetrics</link> is the
+      library you would need to use. The developer of this library and credit
+      for its development goes to <link
+      xlink:href="http://www.dcs.shef.ac.uk/~sam/aboutme.html"
+      xmlns:xlink="http://www.w3.org/1999/xlink">Sam Chapman</link></para>
+
+      <para>Here are only some of the similarity metrics in SimMetrics that
+      can be briefly described in simple English. For an even more detailed
+      explanation and for the full list of included functions have a look over
+      at <link xlink:href="http://www.dcs.shef.ac.uk/~sam/stringmetrics.html"
+      xmlns:xlink="http://www.w3.org/1999/xlink">http://www.dcs.shef.ac.uk/~sam/stringmetrics.html</link>
+      or on http://en.wikipedia.org/wiki/String_metric.</para>
+
+      <para><emphasis role="bold"> Hamming distance</emphasis> measures the
+      minimum number of substitutions required to change one into the
+      other.</para>
+
+      <para><emphasis role="bold"> Levenshtein distance</emphasis> measures
+      the minimum number of operations needed to transform one string into the
+      other, where an operation is an insertion, deletion, or substitution of
+      a single character.</para>
+
+      <para><emphasis role="bold"> Needleman-Wunch distance or Sellers
+      Algorithm</emphasis> is similar to Levenstein with an added cost
+      adjustment to the cost of a gap of the operation.</para>
+
+      <para><emphasis role="bold">Smith-Waterman distance</emphasis> is
+      similar to Levenstein but with two adjustable parameters for cost
+      functions.</para>
+
+      <para><emphasis role="bold">Gotoh Distance or Smith-Waterman-Gotoh
+      distance</emphasis> is an extension of the Smith Waterman with variable
+      gap costs.</para>
+
+      <para><emphasis role="bold">Jaro distance metric</emphasis> is designed
+      and best suited for short strings such as person names. The score is
+      normalized such that 0 equates to no similarity and 1 is an exact match.
+      The higher the distance for two strings is, the more similar the strings
+      are.</para>
+
+      <para><emphasis role="bold">Jaro Winkler</emphasis> is similar to Jaro
+      but with more favorable ratings for strings that match from the
+      beginning.</para>
+
+      <para><emphasis role="bold">Cosine similarity</emphasis> is often used
+      to compare documents in text mining.</para>
+
+      <sect2>
+        <title>Hamming distance</title>
+
+        <para>This is defined as the number of bits which differ between two
+        binary strings i.e. the number of bits which need to be changed
+        (corrupted) to turn one string into the other. For example the bit
+        strings <emphasis role="bold">10011010</emphasis> and <emphasis
+        role="bold">10001101</emphasis> has a hamming distance of 4bits, (as
+        four bits are dissimilar). The simple bitwise version can be simply
+        calculated from the following C code.</para>
+
+        <programlisting>
+//given input 
+unsigned int bitstring1; 
+unsigned int bitstring2; 
+
+//bitwise XOR (bitstring1 is destroyed) 
+bitstring1 ^= bitstring2; 
+
+// count the number of bits set in bitstring1 
+unsigned int c; // c accumulates the total bits set in bitstring1 
+for (c = 0; bitstring1; c++) 
+{ 
+   bitstring1&amp;= bitstring1 - 1; // clear the least significant bit set 
+}</programlisting>
+
+        <para>Select Soundex('Loyds') -- returns L320 select
+        Soundex('Brighton') -- returns B623 select Soundex('Bristol') --
+        returns B623</para>
+
+        <para>The simple hamming distance function can be extended into a
+        vector space approach where the terms within a string are compared,
+        counting the number of terms in the same positions. (This approach is
+        only suitable for exact length comparisons). Such an extension is very
+        similar to the <link
+        xlink:href="http://staffwww.dcs.shef.ac.uk/people/S.Chapman/stringmetrics.html#match"
+        xmlns:xlink="http://www.w3.org/1999/xlink">matching coefficient</link>
+        approach.</para>
+      </sect2>
+
+      <!--PAGEBREAK-->
+
+      <?breakafter ?>
+
+      <sect2>
+        <title>Levenshtein Distance</title>
+
+        <para>This is the basic edit distance function whereby the distance is
+        given simply as the minimum edit distance which transforms string1
+        into string2. Edit Operations are listed as follows:</para>
+
+        <orderedlist>
+          <listitem>
+            <para>Copy character from string1 over to string2 (cost 0)</para>
+          </listitem>
+
+          <listitem>
+            <para>Delete a character in string1 (cost 1)</para>
+          </listitem>
+
+          <listitem>
+            <para>Insert a character in string2 (cost 1)</para>
+          </listitem>
+
+          <listitem>
+            <para>Substitute one character for another (cost 1)</para>
+
+            <programlisting>
+D(i-1,j-1) + d(si,tj) //subst/copy
+D(i,j) = min D(i-1,j)+1 //insert 
+D(i,j-1)+1 //delete</programlisting>
+
+            <para>d(i,j) is a function whereby d(c,d)=0 if c=d, 1 else</para>
+
+            <para>There are many extensions to the Levenshtein distance
+            function typically these alter the d(i,j) function, but further
+            extensions can be made for instance, the <link
+            xlink:href="http://staffwww.dcs.shef.ac.uk/people/S.Chapman/stringmetrics.html#needleman"
+            xmlns:xlink="http://www.w3.org/1999/xlink">Needleman-Wunch
+            distance</link> for which Levenshtein is equivalent if the gap
+            distance is 1. The Levenshtein distance is calculated below for
+            the term "sam chapman" and "sam john chapman", the final distance
+            is given by the bottom right cell, i.e. 5. This score indicates
+            that only 5 edit cost operations are required to match the strings
+            (for example, insertion of the "john " characters, although a
+            number of other routes can be traversed instead).</para>
+          </listitem>
+        </orderedlist>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata align="center" contentdepth="100%"
+                       fileref="Images\tfs-SimMetrics-01.JPG" scalefit="1"
+                       width="100%"/>
+          </imageobject>
+        </mediaobject>
+      </sect2>
+
+      <!--PAGEBREAK-->
+
+      <?breakafter ?>
+
+      <sect2>
+        <title>Needleman-Wunch distance or Sellers Algorithm</title>
+
+        <para>This approach is known by various names, Needleman-Wunch,
+        Needleman-Wunch-Sellers, Sellers and the Improving Sellers algorithm.
+        This is similar to the basic edit distance metric, <link
+        xlink:href="http://staffwww.dcs.shef.ac.uk/people/S.Chapman/stringmetrics.html#Levenshtein"
+        xmlns:xlink="http://www.w3.org/1999/xlink">Levenshtein
+        distance</link>, this adds a variable cost adjustment to the cost of a
+        gap, i.e. insert/deletion, in the distance metric. So the Levenshtein
+        distance can simply be seen as the Needleman-Wunch distance with
+        G=1.</para>
+
+        <programlisting>
+D(i-1,j-1) + d(si,tj) //subst/copy
+D(i,j) = min D(i-1,j)+G //insert
+D(i,j-1)+G //delete</programlisting>
+
+        <para>Where G = "gap cost" and d(c,d) is again an arbitrary distance
+        function on characters (e.g. related to typographic frequencies, amino
+        acid substitutibility, etc). The Needleman-Wunch distance is calulated
+        below for the term "sam chapman" and "sam john chapman", with the gap
+        cost G set to 2. The final distance is given by the bottom right cell,
+        i.e. 10. This score indicates that only 10 edit cost operations are
+        required to match the strings (for example, insertion of the "john "
+        characters, although a number of other routes can be traversed
+        instead).</para>
+
+        <para><mediaobject>
+            <imageobject>
+              <imagedata align="center" contentdepth="100%"
+                         fileref="Images\tfs-SimMetrics-02.JPG" scalefit="1"
+                         width="100%"/>
+            </imageobject>
+          </mediaobject></para>
+      </sect2>
+
+      <sect2>
+        <title>Smith-Waterman distance</title>
+
+        <para>Specific details can be found for this approach in the following
+        paper:</para>
+
+        <para>Smith, T. F. and Waterman, M. S. 1981. <link
+        xlink:href="http://citeseer.ist.psu.edu/smith81identification.html"
+        xmlns:xlink="http://www.w3.org/1999/xlink">Identification of common
+        molecular subsequences</link></para>
+
+        <para>Again similar to the <link
+        xlink:href="http://staffwww.dcs.shef.ac.uk/people/S.Chapman/stringmetrics.html#Levenshtein"
+        xmlns:xlink="http://www.w3.org/1999/xlink">Levenshtein
+        distance</link>, this was developed to identify optimal alignments
+        between related DNA and protein sequences. This has two main
+        adjustable parameters a function for an alphabet mapping to cost
+        values for substitutions and costs, (the d function). This also allows
+        costs to be attributed to a gap G, (insert or delete). The final
+        similarity distance is computed from the maximum value in the path
+        where</para>
+
+        <programlisting>
+0 //start over
+D(i-1,j-1) -d(si,tj) //subst/copy
+D(i,j) = max D(i-1,j)-G //insert
+D(i,j-1)-G //delete</programlisting>
+
+        <para>Distance is maximum over all i,j in table of D(i,j)</para>
+
+        <programlisting>
+G = 1 //example value for gap
+d(c,c) = -2 //context dependent substitution cost
+d(c,d) = +1 //context dependent substitution cost
+The Smith-Waterman distance is calculated below for the term 
+"aaaa mnop zzzz" and "bbbb mnop yyyy",
+with the gap cost G set to 0.5 and where d(c,c) = -2, d(b,c) = 1.</programlisting>
+
+        <para>The final distance is given by the highest valued cell, i.e. 6.
+        This score indicates that the longest approximately matching string
+        terminates in the cell with the highest value so the sequence "mnop"
+        matches in both strings.</para>
+
+        <para><mediaobject>
+            <imageobject>
+              <imagedata align="center" contentdepth="100%"
+                         fileref="Images\tfs-SimMetrics-03.JPG" scalefit="1"
+                         width="100%"/>
+            </imageobject>
+          </mediaobject></para>
+      </sect2>
+
+      <sect2>
+        <title>Gotoh or Smith-Waterman-Gotoh distance</title>
+
+        <para>This is an extension from the Smith Waterman distance by
+        allowing affine gaps within the sequence. This work comes from the
+        following paper:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Gotoh, O. "An Improved Algorithm for Matching Biological
+            Sequences". Journal of Molecular Biology. 162:705-708,
+            1981.</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>The Affine Gap model includes variable gap costs typically based
+        upon the length of the gap.</para>
+
+        <itemizedlist>
+          <listitem>
+            <para><inlinemediaobject>
+                <imageobject>
+                  <imagedata align="left"
+                             fileref="Images/tfs-SimMetrics-04.JPG"/>
+                </imageobject>
+              </inlinemediaobject></para>
+          </listitem>
+
+          <listitem>
+            <para><inlinemediaobject>
+                <imageobject>
+                  <imagedata align="left"
+                             fileref="Images/tfs-SimMetrics-05.JPG"/>
+                </imageobject>
+              </inlinemediaobject></para>
+          </listitem>
+
+          <listitem>
+            <para><inlinemediaobject>
+                <imageobject>
+                  <imagedata align="left"
+                             fileref="Images/tfs-SimMetrics-06.JPG"/>
+                </imageobject>
+              </inlinemediaobject></para>
+          </listitem>
+        </itemizedlist>
+
+        <para>Affine gap costs are specified in two ways one with a cost for
+        starting a gap and secondly with a cost for continuation of a
+        gap.</para>
+      </sect2>
+
+      <sect2>
+        <title>Jaro distance metric</title>
+
+        <para>The Jaro distance metric takes into account typical spelling
+        deviations, this work comes from the following paper.</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Jaro, M. A. 1989 "Advances in record linking methodology as
+            applied to the 1985 census of Tampa Florida". Journal of the
+            American Statistical Society 64:1183-1210</para>
+          </listitem>
+
+          <listitem>
+            <para>Jaro, M. A. 1995 "Probabilistic linkage of large public
+            health data files" Statistics in Medicine 14:491-498</para>
+          </listitem>
+
+          <listitem>
+            <para>Briefly, for two strings <emphasis>s</emphasis> and
+            <emphasis>t</emphasis>, let <emphasis>s'</emphasis> be the
+            characters in <emphasis>s</emphasis> that are "common with"
+            <emphasis>t</emphasis>, and let <emphasis>t'</emphasis> be the
+            charcaters in <emphasis>t</emphasis> that are "common with"
+            <emphasis>s</emphasis>; roughly speaking, a character
+            <emphasis>a</emphasis> in <emphasis>s</emphasis> is "in common"
+            with <emphasis>t </emphasis>if the same character
+            <emphasis>a</emphasis> appears in about the place in
+            <emphasis>t</emphasis>.</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>Let <emphasis>Ts,t</emphasis> measure the number of
+        transpositions of characters in <emphasis>s'</emphasis> relative to
+        <emphasis>t'</emphasis>. The Jaro similarity metric for
+        <emphasis>s</emphasis> and <emphasis>t</emphasis> is</para>
+
+        <para>This approach has since been expanded to slightly modified
+        approach called <link
+        xlink:href="http://www.dcs.shef.ac.uk/~sam/stringmetrics.html"
+        xmlns:xlink="http://www.w3.org/1999/xlink">Jaro Winkler</link>.</para>
+      </sect2>
+
+      <sect2>
+        <title>Jaro Winkler</title>
+
+        <para>This is an extension of the <link
+        xlink:href="http://staffwww.dcs.shef.ac.uk/people/S.Chapman/stringmetrics.html#jaro"
+        xmlns:xlink="http://www.w3.org/1999/xlink">Jaro distance
+        metric</link>, from the work of Winkler in 1999. This extension
+        modifies the weights of poorly matching pair <emphasis>s, t</emphasis>
+        that share a common prefix. The output score is simply adjusted as
+        follows,</para>
+
+        <para/>
+
+        <para><emphasis>JaroWinklerScore(s,t) = JaroScore(s,t) +
+        (prefixLength* PREFIXSCALE * (1.0f -
+        JaroScore(s,t)));</emphasis></para>
+
+        <para/>
+
+        <para>Where <emphasis>prefixLength </emphasis>is the length of common
+        prefix at the start of the string,</para>
+
+        <para><emphasis>PREFIXSCALE</emphasis> is a constant scaling factor
+        for how much the score is adjusted upwards for having common
+        prefixes.</para>
+
+        <para>This adjustment gives more favorable ratings to strings that
+        match from the beginning for a set prefix length.</para>
+      </sect2>
+
+      <sect2>
+        <title>Cosine similarity</title>
+
+        <para>Cosine similarity is a common vector based similarity measure
+        similar to <link
+        xlink:href="http://staffwww.dcs.shef.ac.uk/people/S.Chapman/stringmetrics.html#dice"
+        xmlns:xlink="http://www.w3.org/1999/xlink">dice coefficient</link>.
+        Whereby the input string is transformed into vector space so that the
+        Euclidean cosine rule can be used to determine similarity. The cosine
+        similarity is often paired with other approaches to limit the
+        dimensionality of the problem. For instance with simple strings at
+        list of stopwords are used to exclude from the dimensionality of the
+        comparison. In theory this problem has as many dimensions as terms
+        exist.</para>
+      </sect2>
+
+      <sect2>
+        <title>Q-gram</title>
+
+        <para>Q-grams are typically used in approximate string matching by
+        "sliding" a window of length q over the characters of a string to
+        create a number of 'q' length grams for matching a match is then rated
+        as number of q-gram matches within the second string over possible
+        q-grams.</para>
+
+        <para>The intuition behind the use of q-grams as a foundation for
+        approximate string processing is that when two strings s1 and s2 are
+        within a small edit distance of each other, they share a large number
+        of q-grams in common.</para>
+
+        <para>Consider the following example. The positional q-grams of length
+        q=3 for string "sam chapman" are f(1,##s), (2,#sa), (3,sam), (4,am ),
+        (5,m c), (6, ch), (7,cha), (8,hap), (9,apm), (10,pma), (11,man),
+        (12,an%), (13,n%%),  where '#' and '%' indicate the beginning and end
+        of the string. So getting the q-grams for two query strings allows the
+        count of identical q-grams over the total q-grams available. this
+        method is frequently employed as a 'fuzzy' search in databases to
+        allow non exact matching of queries. A rating is also often given by
+        the ratio of the q-grams distance metric.</para>
+
+        <para>For a wider discussion on q-gram and adding them to database
+        applications see the following paper:</para>
+
+        <para>"<link
+        xlink:href="http://www1.cs.columbia.edu/%7Epirot/publications/deb-dec2001.pdf"
+        xmlns:xlink="http://www.w3.org/1999/xlink">Using q-grams in a DBMS for
+        Approximate String Processing</link>" by Luis Gravano, Panagiotis G,
+        Ipeirotis H. V, Jagadish, Nick Koudas S. Muthukrishnan, Lauri
+        Pietarinen and Divesh Srivastava.</para>
+      </sect2>
+
+      <sect2>
+        <title>Block Distance or L1 distance or City Block distance</title>
+
+        <para>This distance metric is variously named as block distance, L1
+        distance or city block distan</para>
+
+        <para>This is a vector based approach so where 'q' and 'r' are defined
+        in n-dimensional vector space The L1 or block distance is calculated
+        from summing the edge distances.</para>
+
+        <para>This can be described in two dimensions with discrete-valued
+        vectors, when we can picture the set of points within a grid, the
+        distance value is simply the number of edges between points that must
+        be traversed to get from 'q' to 'r' within the grid. This is the same
+        problem as getting from corner a to b in a rectilinear street map,
+        hence the name "city-block metric".</para>
+      </sect2>
+
+      <sect2>
+        <title>Dice’s Coefficient</title>
+
+        <para>Dice coefficient is a term based similarity measure (0-1)
+        whereby the similarity measure is defined as twice the number of terms
+        common to compared entities divided by the total number of terms in
+        both tested entities. The Coefficient result of 1 indicates identical
+        vectors as where a 0 equals orthogonal vectors.</para>
+
+        <para>Dices coefficient = (2*Common Terms) / (Number of terms in
+        String1 + Number of terms in String2)</para>
+      </sect2>
+
+      <sect2>
+        <title>Euclidean distance or L2 distance</title>
+
+        <para>This approach again works in vector space similar to the <link
+        xlink:href="http://staffwww.dcs.shef.ac.uk/people/S.Chapman/stringmetrics.html#match"
+        xmlns:xlink="http://www.w3.org/1999/xlink">matching coefficient</link>
+        and the <link
+        xlink:href="http://staffwww.dcs.shef.ac.uk/people/S.Chapman/stringmetrics.html#dice"
+        xmlns:xlink="http://www.w3.org/1999/xlink">dice coefficient</link>,
+        however the similarity measure is not judged from the angle as in
+        <link
+        xlink:href="http://staffwww.dcs.shef.ac.uk/people/S.Chapman/stringmetrics.html#cosine"
+        xmlns:xlink="http://www.w3.org/1999/xlink">cosine rule</link> but
+        rather the direct euclidean distance between the vector inputs. Below
+        is the standard Euclidean distance formula between vectors q and
+        r.</para>
+      </sect2>
+
+      <sect2>
+        <title>Jaccard Similarity or Jaccard Coefficient or Tanimoto
+        coefficient</title>
+
+        <para>This is another token based vector space similarity measure like
+        the <link
+        xlink:href="http://staffwww.dcs.shef.ac.uk/people/S.Chapman/stringmetrics.html#cosine"
+        xmlns:xlink="http://www.w3.org/1999/xlink">cosine distance</link> and
+        <link
+        xlink:href="http://staffwww.dcs.shef.ac.uk/people/S.Chapman/stringmetrics.html#match"
+        xmlns:xlink="http://www.w3.org/1999/xlink">the matching
+        coefficient</link>. Jaccard Similarity uses word sets from the
+        comparison instances to evaluate similarity. The jaccard similarity
+        penalizes a small number of shared entries ( as a portion of all
+        non-zero entries) more than the <link
+        xlink:href="http://staffwww.dcs.shef.ac.uk/people/S.Chapman/stringmetrics.html#dice"
+        xmlns:xlink="http://www.w3.org/1999/xlink">Dice coeffient</link>. The
+        Jaccard similarity is frequently used as a similarity measure for
+        chemical compounds. This similarity measure was first details in 1912
+        in the following paper.</para>
+
+        <para>Jaccard 1912, "The distribution of the flora of the alpine
+        zone", New Phytologist 11:37-50</para>
+
+        <para>Each instance is represented as a Jaccard vector similarity
+        function. The Jaccard between two vectors X and Y is</para>
+
+        <para>(X*Y) / (|X||Y|-(X*Y))</para>
+
+        <para/>
+
+        <para>where (X*Y) is the inner product of X and Y, and |X| =
+        (X*X)^1/2, i.e. the Euclidean norm of X.</para>
+
+        <para>This can more easily be described as ( |X &amp; Y| ) / ( | X or
+        Y | ).</para>
+
+        <para>This approach has been extended by a number of
+        specializations/alterations not considered here.</para>
+      </sect2>
+
+      <sect2>
+        <title>Matching Coefficient</title>
+
+        <para>The Matching Coefficient is a very simple vector based approach
+        which simply counts the number of terms, (dimensions), on which both
+        vectors are non zero. So for vector set X and set Y the matching
+        coefficient is |X &amp; Y|. This can be seen as the vector based count
+        of coreferent terms. This is similar to the vector version of the
+        simple <link
+        xlink:href="http://staffwww.dcs.shef.ac.uk/people/S.Chapman/stringmetrics.html#hamming"
+        xmlns:xlink="http://www.w3.org/1999/xlink">hamming distance</link>
+        although position is not taken into account.</para>
+      </sect2>
+
+      <sect2>
+        <title>Monge Elkan distance</title>
+
+        <para>This distance is often incorrectly referred to as an
+        implementation of the <link
+        xlink:href="http://www.dcs.shef.ac.uk/~sam/stringmetrics.html"
+        xmlns:xlink="http://www.w3.org/1999/xlink">Smith-Waterman
+        distance</link> approach. As in the original work of Monge and Elkan
+        they called this <link
+        xlink:href="http://staffwww.dcs.shef.ac.uk/people/S.Chapman/stringmetrics.html#smith"
+        xmlns:xlink="http://www.w3.org/1999/xlink">Smith-Waterman</link>, but
+        actually, this uses an affine gap model, so it's not <link
+        xlink:href="http://staffwww.dcs.shef.ac.uk/people/S.Chapman/stringmetrics.html#smith"
+        xmlns:xlink="http://www.w3.org/1999/xlink">Smith-Waterman</link> at
+        all but rather the extended <link
+        xlink:href="http://staffwww.dcs.shef.ac.uk/people/S.Chapman/stringmetrics.html#gotoh"
+        xmlns:xlink="http://www.w3.org/1999/xlink">Gotoh distance</link>.
+        Specific details can be found regarding the Monge Elkan edit distance
+        function in the following paper:</para>
+
+        <para>Alvaro E. Monge and Charles P. Elkan. <link
+        xlink:href="http://citeseer.ist.psu.edu/monge96field.html"
+        xmlns:xlink="http://www.w3.org/1999/xlink">The field matching problem:
+        Algorithms and applications</link>. In Proceedings of the Second
+        International Conference on Knowledge Discovery and Data Mining,
+        (KDD), 1996</para>
+
+        <para>The Monge Elkan approach makes other additional tests by taking
+        the semantic similarity of a number of fields or sub fields into
+        consideration. Each sub field is evaluated against the most similar
+        sub field in the comparison string using the <link
+        xlink:href="http://staffwww.dcs.shef.ac.uk/people/S.Chapman/stringmetrics.html#gotoh"
+        xmlns:xlink="http://www.w3.org/1999/xlink">Gotoh distance</link>
+        between the fields this is then combined using a matching Algorithm
+        (displayed below).</para>
+
+        <para>This recursive field matching algorithm has quadratic time
+        complexity. Every atomic entry in A and B must be compared against
+        each other.</para>
+      </sect2>
+
+      <sect2>
+        <title>Overlap Coefficient</title>
+
+        <para>This is a measure whereby if a set X is a subset of Y or the
+        converse then the similarity coefficient is a full match. This is
+        similar to <link
+        xlink:href="http://staffwww.dcs.shef.ac.uk/people/S.Chapman/stringmetrics.html#dice"
+        xmlns:xlink="http://www.w3.org/1999/xlink">Dice coefficient</link>.
+        Overlap coefficient is defined as so.</para>
+
+        <para/>
+
+        <para>overlap_coefficient(q,r) = ( | q &amp; r | ) / min{ | q | , | r
+        | }</para>
+
+        <para/>
+
+        <para>What I would like instead to focus on is how we can exploit the
+        power of such a library within Sql Server.</para>
+      </sect2>
+    </sect1>
+
+    <sect1>
+      <title>Evaluating metric accuracy and comparing Metrics</title>
+
+      <para>All string metric functions accept two string arguments and return
+      a float value between 0 and 1. The closer the score reaches 1 means that
+      the metric we have applied is telling us the 2 input strings are
+      matches.</para>
+
+      <para>Now that we have plenty of Metrics to choose from, we will want to
+      evaluate them and see which one is best for us. This is where the
+      following function comes in handy:</para>
+
+      <para><programlisting>CREATE FUNCTION dbo.CompareStringMetrics(@firstword [nvarchar](255), 
+@secondword [nvarchar](255))
+RETURNS TABLE
+AS
+RETURN
+(
+SELECT dbo.Jaro(@firstword, @secondword) as Score, 'Jaro' as Metric
+UNION SELECT dbo.JaroWinkler(@firstword, @secondword), 'JaroWinkler'
+UNION SELECT dbo.BlockDistance(@firstword, @secondword), 'BlockDistance'
+UNION SELECT dbo.ChapmanLengthDeviation(@firstword, @secondword),
+'ChapmanLengthDeviation'
+UNION SELECT dbo.ChapmanMeanLength(@firstword, @secondword), 'ChapmanMeanLength'
+UNION SELECT dbo.CosineSimilarity(@firstword, @secondword), 'CosineSimilarity'
+UNION SELECT dbo.DiceSimilarity(@firstword, @secondword), 'DiceSimilarity'
+UNION SELECT dbo.EuclideanDistance(@firstword, @secondword), 'EuclideanDistance'
+UNION SELECT dbo.JaccardSimilarity(@firstword, @secondword), 'JaccardSimilarity'
+UNION SELECT dbo.Levenstein(@firstword, @secondword), 'Levenstein'
+UNION SELECT dbo.MatchingCoefficient(@firstword, @secondword),
+'MatchingCoefficient'
+UNION SELECT dbo.MongeElkan(@firstword, @secondword), 'MongeElkan'
+UNION SELECT dbo.NeedlemanWunch(@firstword, @secondword), 'NeedlemanWunch'
+UNION SELECT dbo.OverlapCoefficient(@firstword, @secondword),
+'OverlapCoefficient'
+UNION SELECT dbo.QGramsDistance(@firstword, @secondword), 'QGramsDistance'
+UNION SELECT dbo.SmithWaterman(@firstword, @secondword),
+'SmithWaterman'
+UNION SELECT dbo.SmithWatermanGotoh(@firstword, @secondword),
+'SmithWatermanGotoh'
+UNION SELECT dbo.SmithWatermanGotohWindowedAffine(@firstword, @secondword),
+'SmithWatermanGotohWindowedAffine'
+)</programlisting></para>
+
+      <para>This means that now we can easily evaluate the performance and the
+      accuracy of each metric by running queries like: <programlisting>Select * from CompareStringMetrics('Loyds', 'LLoyds') where score &gt; 0.6
+Select * from CompareStringMetrics('bristol', 'brighton') where score &lt; 0.5</programlisting></para>
+    </sect1>
+
+    <sect1>
+      <title>Conclusion</title>
+
+      <para>SimMetrics is a great library for fuzzy text comparisons. This
+      article showed you how you can bring its power into Sql Server. There
+      are plenty of functions to choose from, experiment and see what works
+      best for you. You can be creative on what you want to apply your metric
+      , e.g. instead of applying directly on a field you can choose to make
+      simple search keys by lower casing fields, striping common text patterns
+      that you don’t need (e.g. Inc, Ltd etc) and removing numbers. There are
+      many ways to apply these sort of functions, what is more suitable for
+      you is your call, since it depends on the context of your problem. If
+      you find any innovative ways of correlating your data share it with
+      us!</para>
+    </sect1>
+  </chapter>
+
+  <chapter>
+    <title>Build Guide</title>
+
+    <sect1>
+      <title>Prerequisites</title>
+
+      <note>
+        <para>If the system already have Microsoft Visual Studio, you should
+        uninstall manually by the following command to prevent conflict at
+        common packages</para>
+
+        <orderedlist>
+          <listitem>
+            <para>Download the setup application you used to originally
+            install Visual Studio. If you installed from media, please insert
+            that media.</para>
+          </listitem>
+
+          <listitem>
+            <para>Open a command prompt.</para>
+
+            <variablelist>
+              <varlistentry>
+                <term>a.</term>
+
+                <listitem>
+                  <para>Click <emphasis role="bold">Run</emphasis> on the
+                  <emphasis role="bold">Start</emphasis> menu (Start +
+                  R).</para>
+                </listitem>
+              </varlistentry>
+
+              <varlistentry>
+                <term>b.</term>
+
+                <listitem>
+                  <para>Type <emphasis role="bold">cmd</emphasis> and press
+                  <emphasis role="bold">OK</emphasis> (Enter).</para>
+                </listitem>
+              </varlistentry>
+            </variablelist>
+          </listitem>
+
+          <listitem>
+            <para>Type in the full path to the setup application and pass the
+            following command line switches: <emphasis role="bold">/uninstall
+            /force </emphasis></para>
+
+            <para>Example: D:\vs_ultimate.exe /uninstall /force</para>
+          </listitem>
+
+          <listitem>
+            <para>Click the <emphasis role="bold">Uninstall</emphasis> button
+            and follow the prompts.</para>
+          </listitem>
+        </orderedlist>
+      </note>
+
+      <itemizedlist>
+        <listitem>
+          <para>Microsoft .NET Framework 4.6</para>
+
+          <para><link
+          xlink:href="https://www.microsoft.com/en-us/download/details.aspx?id=48137"
+          xmlns:xlink="http://www.w3.org/1999/xlink">https://www.microsoft.com/en-us/download/details.aspx?id=48137</link></para>
+        </listitem>
+
+        <listitem>
+          <para><link
+          xlink:href="http://www.microsoft.com/en-us/download/details.aspx?id=8279"
+          xmlns:xlink="http://www.w3.org/1999/xlink">SDK for
+          MSBuild</link></para>
+
+          <para>This SDK make platform toolset for MSBuild.</para>
+
+          <note>
+            <para>If the system cannot install, try to uninstall "Microsoft
+            Visual C++ 2010 x64 Redistributable" and "Microsoft Visual C++
+            2010 x86 Redistributable" then install again.</para>
+          </note>
+        </listitem>
+      </itemizedlist>
+    </sect1>
+
+    <sect1>
+      <title>Preparing the build environment</title>
+
+      <para>Execute the configure script from the root directory of the
+      project source.</para>
+
+      <programlisting>
+configure</programlisting>
+
+      <para>Possible parameters for the configure script are:</para>
+
+      <programlisting>configure              - Creates the build.properties file with default values for all 
+                         possible parameters. It can work only if there is a default 
+                         "JAVA_HOME" registered with the system.
+configure -help        - Displays the Help Information.
+configure -buildid     - Sets the buildid for the project.
+configure -appname     - Sets the short application name for the project.
+configure -appfullname - Sets the full application name for the project.
+configure -version     - Sets the version number for the project.
+configure -release     - Sets the release number for the project.
+configure -instdir     - Sets the location of the installation directory used when 
+                         executing the make script with the install target specified.
+configure -jdkhome     - Sets the "JAVA_HOME" location of Java to be used to compile 
+                         the project.
+
+Multiple parameters can be specified at once, for example:
+
+          configure [-version version_tag] [-release release_tag] [-jdkhome jdk_home]
+          configure -version @VERSION@ -release @RELEASE@ -jdkhome @JAVA_PATH@
+</programlisting>
+
+      <para>The configure script will create/change the properties.build file
+      based on the parameters provided. This file can also be manually changed
+      to adjust your environment/parameters for building the project from the
+      sources.</para>
+    </sect1>
+
+    <sect1>
+      <title>Compiling and building</title>
+
+      <para>Execute the make script with the buildAll target from the root
+      directory of project source. When the building process finishes, the
+      project binaries will be in output/tfs-[version]-[release]
+      folder.</para>
+
+      <para>Possible build targets for the make script are:</para>
+
+      <programlisting>make                    - Displays the Help screen.
+make help               - Displays the Help screen.
+make buildAll           - Builds and configures tfs with documentation.
+make buildNoDoc         - Builds and configures tfs without documentation
+make buildDoc           - Builds documentation only
+make clean              - Removes the output and distribution folder
+                          (in order to start a new compilation from scratch)
+make debug              - Builds and configures tfs debug version.
+make distributions      - Builds and configures tfs with all documentations
+                          and creates distribution package.
+make install            - Installs and configures tfs into directory defined by
+                          parameter install.dir in build.properties file.
+                          Which can be set by using the command:
+                          configure -instdir PATH_TO_DIR.
+                          (execute only after 'make buildAll').</programlisting>
+    </sect1>
+
+    <sect1>
+      <title>Packaging distributions</title>
+
+      <para>Assuming that the environment is already configured as described
+      previously, to create the project distribution packages, execute:</para>
+
+      <programlisting>
+make distributions</programlisting>
+
+      <para>When the building process finishes, the distributions folder will
+      be created in the root directory of the project source containing the
+      appropriate OS specific binary distributions.</para>
+
+      <para>On Windows, to have the resulting '.exe' file automatically
+      signed, the file called 'sign.build' should be placed in the root
+      directory of the projects source with the following properties:</para>
+
+      <programlisting>
+sign.privatekey - absolute path to the private key used for signing.
+sign.pwd        - password for signing.</programlisting>
+
+      <para>Example of the 'sign.build' file:</para>
+
+      <programlisting>
+&lt;?xml version="1.0"?&gt;
+&lt;project name ="My project sign.properties" default=""&gt;
+    &lt;property name="sign.privatekey" value="c:/tmp/privatekey.pfx"/&gt;
+    &lt;property name="sign.pwd" value="&lt;SIGN_PASSWORD&gt;"/&gt;
+&lt;/project&gt;</programlisting>
+    </sect1>
+  </chapter>
+
+  <chapter>
+    <title>Release Notes</title>
+
+    <sect1>
+      <title>Release 2.5-1</title>
+
+      <itemizedlist>
+        <para>For this release, the following items were updated and/or
+        added:</para>
+
+        <listitem>
+          <para>Updated latest Components</para>
+        </listitem>
+      </itemizedlist>
+    </sect1>
+
+    <sect1>
+      <title>Release 2.4-1</title>
+
+      <itemizedlist>
+        <para>For this release, the following items were updated and/or
+        added:</para>
+
+        <listitem>
+          <para>Updated latest Components</para>
+        </listitem>
+
+        <listitem>
+          <para>Updated installation.</para>
+        </listitem>
+      </itemizedlist>
+    </sect1>
+
+    <sect1>
+      <title>Release 2.3-1</title>
+
+      <itemizedlist>
+        <para>For this release, the following items were updated and/or
+        added:</para>
+
+        <listitem>
+          <para>Updated latest Components</para>
+        </listitem>
+      </itemizedlist>
+    </sect1>
+
+    <sect1>
+      <title>Release 2.2-1</title>
+
+      <itemizedlist>
+        <para>For this release, the following items were updated and/or
+        added:</para>
+
+        <listitem>
+          <para>Updated latest Components</para>
+        </listitem>
+      </itemizedlist>
+    </sect1>
+
+    <sect1>
+      <title>Release 2.1-1</title>
+
+      <itemizedlist>
+        <para>For this release, the following items were updated and/or
+        added:</para>
+
+        <listitem>
+          <para>Updated latest Components</para>
+        </listitem>
+      </itemizedlist>
+    </sect1>
+
+    <sect1>
+      <title>Release 2.0-1</title>
+
+      <itemizedlist>
+        <para>For this release, the following items were updated and/or
+        added:</para>
+
+        <listitem>
+          <para>Support build without Visual Studio</para>
+        </listitem>
+
+        <listitem>
+          <para>Added TDS component for new docbook style</para>
+        </listitem>
+
+        <listitem>
+          <para>Updated latest Components</para>
+        </listitem>
+
+        <listitem>
+          <para>Updated Documents</para>
+        </listitem>
+      </itemizedlist>
+    </sect1>
+
+    <sect1>
+      <title>Release 1.9-1</title>
+
+      <itemizedlist>
+        <para>For this release, the following items were updated and/or
+        added:</para>
+
+        <listitem>
+          <para>Updated latest Components</para>
+        </listitem>
+
+        <listitem>
+          <para>Updated Documents</para>
+        </listitem>
+
+        <listitem>
+          <para>Changed build Project with Microsoft Visual Studio.NET
+          2012</para>
+        </listitem>
+
+        <listitem>
+          <para>Updated configure build for support Microsoft Visual
+          Studio.NET 2012</para>
+        </listitem>
+      </itemizedlist>
+    </sect1>
+
+    <sect1>
+      <title>Release 1.8-1</title>
+
+      <itemizedlist>
+        <para>For this release, the following items were updated and/or
+        added:</para>
+
+        <listitem>
+          <para>Updated Documents</para>
+        </listitem>
+
+        <listitem>
+          <para>Added these files to components folder
+          (prereqs.build.windows.csv,prereqs.install.windows).</para>
+        </listitem>
+
+        <listitem>
+          <para>Updated latest Components</para>
+        </listitem>
+      </itemizedlist>
+    </sect1>
+
+    <sect1>
+      <title>Release 1.7-1</title>
+
+      <itemizedlist>
+        <para>For this release, the following items were updated and/or
+        added:</para>
+
+        <listitem>
+          <para>Updated Documentation,Release Note</para>
+        </listitem>
+
+        <listitem>
+          <para>Updated Control Panel - Programs and Features - "Version"
+          column show version + buildid</para>
+        </listitem>
+
+        <listitem>
+          <para>Created Setup: Ask to create taskbar shortcut at the Start
+          option page to standardize of instal</para>
+        </listitem>
+      </itemizedlist>
+    </sect1>
+
+    <sect1>
+      <title>Release 1.6-1</title>
+
+      <itemizedlist>
+        <para>For this release, the following items were updated and/or
+        added:</para>
+
+        <listitem>
+          <para>Updated Documents ,Release Note</para>
+        </listitem>
+
+        <listitem>
+          <para>Updated Standandize output files and folder structure</para>
+        </listitem>
+
+        <listitem>
+          <para>Tested and Supported W2K8R2 SP1 + all updates</para>
+        </listitem>
+      </itemizedlist>
+    </sect1>
+
+    <sect1>
+      <title>Release 1.5-1</title>
+
+      <itemizedlist>
+        <para>For this release, the following items were updated and/or
+        added:</para>
+
+        <listitem>
+          <para>Updated DOCBOOK DTD to version 5.0</para>
+        </listitem>
+
+        <listitem>
+          <para>Updated 3-line titlepage of documentation (PDF)</para>
+        </listitem>
+
+        <listitem>
+          <para>Added timestamp checking before signing digital
+          signature</para>
+        </listitem>
+
+        <listitem>
+          <para>Added digital signature for the executable (exe) files</para>
+        </listitem>
+
+        <listitem>
+          <para>Updated 3-line titlepage of documentation (PDF &amp;
+          HTML)</para>
+        </listitem>
+
+        <listitem>
+          <para>Removed try-catch and nantcontrib reference</para>
+        </listitem>
+
+        <listitem>
+          <para>Updated menu link documentation ,manual</para>
+        </listitem>
+
+        <listitem>
+          <para>Changed Output naming: tfs-x.y-z.doc.zip, screenshots:
+          tfs-x.y-z.screens.zip, demos: tfs-x.y-z.demo.zip, current docu:
+          tfs-current.doc.pdf</para>
+        </listitem>
+
+        <listitem>
+          <para>Updated trademarks to trademarks of GrECo International
+          Holding AG in Austria / Europe in exe ,detail, document
+          header</para>
+        </listitem>
+
+        <listitem>
+          <para>Updated Configure script write version information into
+          version.properties</para>
+        </listitem>
+
+        <listitem>
+          <para>Added components properties componentsincludes.properties and
+          Component.properties for support autmated building</para>
+        </listitem>
+
+        <listitem>
+          <para>Updated Document Trademarks of GrECo International Holding AG
+          in Austria / Europe</para>
+        </listitem>
+
+        <listitem>
+          <para>Updated Trademarks are now owned by "GrECo International
+          Holding AG in Austria / Europe"...e.g. exe details, docu header,
+          etc</para>
+        </listitem>
+
+        <listitem>
+          <para>Updated Copyright to Copyright (c) 2011 Together Teamsolutions
+          Co., Ltd.</para>
+        </listitem>
+
+        <listitem>
+          <para>Updated build script,reference path to support automated
+          building</para>
+        </listitem>
+
+        <listitem>
+          <para>Added configure 'buildid' for project output dir with
+          buildid</para>
+        </listitem>
+
+        <listitem>
+          <para>Updated documentation &amp; Release Note.</para>
+        </listitem>
+      </itemizedlist>
+    </sect1>
+
+    <sect1>
+      <title>Release 1.4-1</title>
+
+      <itemizedlist>
+        <para>For this release, the following items were updated and/or
+        added:</para>
+
+        <listitem>
+          <para>Updated DocBook to improve indentation and viewing of
+          URLs.</para>
+        </listitem>
+
+        <listitem>
+          <para>Compatible with Adobe Reader X.</para>
+        </listitem>
+
+        <listitem>
+          <para>Added Together DocBook.NET (TDB) libraries version 1.0-1 for
+          generating DocBook.</para>
+
+          <itemizedlist>
+            <listitem>
+              <para>Removed IKVM.NET libraries and xalan libraries.</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+
+        <listitem>
+          <para>DocBook-XSL libraries updated to version 1.76.1
+          (docbook-xsl).</para>
+        </listitem>
+
+        <listitem>
+          <para>DocBook-DTD libraries updated to version v.4.5
+          (docbook-dtd).</para>
+        </listitem>
+
+        <listitem>
+          <para>Added C# Documentation generated by SandCastle.</para>
+        </listitem>
+
+        <listitem>
+          <para>Updated licenses in "tfs-includes.xlsx".</para>
+        </listitem>
+
+        <listitem>
+          <para>Added licenses for 3rd party subcomponents. Now all license
+          .txt files are included in the licenses folder.</para>
+        </listitem>
+
+        <listitem>
+          <para>Added support for silent installation.</para>
+        </listitem>
+
+        <listitem>
+          <para>Added new sections to Installation Guide chapter
+          documentation: "How to use the silent installation" and "How to use
+          debug version".</para>
+        </listitem>
+
+        <listitem>
+          <para>Standardized the project sources and output:</para>
+
+          <itemizedlist>
+            <listitem>
+              <para>Updated directory names, filenames and output directory
+              structure. Also, updated configure/make scripts.</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+
+        <listitem>
+          <para>Updated screenshots.</para>
+        </listitem>
+      </itemizedlist>
+    </sect1>
+
+    <sect1>
+      <title>Release 1.3-1</title>
+
+      <itemizedlist>
+        <listitem>
+          <para>Changed use new GrECo Signing certificate.</para>
+        </listitem>
+
+        <listitem>
+          <para>Converted all documentation to DocBook,Created build script
+          used Xalan library.</para>
+        </listitem>
+
+        <listitem>
+          <para>Added new document for installation guide.</para>
+        </listitem>
+
+        <listitem>
+          <para>Add new Xalan library version 2.7.1 to folder tools/xalan/lib
+          for support DocBook create documents.</para>
+
+          <itemizedlist>
+            <listitem>
+              <para>serializer.jar</para>
+            </listitem>
+
+            <listitem>
+              <para>xalan.jar</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+
+        <listitem>
+          <para>Add new fop library version 0.95 to folder tools/fop/lib for
+          support DocBook.</para>
+
+          <itemizedlist>
+            <listitem>
+              <para>avalon-framework.jar</para>
+            </listitem>
+
+            <listitem>
+              <para>batik.jar</para>
+            </listitem>
+
+            <listitem>
+              <para>common-logging.jar</para>
+            </listitem>
+
+            <listitem>
+              <para>fop.jar</para>
+            </listitem>
+
+            <listitem>
+              <para>xmlgraphics-common.ja</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+
+        <listitem>
+          <para>Statdardize all result-dir-names ,filename in build output
+          structure.</para>
+        </listitem>
+
+        <listitem>
+          <para>Changed "Together Teamlosungen EDV-dienstleistungen Gmbh. to
+          Together Teamsolutions Co., Ltd.</para>
+        </listitem>
+
+        <listitem>
+          <para>Standardize build configure/make, standardize build target
+          name.</para>
+        </listitem>
+
+        <listitem>
+          <para>Updated licenses "tfs-include.xls".</para>
+        </listitem>
+
+        <listitem>
+          <para>Added new tfs-doc-current.pdf and HTML, PDF of the document
+          files in the documentation and output structure.</para>
+        </listitem>
+
+        <listitem>
+          <para>Put all public result(src, bin, document, screens) in the
+          community dir.</para>
+        </listitem>
+
+        <listitem>
+          <para>Added new configure and configure.build.xml for auto generate
+          properties.build and build.properties files.</para>
+        </listitem>
+
+        <listitem>
+          <para>Removed build.properties and properties.build from
+          source.</para>
+        </listitem>
+      </itemizedlist>
+    </sect1>
+
+    <sect1>
+      <title>Release 1.2-1</title>
+
+      <itemizedlist>
+        <listitem>
+          <para>Upgrade all subcomponents in the project to the latest
+          version.</para>
+        </listitem>
+
+        <listitem>
+          <para>Fixed missing  SimMetrics zip after build.</para>
+        </listitem>
+      </itemizedlist>
+    </sect1>
+
+    <sect1>
+      <title>Release 1.1-1</title>
+
+      <itemizedlist>
+        <listitem>
+          <para>Release 1.1-1 "Made in Thailand" 2010-04-12.</para>
+        </listitem>
+
+        <listitem>
+          <para>Rebuild from the original sources under Windows7 64
+          Bit.</para>
+        </listitem>
+      </itemizedlist>
+    </sect1>
+
+    <sect1>
+      <title>Release 1.0-4</title>
+
+      <itemizedlist>
+        <listitem>
+          <para>Build Guide section added into documentation.</para>
+        </listitem>
+      </itemizedlist>
+    </sect1>
+
+    <sect1>
+      <title>Release 1.0-3</title>
+
+      <itemizedlist>
+        <listitem>
+          <para>Improved documentation and installation setup.</para>
+        </listitem>
+      </itemizedlist>
+    </sect1>
+
+    <sect1>
+      <title>Release 1.0-2</title>
+
+      <itemizedlist>
+        <listitem>
+          <para>Fixed setup.</para>
+        </listitem>
+
+        <listitem>
+          <para>Documentation improvements.</para>
+        </listitem>
+      </itemizedlist>
+    </sect1>
+
+    <sect1>
+      <title>Release 1.0-1</title>
+
+      <itemizedlist>
+        <listitem>
+          <para>Initial packaging.</para>
+        </listitem>
+      </itemizedlist>
+    </sect1>
+  </chapter>
+
+  <appendix>
+    <title>GNU Free Documentation License</title>
+
+    <programlisting>                GNU Free Documentation License
+                 Version 1.3, 3 November 2008
+
+
+ Copyright (C) 2000, 2001, 2002, 2007, 2008 Free Software Foundation, Inc.
+     &lt;http://fsf.org/&gt;
+ Everyone is permitted to copy and distribute verbatim copies
+ of this license document, but changing it is not allowed.
+
+0. PREAMBLE
+
+The purpose of this License is to make a manual, textbook, or other
+functional and useful document "free" in the sense of freedom: to
+assure everyone the effective freedom to copy and redistribute it,
+with or without modifying it, either commercially or noncommercially.
+Secondarily, this License preserves for the author and publisher a way
+to get credit for their work, while not being considered responsible
+for modifications made by others.
+
+This License is a kind of "copyleft", which means that derivative
+works of the document must themselves be free in the same sense.  It
+complements the GNU General Public License, which is a copyleft
+license designed for free software.
+
+We have designed this License in order to use it for manuals for free
+software, because free software needs free documentation: a free
+program should come with manuals providing the same freedoms that the
+software does.  But this License is not limited to software manuals;
+it can be used for any textual work, regardless of subject matter or
+whether it is published as a printed book.  We recommend this License
+principally for works whose purpose is instruction or reference.
+
+
+1. APPLICABILITY AND DEFINITIONS
+
+This License applies to any manual or other work, in any medium, that
+contains a notice placed by the copyright holder saying it can be
+distributed under the terms of this License.  Such a notice grants a
+world-wide, royalty-free license, unlimited in duration, to use that
+work under the conditions stated herein.  The "Document", below,
+refers to any such manual or work.  Any member of the public is a
+licensee, and is addressed as "you".  You accept the license if you
+copy, modify or distribute the work in a way requiring permission
+under copyright law.
+
+A "Modified Version" of the Document means any work containing the
+Document or a portion of it, either copied verbatim, or with
+modifications and/or translated into another language.
+
+A "Secondary Section" is a named appendix or a front-matter section of
+the Document that deals exclusively with the relationship of the
+publishers or authors of the Document to the Document's overall
+subject (or to related matters) and contains nothing that could fall
+directly within that overall subject.  (Thus, if the Document is in
+part a textbook of mathematics, a Secondary Section may not explain
+any mathematics.)  The relationship could be a matter of historical
+connection with the subject or with related matters, or of legal,
+commercial, philosophical, ethical or political position regarding
+them.
+
+The "Invariant Sections" are certain Secondary Sections whose titles
+are designated, as being those of Invariant Sections, in the notice
+that says that the Document is released under this License.  If a
+section does not fit the above definition of Secondary then it is not
+allowed to be designated as Invariant.  The Document may contain zero
+Invariant Sections.  If the Document does not identify any Invariant
+Sections then there are none.
+
+The "Cover Texts" are certain short passages of text that are listed,
+as Front-Cover Texts or Back-Cover Texts, in the notice that says that
+the Document is released under this License.  A Front-Cover Text may
+be at most 5 words, and a Back-Cover Text may be at most 25 words.
+
+A "Transparent" copy of the Document means a machine-readable copy,
+represented in a format whose specification is available to the
+general public, that is suitable for revising the document
+straightforwardly with generic text editors or (for images composed of
+pixels) generic paint programs or (for drawings) some widely available
+drawing editor, and that is suitable for input to text formatters or
+for automatic translation to a variety of formats suitable for input
+to text formatters.  A copy made in an otherwise Transparent file
+format whose markup, or absence of markup, has been arranged to thwart
+or discourage subsequent modification by readers is not Transparent.
+An image format is not Transparent if used for any substantial amount
+of text.  A copy that is not "Transparent" is called "Opaque".
+
+Examples of suitable formats for Transparent copies include plain
+ASCII without markup, Texinfo input format, LaTeX input format, SGML
+or XML using a publicly available DTD, and standard-conforming simple
+HTML, PostScript or PDF designed for human modification.  Examples of
+transparent image formats include PNG, XCF and JPG.  Opaque formats
+include proprietary formats that can be read and edited only by
+proprietary word processors, SGML or XML for which the DTD and/or
+processing tools are not generally available, and the
+machine-generated HTML, PostScript or PDF produced by some word
+processors for output purposes only.
+
+The "Title Page" means, for a printed book, the title page itself,
+plus such following pages as are needed to hold, legibly, the material
+this License requires to appear in the title page.  For works in
+formats which do not have any title page as such, "Title Page" means
+the text near the most prominent appearance of the work's title,
+preceding the beginning of the body of the text.
+
+The "publisher" means any person or entity that distributes copies of
+the Document to the public.
+
+A section "Entitled XYZ" means a named subunit of the Document whose
+title either is precisely XYZ or contains XYZ in parentheses following
+text that translates XYZ in another language.  (Here XYZ stands for a
+specific section name mentioned below, such as "Acknowledgements",
+"Dedications", "Endorsements", or "History".)  To "Preserve the Title"
+of such a section when you modify the Document means that it remains a
+section "Entitled XYZ" according to this definition.
+
+The Document may include Warranty Disclaimers next to the notice which
+states that this License applies to the Document.  These Warranty
+Disclaimers are considered to be included by reference in this
+License, but only as regards disclaiming warranties: any other
+implication that these Warranty Disclaimers may have is void and has
+no effect on the meaning of this License.
+
+2. VERBATIM COPYING
+
+You may copy and distribute the Document in any medium, either
+commercially or noncommercially, provided that this License, the
+copyright notices, and the license notice saying this License applies
+to the Document are reproduced in all copies, and that you add no
+other conditions whatsoever to those of this License.  You may not use
+technical measures to obstruct or control the reading or further
+copying of the copies you make or distribute.  However, you may accept
+compensation in exchange for copies.  If you distribute a large enough
+number of copies you must also follow the conditions in section 3.
+
+You may also lend copies, under the same conditions stated above, and
+you may publicly display copies.
+
+
+3. COPYING IN QUANTITY
+
+If you publish printed copies (or copies in media that commonly have
+printed covers) of the Document, numbering more than 100, and the
+Document's license notice requires Cover Texts, you must enclose the
+copies in covers that carry, clearly and legibly, all these Cover
+Texts: Front-Cover Texts on the front cover, and Back-Cover Texts on
+the back cover.  Both covers must also clearly and legibly identify
+you as the publisher of these copies.  The front cover must present
+the full title with all words of the title equally prominent and
+visible.  You may add other material on the covers in addition.
+Copying with changes limited to the covers, as long as they preserve
+the title of the Document and satisfy these conditions, can be treated
+as verbatim copying in other respects.
+
+If the required texts for either cover are too voluminous to fit
+legibly, you should put the first ones listed (as many as fit
+reasonably) on the actual cover, and continue the rest onto adjacent
+pages.
+
+If you publish or distribute Opaque copies of the Document numbering
+more than 100, you must either include a machine-readable Transparent
+copy along with each Opaque copy, or state in or with each Opaque copy
+a computer-network location from which the general network-using
+public has access to download using public-standard network protocols
+a complete Transparent copy of the Document, free of added material.
+If you use the latter option, you must take reasonably prudent steps,
+when you begin distribution of Opaque copies in quantity, to ensure
+that this Transparent copy will remain thus accessible at the stated
+location until at least one year after the last time you distribute an
+Opaque copy (directly or through your agents or retailers) of that
+edition to the public.
+
+It is requested, but not required, that you contact the authors of the
+Document well before redistributing any large number of copies, to
+give them a chance to provide you with an updated version of the
+Document.
+
+
+4. MODIFICATIONS
+
+You may copy and distribute a Modified Version of the Document under
+the conditions of sections 2 and 3 above, provided that you release
+the Modified Version under precisely this License, with the Modified
+Version filling the role of the Document, thus licensing distribution
+and modification of the Modified Version to whoever possesses a copy
+of it.  In addition, you must do these things in the Modified Version:
+
+A. Use in the Title Page (and on the covers, if any) a title distinct
+   from that of the Document, and from those of previous versions
+   (which should, if there were any, be listed in the History section
+   of the Document).  You may use the same title as a previous version
+   if the original publisher of that version gives permission.
+B. List on the Title Page, as authors, one or more persons or entities
+   responsible for authorship of the modifications in the Modified
+   Version, together with at least five of the principal authors of the
+   Document (all of its principal authors, if it has fewer than five),
+   unless they release you from this requirement.
+C. State on the Title page the name of the publisher of the
+   Modified Version, as the publisher.
+D. Preserve all the copyright notices of the Document.
+E. Add an appropriate copyright notice for your modifications
+   adjacent to the other copyright notices.
+F. Include, immediately after the copyright notices, a license notice
+   giving the public permission to use the Modified Version under the
+   terms of this License, in the form shown in the Addendum below.
+G. Preserve in that license notice the full lists of Invariant Sections
+   and required Cover Texts given in the Document's license notice.
+H. Include an unaltered copy of this License.
+I. Preserve the section Entitled "History", Preserve its Title, and add
+   to it an item stating at least the title, year, new authors, and
+   publisher of the Modified Version as given on the Title Page.  If
+   there is no section Entitled "History" in the Document, create one
+   stating the title, year, authors, and publisher of the Document as
+   given on its Title Page, then add an item describing the Modified
+   Version as stated in the previous sentence.
+J. Preserve the network location, if any, given in the Document for
+   public access to a Transparent copy of the Document, and likewise
+   the network locations given in the Document for previous versions
+   it was based on.  These may be placed in the "History" section.
+   You may omit a network location for a work that was published at
+   least four years before the Document itself, or if the original
+   publisher of the version it refers to gives permission.
+K. For any section Entitled "Acknowledgements" or "Dedications",
+   Preserve the Title of the section, and preserve in the section all
+   the substance and tone of each of the contributor acknowledgements
+   and/or dedications given therein.
+L. Preserve all the Invariant Sections of the Document,
+   unaltered in their text and in their titles.  Section numbers
+   or the equivalent are not considered part of the section titles.
+M. Delete any section Entitled "Endorsements".  Such a section
+   may not be included in the Modified Version.
+N. Do not retitle any existing section to be Entitled "Endorsements"
+   or to conflict in title with any Invariant Section.
+O. Preserve any Warranty Disclaimers.
+
+If the Modified Version includes new front-matter sections or
+appendices that qualify as Secondary Sections and contain no material
+copied from the Document, you may at your option designate some or all
+of these sections as invariant.  To do this, add their titles to the
+list of Invariant Sections in the Modified Version's license notice.
+These titles must be distinct from any other section titles.
+
+You may add a section Entitled "Endorsements", provided it contains
+nothing but endorsements of your Modified Version by various
+parties--for example, statements of peer review or that the text has
+been approved by an organization as the authoritative definition of a
+standard.
+
+You may add a passage of up to five words as a Front-Cover Text, and a
+passage of up to 25 words as a Back-Cover Text, to the end of the list
+of Cover Texts in the Modified Version.  Only one passage of
+Front-Cover Text and one of Back-Cover Text may be added by (or
+through arrangements made by) any one entity.  If the Document already
+includes a cover text for the same cover, previously added by you or
+by arrangement made by the same entity you are acting on behalf of,
+you may not add another; but you may replace the old one, on explicit
+permission from the previous publisher that added the old one.
+
+The author(s) and publisher(s) of the Document do not by this License
+give permission to use their names for publicity for or to assert or
+imply endorsement of any Modified Version.
+
+
+5. COMBINING DOCUMENTS
+
+You may combine the Document with other documents released under this
+License, under the terms defined in section 4 above for modified
+versions, provided that you include in the combination all of the
+Invariant Sections of all of the original documents, unmodified, and
+list them all as Invariant Sections of your combined work in its
+license notice, and that you preserve all their Warranty Disclaimers.
+
+The combined work need only contain one copy of this License, and
+multiple identical Invariant Sections may be replaced with a single
+copy.  If there are multiple Invariant Sections with the same name but
+different contents, make the title of each such section unique by
+adding at the end of it, in parentheses, the name of the original
+author or publisher of that section if known, or else a unique number.
+Make the same adjustment to the section titles in the list of
+Invariant Sections in the license notice of the combined work.
+
+In the combination, you must combine any sections Entitled "History"
+in the various original documents, forming one section Entitled
+"History"; likewise combine any sections Entitled "Acknowledgements",
+and any sections Entitled "Dedications".  You must delete all sections
+Entitled "Endorsements".
+
+
+6. COLLECTIONS OF DOCUMENTS
+
+You may make a collection consisting of the Document and other
+documents released under this License, and replace the individual
+copies of this License in the various documents with a single copy
+that is included in the collection, provided that you follow the rules
+of this License for verbatim copying of each of the documents in all
+other respects.
+
+You may extract a single document from such a collection, and
+distribute it individually under this License, provided you insert a
+copy of this License into the extracted document, and follow this
+License in all other respects regarding verbatim copying of that
+document.
+
+
+7. AGGREGATION WITH INDEPENDENT WORKS
+
+A compilation of the Document or its derivatives with other separate
+and independent documents or works, in or on a volume of a storage or
+distribution medium, is called an "aggregate" if the copyright
+resulting from the compilation is not used to limit the legal rights
+of the compilation's users beyond what the individual works permit.
+When the Document is included in an aggregate, this License does not
+apply to the other works in the aggregate which are not themselves
+derivative works of the Document.
+
+If the Cover Text requirement of section 3 is applicable to these
+copies of the Document, then if the Document is less than one half of
+the entire aggregate, the Document's Cover Texts may be placed on
+covers that bracket the Document within the aggregate, or the
+electronic equivalent of covers if the Document is in electronic form.
+Otherwise they must appear on printed covers that bracket the whole
+aggregate.
+
+
+8. TRANSLATION
+
+Translation is considered a kind of modification, so you may
+distribute translations of the Document under the terms of section 4.
+Replacing Invariant Sections with translations requires special
+permission from their copyright holders, but you may include
+translations of some or all Invariant Sections in addition to the
+original versions of these Invariant Sections.  You may include a
+translation of this License, and all the license notices in the
+Document, and any Warranty Disclaimers, provided that you also include
+the original English version of this License and the original versions
+of those notices and disclaimers.  In case of a disagreement between
+the translation and the original version of this License or a notice
+or disclaimer, the original version will prevail.
+
+If a section in the Document is Entitled "Acknowledgements",
+"Dedications", or "History", the requirement (section 4) to Preserve
+its Title (section 1) will typically require changing the actual
+title.
+
+
+9. TERMINATION
+
+You may not copy, modify, sublicense, or distribute the Document
+except as expressly provided under this License.  Any attempt
+otherwise to copy, modify, sublicense, or distribute it is void, and
+will automatically terminate your rights under this License.
+
+However, if you cease all violation of this License, then your license
+from a particular copyright holder is reinstated (a) provisionally,
+unless and until the copyright holder explicitly and finally
+terminates your license, and (b) permanently, if the copyright holder
+fails to notify you of the violation by some reasonable means prior to
+60 days after the cessation.
+
+Moreover, your license from a particular copyright holder is
+reinstated permanently if the copyright holder notifies you of the
+violation by some reasonable means, this is the first time you have
+received notice of violation of this License (for any work) from that
+copyright holder, and you cure the violation prior to 30 days after
+your receipt of the notice.
+
+Termination of your rights under this section does not terminate the
+licenses of parties who have received copies or rights from you under
+this License.  If your rights have been terminated and not permanently
+reinstated, receipt of a copy of some or all of the same material does
+not give you any rights to use it.
+
+
+10. FUTURE REVISIONS OF THIS LICENSE
+
+The Free Software Foundation may publish new, revised versions of the
+GNU Free Documentation License from time to time.  Such new versions
+will be similar in spirit to the present version, but may differ in
+detail to address new problems or concerns.  See
+http://www.gnu.org/copyleft/.
+
+Each version of the License is given a distinguishing version number.
+If the Document specifies that a particular numbered version of this
+License "or any later version" applies to it, you have the option of
+following the terms and conditions either of that specified version or
+of any later version that has been published (not as a draft) by the
+Free Software Foundation.  If the Document does not specify a version
+number of this License, you may choose any version ever published (not
+as a draft) by the Free Software Foundation.  If the Document
+specifies that a proxy can decide which future versions of this
+License can be used, that proxy's public statement of acceptance of a
+version permanently authorizes you to choose that version for the
+Document.
+
+11. RELICENSING
+
+"Massive Multiauthor Collaboration Site" (or "MMC Site") means any
+World Wide Web server that publishes copyrightable works and also
+provides prominent facilities for anybody to edit those works.  A
+public wiki that anybody can edit is an example of such a server.  A
+"Massive Multiauthor Collaboration" (or "MMC") contained in the site
+means any set of copyrightable works thus published on the MMC site.
+
+"CC-BY-SA" means the Creative Commons Attribution-Share Alike 3.0 
+license published by Creative Commons Corporation, a not-for-profit 
+corporation with a principal place of business in San Francisco, 
+California, as well as future copyleft versions of that license 
+published by that same organization.
+
+"Incorporate" means to publish or republish a Document, in whole or in 
+part, as part of another Document.
+
+An MMC is "eligible for relicensing" if it is licensed under this 
+License, and if all works that were first published under this License 
+somewhere other than this MMC, and subsequently incorporated in whole or 
+in part into the MMC, (1) had no cover texts or invariant sections, and 
+(2) were thus incorporated prior to November 1, 2008.
+
+The operator of an MMC Site may republish an MMC contained in the site
+under CC-BY-SA on the same site at any time before August 1, 2009,
+provided the MMC is eligible for relicensing.</programlisting>
+  </appendix>
+
+  <colophon>
+    <para>Together Teamsolutions Co., Ltd.</para>
+
+    <address>
+	  <otheraddr>330/30 Moo 12 Pratamnak Soi 5</otheraddr>
+      <otheraddr>Nongprue Banglamung Pattaya</otheraddr>
+      <otheraddr>20260 Chonburi Thailand</otheraddr>
+      <phone>Tel. +66 38 252802</phone>
+      <fax>Fax +43 720 347872</fax>
+      <email>office@togetherteam.co.th</email>
+      <link xlink:href="www.togetherteam.co.th"
+        xmlns:xlink="http://www.w3.org/1999/xlink">www.togetherteam.co.th</link>
+    </address>
+  </colophon>
+</book>

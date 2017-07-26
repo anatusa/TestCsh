@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!--
+	Together Fuzzy Search
+	Copyright (C) 2011 Together Teamsolutions Co., Ltd.
+
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program. If not, see http://www.gnu.org/licenses
+-->
+
+<project basedir="." name="Together Configure" default="init">
+	<description>Together Configure use to set property of project</description>
+	
+	<target name="init" description="show operating system">
+		<echo message="OS=${operating-system::to-string(environment::get-operating-system())}" />
+	</target>
+	
+	<target name="property.export" 
+		description="for export specific old property to file">
+		<echo message="export ${output.name}" />
+		<xmlpeek
+            file="${property.file}"
+            xpath="/project/property[@name = '${output.name}']/@value"
+            property="output.value">
+        </xmlpeek>
+		<if test="${not property::exists('output.value')}">
+			<echo message="not found property name '${output.name}'" />
+		</if>
+		<if test="${property::exists('output.value')}">
+			<echo message="${output.name}=${string::replace(output.value,'\','/')}" file="../${output.name}.txt" />
+		</if>
+	</target>
+	
+	<target name="property.import" 
+		description="for import specific new property to build file">
+		<echo message="${input.name}=${string::get-length(property::get-value('input.value'))}" />
+		<if test="${input.name=='vs.dir' and string::get-length(property::get-value('input.value'))==0}">
+			<call target="read.vs.path" />
+		</if>
+		
+		<if test="${input.name=='msbuild.dir' and string::get-length(property::get-value('input.value'))==0}">
+			<call target="read.msbuild" />
+		</if>		
+		
+		<if test="${not property::exists('job.done')}">
+			<xmlpoke file="${property.file}" 
+				xpath="/project/property[@name = '${input.name}']/@value" 
+				value="${string::replace(input.value,'\','/')}" />
+		</if>
+	</target>
+	
+	<target name="read.msbuild" description="read .net enviroment">
+		<readregistry property="msbuild.path" key="SOFTWARE\Microsoft\MSBuild\ToolsVersions\4.0\MSBuildToolsPath" hive="LocalMachine" />
+		<echo message="${msbuild.path}" />
+		<xmlpoke file="${property.file}" 
+			xpath="/project/property[@name = '${input.name}']/@value" 
+			value="${string::replace(msbuild.path,'\','/')}" />
+			<property name="job.done" value="true" />
+	</target>
+	
+	<target name="read.vs.path" description="read .net enviroment">
+		<readregistry property="vs.path" key="SOFTWARE\Microsoft\VisualStudio\11.0\InstallDir" hive="LocalMachine" />
+		<echo message="${vs.path}" />
+		<echo message="${directory::get-parent-directory(vs.path)}\Tools" />
+		
+		<xmlpoke file="${property.file}" 
+			xpath="/project/property[@name = '${input.name}']/@value" 
+			value="${string::replace(vs.path,'\','/')}" />
+		<property name="job.done" value="true" />
+	</target>
+	
+</project>

@@ -1,0 +1,302 @@
+Write the newest changes above, under this line, please!
+########## TFS - Together Fuzzy Search - 2.5-1 ##########
+2017-07-22 Thanthip Phudech <t.phudech@togetherteam.co.th>
+	# Updated version of TFS 2.4-1 to 2.5-1
+		- ChangeLog.txt
+		- configure.bat
+		- doc/tfs-doc.xml
+		- version.build
+
+########## TFS - Together Fuzzy Search - 2.4-1 RELEASED ##########
+2017-07-03 Thanthip Phudech <t.phudech@togetherteam.co.th>
+	# Corrected some words in the document.
+		- doc/tfs-doc.xml
+		- doc/tfs-testcases-doc.xml
+
+2017-05-11 Phornthip Phechpanaprai <P.phechpanaprai@togetherteam.co.th>
+	# Update release note.
+
+2017-05-08 Thanthip Phudech <t.phudech@togetherteam.co.th>
+	# Updated contents in the documents (Build Guide).
+		- doc/tfs-doc.xml
+	# Modified the following file for updating some parameters and batch scripts.
+		- configure.bat
+		- make.bat
+
+2017-04-26 Anat Usa-ampai <A.Usa-ampai@togetherteam.co.th>
+	# Fixed error occurred when build the project with base directory which have white space.
+
+2017-03-24 Thanthip Phudech <t.phudech@togetherteam.co.th>
+	# Added trim function for removing leading and trailing spaces (silent installation).
+	# Modified the NSI script for supporting forbidden characters.
+		- installation/Windows/TFS.nsi
+
+2017-03-17 Thanthip Phudech <t.phudech@togetherteam.co.th>
+	# Added trim function for removing leading and trailing spaces in the start menu name.
+		- installation/Windows/togStartOption.nsh
+
+2017-03-03 Thanthip Phudech <t.phudech@togetherteam.co.th>
+	# Updated contents in the documents and document's image.
+		- doc/tfs-doc.xml
+		- doc/tfs-testcases-doc.xml
+		- doc/images
+
+2017-02-25 Thanthip Phudech <t.phudech@togetherteam.co.th>
+	# Fixed "The textbox's returned as default value when the textbox is empty. It should be the empty value instead of default value" issue in the "Choose Start Options" page.
+
+2017-02-16 Chokchai Khonsuwan <C.khonsuwan@togetherteam.co.th>
+	# Added default button in "Choose Start Options" installation screen.
+		- installation/Windows/togStartOption.nsh
+
+2017-02-10 Chokchai Khonsuwan <C.khonsuwan@togetherteam.co.th>
+	# Removed unnecessary documents from installed folder.
+		- installation/Windows/TFS.nsi
+
+2017-02-10 Chokchai Khonsuwan <C.khonsuwan@togetherteam.co.th>
+	# Fixed copyright year of Uninstall file.
+		- installation/Windows/TFS.nsi
+
+2017-02-09 Chokchai Khonsuwan <C.khonsuwan@togetherteam.co.th>
+	# Removed pin to taskbar from the project.
+		- installation/Windows/pin.vbs
+		- installation/Windows/TFS.nsi
+		- installation/Windows/togStartOption.nsh
+		- installation/Windows/unpin.vbs
+	# Corrected wrong words in the wizard (Browse screen).
+		- installation/Windows/togDirectory.nsh
+
+2016-12-13 Thanthip Phudech <t.phudech@together.at>
+	# Updated document (Installation Guide).
+
+2016-10-07 Thanthip Phudech <t.phudech@together.at>
+	# Added a new parameter (APPFULLNAME) in default.build.
+	# Updated silent.properties.
+	# Updated document (silent installation).
+
+2016-10-04 Thanthip Phudech <t.phudech@together.at>
+	# Modified configure.bat
+	# Correct the license part (at the top) in each of files.
+	# Updated document (Build Guide).
+	# Added trr to tfs project (tool and ComponentIncludes.csv)
+	# Changed parameter name in help section of make.bat (from project_name to app_name).
+
+2016-09-17 Thanthip Phudech <t.phudech@together.at>
+	# Correct the license part of the following files..
+		- pin.vbs
+		- unpin.vbs
+
+2016-09-13 Thanthip Phudech <t.phudech@together.at>
+	# Correct the license part (at the top) in each of files.
+
+2016-08-06 Thanthip Phudech <t.phudech@together.at>
+	# Updated version number of TFS from 2.3-1 to 2.4-1.
+		- ChangeLog.txt
+		- configure.bat
+		- doc/tfs-doc.xml
+		- version.build
+
+########## TFS - Tog Fuzzy Search - 2.3-1 RELEASED ##########
+2016-06-30 Chokchai Khonsuwan <C.khonsuwan@togetherteam.co.th>
+	# Updated document.
+
+2016-06-24 Chokchai Khonsuwan <C.khonsuwan@togetherteam.co.th>
+	# Updated docbook process for support FOP 2.0 and font configuration
+
+2016-03-22 Sansern Makcharoen <S.Makcharoen@togetherteam.co.th>
+    # Automatic update "COPYRIGHT" to the current year
+	
+2016-03-18 Warut Dechma <W.Dechma@togetherteam.co.th>
+	# fixed: the setup has infinite loop for finding a drive to calculate a free space.
+
+2016-01-22 Thanthip Phudech <t.phudech@together.at>
+	# Updated version number of TFS from 2.2-1 to 2.3-1.
+		- ChangeLog.txt
+		- configure.bat
+		- doc/tfs-doc.xml
+		- version.build
+
+########## TFS - Tog Fuzzy Search - 2.2-1 RELEASED ##########
+2015-10-08 Thanthip Phudech <t.phudech@together.at>
+	# Modified document (Added note about Adobe Reader 10 / disable Protected Mode).
+
+2015-09-23 Anat Usa-ampai <A.Usa-ampai@togetherteam.co.th>
+	# Change TargetFrameworkVersion to v4.6.
+
+2015-09-16 Pisut Thentubtim <P.Thengtubtim@togetherteam.co.th>
+	# Updated version number of TFS from 2.1-1 to 2.2-1.
+		- configure.bat
+		- doc/tfs-doc.xml
+		- version.build
+
+########## TFS - Tog Fuzzy Search - 2.1-1 RELEASED ##########
+
+2015-08-08 Kantida Charoenwong <K.charoenwong@togetherteam.co.th>
+	# Update Pin on taskbar support Windows 10.
+
+2015-07-28 Phornthip Phechpanaprai <P.Phechpanaprai@togetherteam.co.th>
+	# Update the build script
+		- default.build : change DNAME to DAPP_FULL_NAME
+		- MUI_English.nsh
+		- TFS.nsi
+
+2015-07-08 Warut Dechma <warut@together.at>
+	# update the build scripts for supports project.build
+	# improve configure.bat performance.
+
+2015-07-07 Chokchai Khonsuwan <C.khonsuwan@together.at>
+	#Update target clean  in "default.build"
+
+2015-07-07 Warut Dechma <warut@together.at>
+	# add NAnt and NAntContrib version 0.92 into the tools folder.
+	# update the build scripts:
+		- configure.bat : use NAnt from the tools folder. Do not create build.properties anymore. Removed 'nanthome' and 'nantcontrib' options.
+		- make.bat : use NAnt from thhe tools folder.
+		- defualt.build : change the NAntContrib path to the tools folder.
+	# update the build guides chapter.
+
+2015-05-26 Sansern Makcharoen <S.Makcharoen@togetherteam.co.th>
+    # Added "tests" folder 
+	# Added "signtool" component
+	
+2015-03-12 Anat Usa-ampai <anat@together.at>
+	# Move configure from tools to root directory.
+
+2015-03-11 Anat Usa-ampai <anat@together.at>
+	# Move HTML Help Workshop to tools directory.
+
+2015-02-25 Warut Dechma <warut@together.at>
+	# removed commons-lang from tools.
+
+2015-02-23 Pisut Thentubtim <P.Thengtubtim@togetherteam.co.th>
+	# default.build:updateded
+		Updated signing conditions
+
+########## TFS - Tog Fuzzy Search - 2.0-1 RELEASED ##########
+
+2015-01-30 Warut Dechma <warut@together.at>
+	# update the document license.
+	
+2015-01-13 Sansern Makcharoen <S.Makcharoen@togetherteam.co.th>
+    # added colophon tag in "tfs-doc.xml" and "tfs-testcases-doc.xml"
+
+2014-08-21 Sansern Makcharoen <S.Makcharoen@togetherteam.co.th>
+    # Changed signing conditions.
+
+2014-08-18 Pisut Thentubtim <pisut@together.at>
+    # default.build:updated
+		Changed timeout(signing timestamp) from 1800000 to 30000.
+		
+2014-05-22 Sansern Makcharoen <S.Makcharoen@togetherteam.co.th>
+    # Added new components to components/ComponentIncludes.csv
+    # Added schema to docbook.
+
+2014-04-03 Nattapong Sunkamalai<n.sunkamalai@togetherteam.co.th>
+    	# updated the document with the new template.
+	# updated ComponentIncludes.csv
+		- removed tdb
+	# added new components for building the document:
+		- avalon-framework
+		- batik
+		- commons-io
+		- commons-lang
+		- commons-logging
+		- fop
+		- xalan
+		- xerces
+		- xml-commons
+		- xmlgraphic-commons
+                - tds
+	# required Java for building the document.
+	# updated the build script for building documents.
+
+2014-04-01 Sansern Makcharoen <S.Makcharoen@togetherteam.co.th>
+	# Added <msbuild> script to default.build
+	# Removed "vs.dir", and added "htmlthelp.dir" in doc/default.build
+	# Removed "vs.dir", and added "htmlhelp.dir" in configure.bat
+
+2013-07-03 Warut Dechma <warut@together.at>
+	# changed the silent uninstallation from "/SILENT=(YES/NO)" to "/SILENT".
+	# fixed: write the TFS registry in wrong path, not 64 bit registry when install on OS 64 bit.
+
+2013-03-15 Pisut Thentubtim <pisut@together.at>
+	# default.build:updated 
+		- sign.all.flag to controls all signed files (true/false):added
+		- sign.dll.flag to controls signed DLL (true/false):added
+		- sign.dll.timestamp to controls signed DLL with/without a time stamp server (true/false):added
+		- sign.setup.flag to controls signed the setup file (true/false):added
+		- sign.setup.timestamp to controls signed the setup file with/without a time stamp server (true/false):added
+		- loop for switch URL timestamp:added
+	
+2013-03-09 Warut Dechma <warut@together.at>
+	# updated the build script(build.xml) for building TAB with the retry signing concept.
+
+2013-02-05 Pisut Thentubtim <pisut@together.at>
+	# increased: the version to 2.0-1
+		- doc/tfs-doc.xml:updated
+		- configure.bat:updated
+		- version.build:updated
+		
+2013-01-23 Pisut Thentubtim <pisut@together.at>
+	# doc/tfs-testcases.xml:updated
+		- updated: new template tes case in document.
+		
+2013-01-22 Pisut Thentubtim <pisut@together.at>
+	# doc/tfs-doc.xml:updated
+		- removed: java testcase in manual document.
+		
+2013-01-17 Pisut Thentubtim <pisut@together.at>
+	# doc/tfs-doc.xml:updated
+		- added: information of SoundEX of SQL2012 in manual document.
+		- updated: information license in manual document.
+		- removed: java testcase in manual document.
+	# doc/tfs-testcases.xml:updated
+		- added: information of SoundEX of SQL2012 in document.
+		
+2012-12-26 Pisut Thentubtim <pisut@together.at>
+	# default.build:updated
+		- added: excluding/including test.pdf file following standard output(distributions folder).
+	# installation/Windows/TFS.nsi:updated
+		- added: excluding test.pdf file in "doc" folder.
+	# doc/default.build:updated
+		- added: buildTestCaseDoc task for building test case document.	
+	# doc/tfs-testcases-doc.xml:added
+		
+2012-12-24 Pisut Thentubtim <pisut@together.at>
+	# doc/tfs-doc.xml:updated
+		- added: information of SoundEX of SQL2012 in manual document.
+
+2011-10-27 Kittichai Suthunyatanakit <suthunyatanakit@together.at>
+	# updated DOCBOOK DTD to version 5.0
+	# added pagebreak to the pdf file
+	
+2011-10-18 Kittichai Suthunyatanakit <suthunyatanakit@together.at>
+	# updated release notes (1.5-1)
+	# added digital signature & timeout check in tfs.nsi & default.build for uninstall.exe
+
+2011-09-19 Kittichai Suthunyatanakit <suthunyatanakit@together.at>
+	# updated 3-line titlepage of documentation (PDF & HTML & CHM)
+	
+2011-07-25 Boonsong serngkhunthot<sboonsong@together.at>
+	# Added about configure buildid for project output dir with BuildID
+	
+2011-07-22 Warut Dechma <warut@together.at>
+	# fixed: missing the property "dist.documentation.dir"
+	
+2011-07-11 Boonsong serngkhunthot<sboonsong@together.at>
+	# Updated about debug version file to standardize tfs-x.y-z.debug.zip
+	
+2011-06-15 Boonsong Serngkhunthot<sboonsong@together.at>
+	# Updated copy right to (c) 2011 Together Teamsolutions Co., Ltd.
+	# Updated configure -help  ,Multiple parameters can be specified at ONCE
+	# Updated about signing tfs.dll
+	
+2011-05-23 Simon Black <simon@together.at>
+	# Revised and Updated tfs-doc.xml (Release 1.4-1)
+
+2011-05-30 Boonsong Serngkhunthot<sboonsong@together.at>
+	#updated about silent uninstallation 
+	
+2011-04-25 Boonsong Serngkhunthot<sboonsong@together.at>
+    #moved nsis to tools folder and changed name install folder to installation folder
+    #rename folder lib to external-lib
+    

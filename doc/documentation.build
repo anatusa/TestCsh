@@ -1,0 +1,249 @@
+<?xml version="1.0"?>
+<!--
+    Together Fussy Search
+    Copyright (C) 2011 Together Teamsolutions Co., Ltd.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or 
+    (at your option) any later version.
+ 
+    This program is distributed in the hope that it will be useful, 
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+    GNU General Public License for more details.
+ 
+    You should have received a copy of the GNU General Public License
+    along with this program. If not, see http://www.gnu.org/licenses
+-->
+<project basedir="." name="ExecNetDoc" default="doc.make.chm">
+	<property name="documentation.dir" value="${project::get-base-directory()}/../output/doc" />
+	<property name="bin.intern.dir" value="${project::get-base-directory()}/../output/bin" />
+	
+	<property name="output2.dir" value="output" />
+	<!-- Directories -->
+	<!--property name="sandcastle.dir"
+			  value="C:\Program Files (x86)\Sandcastle" /-->
+	<property name="sandcastle.workingdir" 
+			  value="${project::get-base-directory()}\tmp2" />
+	<property name="sandcastle.output.dir" 
+			  value="${sandcastle.workingdir}\${output2.dir}" />
+	<!-- Executables -->
+	<property name="sandcastle.mrefbuilder.exe" 
+			  value="${sandcastle.dir}\productiontools\mrefbuilder.exe" />
+	<property name="sandcastle.buildassembler.exe" 
+			  value="${sandcastle.dir}\productiontools\buildassembler.exe" />
+	<property name="sandcastle.xsltransform.exe" 
+			  value="${sandcastle.dir}\productiontools\xsltransform.exe" />
+	<!-- Transformations -->
+	<property name="sandcastle.applyvsdocmodel.xsl" 
+			  value="${sandcastle.dir}\ProductionTransforms\ApplyVSDocModel.xsl" />
+	<property name="sandcastle.addguidfilenames.xsl" 
+			  value="${sandcastle.dir}\ProductionTransforms\AddGuidFilenames.xsl" />
+	<property name="sandcastle.reflectiontomanifest.xsl" 
+			  value="${sandcastle.dir}\ProductionTransforms\ReflectionToManifest.xsl" />
+	<property name="sandcastle.reflectiontochmproject.xsl" 
+			  value="${sandcastle.dir}\ProductionTransforms\ReflectionToChmProject.xsl" />
+	<property name="sandcastle.toctochmcontents.xsl" 
+			  value="${sandcastle.dir}\ProductionTransforms\TocToChmContents.xsl" />
+	<property name="sandcastle.reflectiontochmindex.xsl" 
+			  value="${sandcastle.dir}\ProductionTransforms\ReflectionToChmIndex.xsl" />
+	<property name="sandcastle.createvstoc.xsl" 
+			  value="${sandcastle.dir}\ProductionTransforms\CreateVSToc.xsl" />
+	<!-- Help Compiler -->
+	<choose>
+		<when test="${(not property::exists('htmlhelp.dir')) or htmlhelp.dir==''}">
+			<property name="hhc.exe" value="${tools.dir}\htmlhelpworkshop\hhc.exe" />
+			<property name="hhc.dir" value="${tools.dir}\htmlhelpworkshop" />
+		</when>
+		<otherwise>
+			<property name="hhc.exe" value="${htmlhelp.dir}\hhc.exe" />
+			<property name="hhc.dir" value="${htmlhelp.dir}" />			  
+		</otherwise>
+	</choose>
+	<target name="doc.init" if="${directory::exists('sandcastle.dir')}">
+		<!-- Create or Cleanup Working Directory the first task in the NAnt Project is the creation of an empty working directory:-->
+		<mkdir dir="${sandcastle.workingdir}" 
+			if="${not directory::exists(sandcastle.workingdir)}" />
+		<delete>
+		   <fileset basedir="${sandcastle.workingdir}">
+			  <include name="**\*" />
+		   </fileset>
+		</delete>
+	</target>
+	
+	<target name="doc.prepare" if="${directory::exists(sandcastle.dir)}">
+		<!-- Create Output Environment -->
+		<mkdir dir="${sandcastle.output.dir}" /> 
+		<mkdir dir="${sandcastle.output.dir}/html" /> 
+		<copy todir="${sandcastle.output.dir}"> 
+			<fileset basedir="${sandcastle.dir}/Presentation/vs2005"> 
+				<include name="icons/**" /> 
+				<include name="scripts/**" /> 
+				<include name="styles/**" /> 
+			</fileset> 
+		</copy>
+	</target>
+
+	<target name="doc.configure" if="${directory::exists(sandcastle.dir)}">
+		<!-- Copy configuration file, and hard code references -->
+		<copy file="${sandcastle.dir}/Presentation/vs2005/configuration/sandcastle.config"
+			  tofile="${sandcastle.workingdir}/Sandcastle.config"> 
+		   <filterchain> 
+			  <replacestring from="&quot;..\..\" to="&quot;${sandcastle.dir}\" /> 
+			  <replacestring from="&quot;..\" to="&quot;${sandcastle.dir}\Examples\" />
+			  <replacestring from="&quot;comments.xml" to="&quot;${documentation.dir}\*.xml" />
+			  <replacestring from="%DXROOT%" to="${sandcastle.dir}" /> 			  
+		   </filterchain> 
+		</copy>
+		<!-- Copy configuration file, and hard code references -->
+		<copy file="${sandcastle.dir}/ProductionTools/MRefBuilder.config"
+			  tofile="${sandcastle.workingdir}/MRefBuilder.config"> 
+		   <filterchain> 
+			  <replacestring from="&quot;..\..\" to="&quot;${sandcastle.dir}\" /> 
+			  <replacestring from="&quot;..\" to="&quot;${sandcastle.dir}\Examples\" />
+			  <replacestring from="&quot;comments.xml" to="&quot;${documentation.dir}\*.xml" />
+			  <replacestring from="%DXROOT%" to="${sandcastle.dir}" /> 	
+			  <replacestring from="&quot;MRefBuilder.exe" to="&quot;${sandcastle.dir}\ProductionTools\MRefBuilder.exe" />			  
+		   </filterchain> 
+		</copy>
+	</target>
+	
+	<target name="doc.make.reflection.xml" if="${directory::exists(sandcastle.dir)}">
+		<!-- Run MRefBuilder (introspection on assemblies) to create basic Reflection XML -->
+		<exec program="${sandcastle.mrefbuilder.exe}" workingdir="${sandcastle.workingdir}"> 
+		   <arg value="${bin.intern.dir}/tfs.dll" />
+		   <!--bs arg value="${bin.intern.dir}/SimMetrics.dll" /-->
+		   <arg value="/config:MRefBuilder.config" />
+		   <arg value="/out:reflection.org" />
+		</exec>
+		<!-- Create final Reflection XML -->
+		<!-- Regroup overloads -->
+		<exec program="${sandcastle.xsltransform.exe}" workingdir="${sandcastle.workingdir}">
+		   <arg value="reflection.org" />
+		   <arg value="/xsl:&quot;${sandcastle.applyvsdocmodel.xsl}&quot;" />
+		   <arg value="/out:reflection.org1.xml" />
+		</exec>
+		<!-- Create filenames for html documents -->
+		<exec program="${sandcastle.xsltransform.exe}" workingdir="${sandcastle.workingdir}">
+		   <arg value="reflection.org1.xml" />
+		   <arg value="/xsl:&quot;${sandcastle.addguidfilenames.xsl}&quot;" />
+		   <arg value="/out:reflection.xml" />
+		</exec>
+	</target>
+	
+	<target name="doc.make.manifest.xml" if="${directory::exists(sandcastle.dir)}">
+		<!-- Create Manifest (list of Topics) -->
+		<exec program="${sandcastle.xsltransform.exe}" workingdir="${sandcastle.workingdir}">
+		   <arg value="/xsl:&quot;${sandcastle.reflectiontomanifest.xsl}&quot;" />
+		   <arg value="reflection.xml" />
+		   <arg value="/out:manifest.xml" />
+		</exec>
+	</target>
+	
+	<target name="doc.make.toc" if="${directory::exists(sandcastle.dir)}">
+		<!-- Run BuildAssembler (create html topic files) -->
+		<exec program="${sandcastle.buildassembler.exe}" workingdir="${sandcastle.workingdir}" timeout="1800000">
+		   <arg value="manifest.xml" />
+		   <arg value="/config:Sandcastle.config" />
+		</exec>
+		<echo>Finish BuildAssember</echo>
+	</target>
+	
+	<target name="doc.make.chm" depends="doc.init, doc.configure, doc.prepare, doc.make.reflection.xml, doc.make.manifest.xml, doc.make.toc" if="${directory::exists(sandcastle.dir)}">
+		<!-- Create html Help project -->
+		<echo>Create html Help project</echo>
+		<exec program="${sandcastle.xsltransform.exe}" workingdir="${sandcastle.workingdir}">
+		   <arg value="/xsl:&quot;${sandcastle.reflectiontochmproject.xsl}&quot;" />
+		   <arg value="/arg:project=&quot;${project.name}-${version}-${release}&quot;" />
+		   <arg value="reflection.xml" />
+		   <arg value="/out:&quot;${output2.dir}\${project.name}-${version}-${release}.hhp&quot;" />
+		</exec>
+		<echo>Generate an intermediate Toc file that simulates the Whidbey TOC format</echo>
+		<exec program="${sandcastle.xsltransform.exe}" workingdir="${sandcastle.workingdir}">
+		   <arg value="/xsl:&quot;${sandcastle.createvstoc.xsl}&quot;" />
+		   <arg value="reflection.xml" />
+		   <arg value="/out:&quot;${output2.dir}\${project.name}-${version}-${release}.toc&quot;" />
+		</exec>
+		<!-- Create html Help project Table Of Contents -->
+		<echo>Create html Help project Table Of Contents</echo>
+		<exec program="${sandcastle.xsltransform.exe}" workingdir="${sandcastle.workingdir}" >
+		   <arg value="/xsl:&quot;${sandcastle.toctochmcontents.xsl}&quot;" />
+		   <arg value="&quot;${output2.dir}\${project.name}-${version}-${release}.toc&quot;" />
+		   <arg value="/arg:html=${output2.dir}\html" />
+		   <arg value="/out:&quot;${output2.dir}\${project.name}-${version}-${release}.hhc&quot;" />
+		</exec>
+		<!-- Create html Help project Index -->
+		<echo>Create html Help project Index</echo>
+		<exec program="${sandcastle.xsltransform.exe}" workingdir="${sandcastle.workingdir}" >
+		   <arg value="/xsl:&quot;${sandcastle.reflectiontochmindex.xsl}&quot;" />
+		   <arg value="reflection.xml" />
+		   <arg value="/out:&quot;${output2.dir}\${project.name}-${version}-${release}.hhk&quot;" />
+		</exec>
+		<!-- Generate CHM file -->
+		<call target="GenerateCHMFile"/>
+	</target>
+	<target name="GenerateCHMFile">
+			<echo>Generate CHM file</echo>
+			<property name="hhc.exe.dir" value="&quot;${hhc.exe}&quot;"/>
+			<echo message="hhc.exe.dir=&quot;${hhc.exe}&quot;"/>
+			<property name="hhp" value="&quot;${sandcastle.output.dir}\${project.name}-${version}-${release}.hhp&quot;"/>
+			<property name="bdir" value="&quot;${hhc.dir}&quot;"/>
+			
+			<property name="cmd" value="start /wait /min &quot;HTML HELP&quot; /D ${bdir} ${hhc.exe.dir} ${hhp}"/>
+			<echo message="cmd=${cmd}"/>
+			<echo message="${cmd}" append="false" file="${sandcastle.output.dir}\chm.bat"/> 
+			<exec program="${sandcastle.output.dir}\chm.bat"/>
+			<sleep seconds="15" />  
+	</target>
+	<target name="generateCHM">
+	<!-- about program external program failed return code was 1.-->
+	<!-- try-catch becuase need to sovle about message logs return code was1 when exec hhc.exe for C# doc,output file is ok-->
+	<!-- try many way not found good solutions to solve about return code was1-->
+	<!--exec program="${hhc.exe}" commandline="&quot;${sandcastle.output.dir}\${project.name}-${version}-${release}.hhp&quot;" />
+        <exec program="cmd.exe"
+			  verbose="true">
+			 <arg value="${cmd}" />
+		</exec>
+		<property name="cmd" value="&quot;${hhc.exe}&quot; &quot;${sandcastle.output.dir}\${project.name}-${version}-${release}.hhp&quot;"/>
+		<exec program="cmd.exe" commandline="${cmd}" failonerror="false" verbose="true"  timeout="30000"/>
+		<property name="cmd" value="&quot;${hhc.exe}&quot; &quot;${sandcastle.output.dir}\${project.name}-${version}-${release}.hhp&quot;"/>
+		<echo message="cmd=${cmd}"/>
+		<exec program="cmd.exe"
+			  verbose="true">
+			 <arg value="/c" />
+			 <arg value="&quot;\${cmd}&quot;" />
+		</exec>
+		<property name="cmd" value="&quot;${hhc.exe}&quot; &quot;${sandcastle.output.dir}\${project.name}-${version}-${release}.hhp&quot;"/>
+		<echo message="cmd=${cmd}"/>
+		<exec program="cmd.exe" commandline="${cmd}" failonerror="false" verbose="true"  timeout="30000"/-->
+		<echo>Generate CHM file</echo>
+		<echo message="hhc.exe=${hhc.exe}"/>
+		<property name="cmd" value="&quot;${hhc.exe}&quot; &quot;${sandcastle.output.dir}\${project.name}-${version}-${release}.hhp&quot;"/>
+		<echo message="cmd=${cmd}"/>
+		<!--a)return code was 1 ,failonerror="false"-->
+		<!--trycatch><try-->
+		<!--exec program="${hhc.exe}" verbose="true" failonerror="true" 
+		commandline="&quot;${sandcastle.output.dir}\${project.name}-${version}-${release}.hhp&quot;" 
+		workingdir="${sandcastle.output.dir}"
+		basedir="${directory::get-parent-directory(directory::get-parent-directory(directory::get-parent-directory(vs.dir)))}/HTML Help Workshop"/-->
+		<!--/try></trycatch-->
+		<!--b)not work this way-->
+		<!--exec program="cmd.exe" commandline="${cmd}" failonerror="false" verbose="true"  timeout="60000"/-->
+		<!--c)-->
+		 <exec program="cmd.exe" workingdir="${sandcastle.output.dir}">
+			 <arg value="${cmd}" />
+		</exec>
+		<!--d)-->
+		 <!--property name="bdir" value="${directory::get-parent-directory(directory::get-parent-directory(directory::get-parent-directory(vs.dir)))}/HTML Help Workshop"/>
+		 <property name="cmd" value="/D &quot;${bdir}&quot; &quot;${hhc.exe}&quot;  &quot;${sandcastle.output.dir}\${project.name}-${version}-${release}.hhp&quot;"/>
+		 <exec program="start">
+			 <arg value="${cmd}" />
+		</exec-->
+		<!--e return was code=1"-->
+		 <!--exec program="${hhc.exe}" 
+			  commandline="&quot;${project.name}-${version}-${release}.hhp&quot;" 
+			  workingdir="${sandcastle.output.dir}" 
+			  failonerror="false"/-->
+	</target>
+</project>
