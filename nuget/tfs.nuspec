@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>tfs</id>
+    <version>1.2.3</version>
+    <authors>Together Team solution.</authors>
+    <owners>Together Team solution.</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Together Fuzzy Search TFS is a .NET library used with SQL
+    Server.</description>
+    <releaseNotes>Try to create NuGet package.</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+   </metadata>
+  <files>
+      <file src="tfs.dll" target="lib\net46" />
+	  <file src="SimMetrics.dll" target="lib\net46" />
+  </files>
+</package>
