@@ -151,7 +151,7 @@
 		<property name="exe.name" value="tfs.dll" />
 		<call target="signing.dll.conditions"/>
 		<copy todir="nuget/bin/debug">
-			<fileset basedir="${output.dir}/bin>
+			<fileset basedir="${output.dir}/bin">
 			    <include name="*.*" />
 				<exclude name="log.txt" />
 				<include name="*.pdb" />

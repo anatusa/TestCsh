@@ -12,8 +12,8 @@
     <copyright>Copyright 2017</copyright>
    </metadata>
   <files>
-      <file src="nuget\bin\tfs.dll" target="lib\net46" />
-	  <file src="nuget\bin\SimMetrics.dll" target="lib\net46" />
+      <file src="bin\tfs.dll" target="lib\net46" />
+	  <file src="bin\SimMetrics.dll" target="lib\net46" />
 	  <file src="..\sqlscript\" target="sqlscript\" />
 	  <file src="..\licenses\" target="licenses\" />
 	  <file src="..\output\doc\images\" target="doc\images\" />
