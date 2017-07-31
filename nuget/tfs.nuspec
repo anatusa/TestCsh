@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>tfs</id>
-    <version>2.3.4-Build-20170731-1606</version>
+    <version>0.0.0</version>
     <authors>Together Team solution.</authors>
     <owners>Together Team solution.</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>

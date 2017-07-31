@@ -213,6 +213,13 @@
 				<replacestring from="9.9.9.0" to="${vd1}.${vd2}.${vd3}.0"/>
             </filterchain>
 		</copy>
+		<mkdir dir="${root.dir}/nuget/tmp" />
+		<copy file="${root.dir}/nuget/tfs.nuspec" tofile="${root.dir}/nuget/tmp/tfs.nuspec" overwrite="true"/>
+		<copy file="${root.dir}/nuget/tmp/tfs.nuspec" tofile="${root.dir}/nuget/tfs.nuspec" overwrite="true">		
+			<filterchain>
+				<replacestring from="0.0.0" to="${vd1}.${vd2}.${vd3}-Build-${buildid}"/>
+            </filterchain>
+		</copy>
 	</target>
 
 	<target name="copy.debug.version.to.output.dir">
