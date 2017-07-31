@@ -12,13 +12,13 @@
     <copyright>Copyright 2017</copyright>
    </metadata>
   <files>
-      <file src="tfs.dll" target="lib\net46" />
-	  <file src="SimMetrics.dll" target="lib\net46" />
-	  <file src="sqlscript\" target="sqlscript\" />
-	  <file src="licenses\" target="licenses\" />
-	  <file src="output\doc\images\" target="doc\images\" />
-	  <file src="output\doc\html.css" target="doc\html.css" />
-	  <file src="output\doc\tfs-current.doc.html" target="doc\tfs-current.doc.html" />
-	  <file src="output\doc\tfs-current.doc.pdf" target="doc\tfs-current.doc.pdf" />  
+      <file src="nuget\bin\tfs.dll" target="lib\net46" />
+	  <file src="nuget\bin\SimMetrics.dll" target="lib\net46" />
+	  <file src="..\sqlscript\" target="sqlscript\" />
+	  <file src="..\licenses\" target="licenses\" />
+	  <file src="..\output\doc\images\" target="doc\images\" />
+	  <file src="..\output\doc\html.css" target="doc\html.css" />
+	  <file src="..\output\doc\tfs-current.doc.html" target="doc\tfs-current.doc.html" />
+	  <file src="..\output\doc\tfs-current.doc.pdf" target="doc\tfs-current.doc.pdf" />  
   </files>
 </package>

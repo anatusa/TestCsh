@@ -150,7 +150,13 @@
 		<property name="exe.dir" value="${output.dir}/bin" />
 		<property name="exe.name" value="tfs.dll" />
 		<call target="signing.dll.conditions"/>
-	
+		<copy todir="nuget/bin/debug">
+			<fileset basedir="${output.dir}/bin>
+			    <include name="*.*" />
+				<exclude name="log.txt" />
+				<include name="*.pdb" />
+			</fileset>
+		</copy>
 		<call target="SetDefaultProperties"/>
 	</target>
   
@@ -256,7 +262,13 @@
 		<property name="exe.dir" value="${output.dir}/bin" />
 		<property name="exe.name" value="tfs.dll" />
 		<call target="signing.dll.conditions"/>
-			
+		<copy todir="nuget/bin">
+			<fileset basedir="${output.dir}/bin">
+			    <include name="*.*" />
+				<exclude name="log.txt" />
+				<include name="*.pdb" />
+			</fileset>
+		</copy>
 		<call target="SetDefaultProperties"/>
 	</target>
 
