@@ -21,6 +21,8 @@ after_build:
 
     cd nuget
 
+    nuget update -self
+
     nuget pack tfs.nuspec
 artifacts:
 - path: distributions.zip
