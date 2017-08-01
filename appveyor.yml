@@ -16,7 +16,7 @@ init:
 
     $release = "$release".Substring("$release".IndexOf("value=")+7)
 
-    $release = "$release".Substring(0,"$release").IndexOf(" ")-1)
+    $release = "$release".Substring(0,"$release".IndexOf(" ")-1)
 
     Update-AppveyorBuild -Version "$version-$release-$(Get-Date -format yyyyMMdd-HHmm)"
 nuget:
