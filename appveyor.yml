@@ -33,17 +33,17 @@ after_build:
 
     make distributions
 
-    7z a -r distributions.zip distrubution
+    7z a -r distributions.zip distribution
 
     cd nuget
 
-    nuget update -self
-
     nuget pack tfs.nuspec
+
+    nuget pack tfs.symbols.nuspec
 artifacts:
 - path: distributions.zip
   name: Deploy to GitHub release
-- path: '**\tfs.*.*.*.nupkg'
+- path: '**\**.nupkg'
   name: NuGet Package
 deploy:
 - provider: GitHub

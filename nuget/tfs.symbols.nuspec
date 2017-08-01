@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>tfs</id>
-    <version>2.3.1</version>
+    <version>0.0.0</version>
     <authors>Together Team solution.</authors>
     <owners>Together Team solution.</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -12,8 +12,9 @@
     <copyright>Copyright 2017</copyright>
    </metadata>
   <files>
-      <file src="nuget\bin\debug\tfs.dll" target="lib\net46" />
-	  <file src="nuget\bin\debug\SimMetrics.dll" target="lib\net46" />
+      <file src="bin\debug\tfs.dll" target="lib\net46" />
+	  <file src="bin\debug\SimMetrics.dll" target="lib\net46" />
+	  <file src="bin\debug\tfs.pdb" target="lib\net46" />	 
 	  <file src="..\sqlscript\" target="sqlscript\" />
 	  <file src="..\licenses\" target="licenses\" />
 	  <file src="..\output\doc\" target="doc\" />

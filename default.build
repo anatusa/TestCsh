@@ -220,6 +220,12 @@
 				<replacestring from="0.0.0" to="${vd1}.${vd2}.${vd3}-Build-${buildid}"/>
             </filterchain>
 		</copy>
+		<copy file="${root.dir}/nuget/tfs.symbols.nuspec" tofile="${root.dir}/nuget/tmp/tfs.symbols.nuspec" overwrite="true"/>
+		<copy file="${root.dir}/nuget/tmp/tfs.symbols.nuspec" tofile="${root.dir}/nuget/tfs.symbols.nuspec" overwrite="true">		
+			<filterchain>
+				<replacestring from="0.0.0" to="${vd1}.${vd2}.${vd3}-Build-${buildid}"/>
+            </filterchain>
+		</copy>
 	</target>
 
 	<target name="copy.debug.version.to.output.dir">
