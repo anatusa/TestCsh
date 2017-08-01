@@ -37,9 +37,11 @@ after_build:
 
     cd nuget
 
-    nuget pack tfs.nuspec
-
     nuget pack tfs.symbols.nuspec -Symbols
+
+    del /s tfs.*.?.?-Build-????????-????.nupkg
+
+    nuget pack tfs.nuspec
 artifacts:
 - path: distributions.zip
   name: Deploy to GitHub release
@@ -53,5 +55,5 @@ deploy:
 - provider: NuGet
   api_key:
     secure: iiaGqmUeZuaL7Ti7xB+NMKBaJOUSGxYj2ffoB6RKnF02M3msHJBCZHvw3Gi9yh37
-  skip_symbols: true
+  skip_symbols: false
   artifact: /.*\.nupkg/

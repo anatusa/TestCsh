@@ -17,6 +17,9 @@
 	  <file src="bin\debug\tfs.pdb" target="lib\net46" />	 
 	  <file src="..\sqlscript\" target="sqlscript\" />
 	  <file src="..\licenses\" target="licenses\" />
-	  <file src="..\output\doc\" target="doc\" />
+	  <file src="..\output\doc\images\" target="doc\images\" />
+	  <file src="..\output\doc\html.css" target="doc\html.css" />
+	  <file src="..\output\doc\tfs-current.doc.html" target="doc\tfs-current.doc.html" />
+	  <file src="..\output\doc\tfs-current.doc.pdf" target="doc\tfs-current.doc.pdf" />  
   </files>
 </package>
