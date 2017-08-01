@@ -4,7 +4,7 @@ branches:
   - master
 configuration: Release
 platform: Any CPU
-init:
+before_build:
 - ps:  >-
     $version = Get-Content version.build | Select-String -Pattern version | Select-String -Pattern value
 
