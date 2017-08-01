@@ -5,7 +5,20 @@ branches:
 configuration: Release
 platform: Any CPU
 init:
-- ps: Update-AppveyorBuild -Version "2.5-1-$(Get-Date -format yyyyMMdd-HHmm)"
+- ps:  >-
+    $version = Get-Content version.build | Select-String -Pattern version | Select-String -Pattern value
+
+    $version = "$version".Substring("$version".IndexOf("value=")+7)
+
+    $version = "$version".Substring(0,"$version".IndexOf(" ")-1)
+
+    $release = Get-Content version.build | Select-String -Pattern release | Select-String -Pattern value
+
+    $release = "$release".Substring("$release".IndexOf("value=")+7)
+
+    $release = "$release".Substring(0,"$release").IndexOf(" ")-1)
+
+    Update-AppveyorBuild -Version "$version-$release-$(Get-Date -format yyyyMMdd-HHmm)"
 nuget:
   account_feed: true
   project_feed: true
