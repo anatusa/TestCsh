@@ -38,7 +38,7 @@ after_build:
     cd nuget
 
     nuget pack tfs.symbols.nuspec -Symbols
- artifacts:
+artifacts:
 - path: distributions.zip
   name: Deploy to GitHub release
 - path: '**\**.nupkg'
