@@ -146,6 +146,7 @@
         <bt:String id="paneReadSuperTipTitle" DefaultValue="Test add in"/>
       </bt:ShortStrings>
       <bt:LongStrings>
+        <bt:String id="funcComposeSuperTipDescription" DefaultValue="Inserts text into body of the message or appointment. This is an example of a function button."/>
         <bt:String id="paneReadSuperTipDescription" DefaultValue="Opens a pane displaying all available properties. This is an example of a button that opens a task pane."/>
       </bt:LongStrings>
     </Resources>
