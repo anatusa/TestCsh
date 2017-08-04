@@ -51,11 +51,11 @@ function addMsg3ToBody(event) {
 // Gets the subject of the item and displays it in the info bar.
 function getSubject(event) {
   var subject = Office.context.mailbox.item.subject;
-  
+   var itemID = Office.context.mailbox.item.itemId.substring(0, 50);
   Office.context.mailbox.item.notificationMessages.addAsync("subject", {
     type: "informationalMessage",
     icon: "blue-icon-16",
-    message: "Subject: " + subject,
+    message: "Subject: " + subject + "ItemID: " + itemID,
     persistent: false
   });
   
