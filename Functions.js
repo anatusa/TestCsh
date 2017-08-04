@@ -55,10 +55,10 @@ function getSubject(event) {
   Office.context.mailbox.item.notificationMessages.addAsync("subject", {
     type: "informationalMessage",
     icon: "blue-icon-16",
-    message: "Subject4: " + subject + "ItemID: " + itemID,
+    message: "Subject5: " + subject + "ItemID: " + itemID,
     persistent: false
   });
-  Office.context.mailbox.item.SaveAs("C:\test.msg");
+  alert('Test');
   event.completed();
 }
 
