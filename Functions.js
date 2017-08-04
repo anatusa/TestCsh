@@ -33,7 +33,7 @@ function addTextToBody(text, icon, event) {
 }
 
 function addDefaultMsgToBody(event) {
-  addTextToBody("Inserted by the Add-in Command Demo add-in.", "blue-icon-16", event);
+  addTextToBody("Inserted by the Add-in Command Demo add-in.", "icon16", event);
 }
 
 function addMsg1ToBody(event) {
@@ -54,7 +54,7 @@ function getSubject(event) {
    var itemID = Office.context.mailbox.item.itemId.substring(0, 20);
   Office.context.mailbox.item.notificationMessages.addAsync("subject", {
     type: "informationalMessage",
-    icon: "blue-icon-16",
+    icon: "icon16",
     message: "Subject5: " + subject + "ItemID: " + itemID,
     persistent: false
   });
