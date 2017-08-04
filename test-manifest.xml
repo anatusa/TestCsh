@@ -45,10 +45,16 @@
         <RequestedHeight>250</RequestedHeight>
       </DesktopSettings>
     </Form>
+     <Form xsi:type="ItemEdit">
+      <DesktopSettings>
+        <SourceLocation DefaultValue="https://anatusa.github.io/TestCsh/index.html"/>
+      </DesktopSettings>
+    </Form>
   </FormSettings>
 
   <Permissions>ReadWriteItem</Permissions>
   <Rule xsi:type="RuleCollection" Mode="Or">
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Edit" />
     <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read" />
   </Rule>
   <DisableEntityHighlighting>false</DisableEntityHighlighting>
@@ -93,6 +99,30 @@
               </Group>
             </OfficeTab>
           </ExtensionPoint>
+          <ExtensionPoint xsi:type="MessageComposeCommandSurface"> 
+             <OfficeTab id="TabDefault"> 
+               <Group id="msgComposeDemoGroup"> 
+                 <Label resid="groupLabel" /> 
+                 <!-- Function (UI-less) button --> 
+                 <Control xsi:type="Button" id="msgComposeFunctionButton"> 
+                   <Label resid="funcComposeButtonLabel" /> 
+                   <Supertip> 
+                     <Title resid="funcComposeSuperTipTitle" /> 
+                     <Description resid="funcComposeSuperTipDescription" /> 
+                   </Supertip> 
+                   <Icon> 
+                     <bt:Image size="16" resid="icon16" /> 
+                     <bt:Image size="32" resid="icon32" /> 
+                     <bt:Image size="80" resid="icon80" /> 
+                   </Icon> 
+                   <Action xsi:type="ExecuteFunction"> 
+                     <FunctionName>addDefaultMsgToBody</FunctionName> 
+                   </Action> 
+                 </Control> 
+                </Group> 
+             </OfficeTab> 
+           </ExtensionPoint> 
+
           <!-- Go to http://aka.ms/ExtensionPointsCommands to learn how to add more Extension Points: MessageRead, AppointmentOrganizer, AppointmentAttendee -->
         </DesktopFormFactor>
       </Host>
