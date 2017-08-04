@@ -51,7 +51,7 @@ function addMsg3ToBody(event) {
 // Gets the subject of the item and displays it in the info bar.
 function getSubject(event) {
   var subject = Office.context.mailbox.item.subject;
-   var itemID = Office.context.mailbox.item.itemId.substring(0, 50);
+   var itemID = Office.context.mailbox.item.itemId.substring(0, 20);
   Office.context.mailbox.item.notificationMessages.addAsync("subject", {
     type: "informationalMessage",
     icon: "blue-icon-16",
@@ -94,7 +94,7 @@ function getDateTimeCreated(event) {
 function getItemID(event) {
   // Limited to 150 characters max in the info bar, so 
   // only grab the first 50 characters of the ID
-  var itemID = Office.context.mailbox.item.itemId.substring(0, 50);
+  var itemID = Office.context.mailbox.item.itemId.substring(0, 20);
   
   Office.context.mailbox.item.notificationMessages.addAsync("itemID", {
     type: "informationalMessage",
