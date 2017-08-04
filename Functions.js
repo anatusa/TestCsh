@@ -55,7 +55,7 @@ function getSubject(event) {
   Office.context.mailbox.item.notificationMessages.addAsync("subject", {
     type: "informationalMessage",
     icon: "icon16",
-    message: "Subject5: " + subject + "ItemID: " + itemID,
+    message: "Subject6: " + subject + "ItemID: " + itemID,
     persistent: false
   });
   alert('Test');
