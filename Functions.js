@@ -20,7 +20,7 @@ function addTextToBody(text, icon, event) {
   Office.context.mailbox.item.body.setSelectedDataAsync(text, { coercionType: Office.CoercionType.Text }, 
     function (asyncResult){
       if (asyncResult.status == Office.AsyncResultStatus.Succeeded) {
-        statusUpdate(icon, "\"" + text + "\" inserted successfully.");
+        statusUpdate(icon, "\"" + text + "\" inserted successfully2.");
       }
       else {
         Office.context.mailbox.item.notificationMessages.addAsync("addTextError", {
@@ -71,7 +71,7 @@ function getSubject(event) {
 );
 
   
-  Office.context.mailbox.item.notificationMessages.addAsync("subject", {
+  /*Office.context.mailbox.item.notificationMessages.addAsync("subject", {
     type: "informationalMessage",
     icon: "icon16",
     message: "Subject7: " + subject + "File Size: " + reeee,
@@ -129,7 +129,7 @@ function getSubject(event) {
     message: "Subject9: " + subject + "File Size: " + reeee,
     persistent: false
   });
-  
+  */
   event.completed();
 }
 
