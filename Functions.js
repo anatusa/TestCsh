@@ -52,10 +52,29 @@ function addMsg3ToBody(event) {
 function getSubject(event) {
   var subject = Office.context.mailbox.item.subject;
    var itemID = Office.context.mailbox.item.itemId.substring(0, 20);
+  var reeee = "";
+  Office.context.document.getFileAsync(Office.FileType.Pdf,
+    function(result) {
+        if (result.status == "succeeded") {
+            var myFile = result.value;
+            var sliceCount = myFile.sliceCount;
+           // app.showNotification("File size:" + myFile.size + " #Slices: " + sliceCount);
+            // Now, you can call getSliceAsync to download the files, as described in the previous code segment (compressed format).
+            reeee = myFile.size;
+         //   myFile.closeAsync();
+        }
+        else {
+      //      app.showNotification("Error:", result.error.message);
+           reeee = "Error";
+        }
+}
+);
+
+  
   Office.context.mailbox.item.notificationMessages.addAsync("subject", {
     type: "informationalMessage",
     icon: "icon16",
-    message: "Subject6: " + subject + "ItemID: " + itemID,
+    message: "Subject7: " + subject + "File Size: " + reeee,
     persistent: false
   });
   alert('Test');
