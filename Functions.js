@@ -54,14 +54,7 @@ function getSubject(event) {
    var itemID = Office.context.mailbox.item.itemId.substring(0, 20);
   var reeee = "";
 
- Office.context.mailbox.item.notificationMessages.addAsync("subject", {
-    type: "informationalMessage",
-    icon: "icon16",
-    message: "Subject7: " + subject + "File Size: " + reeee,
-    persistent: false
-  });
- 
-  
+
   Office.context.mailbox.getFileAsync(Office.FileType.Pdf,
     function(result) {
         if (result.status == "succeeded") {
@@ -79,14 +72,14 @@ function getSubject(event) {
 }
 );
 
-  /*
+  
   Office.context.mailbox.item.notificationMessages.addAsync("subject", {
     type: "informationalMessage",
     icon: "icon16",
     message: "Subject8: " + subject + "File Size: " + reeee,
     persistent: false
   });
-  
+  /*
    
   Office.context.mailbox.item.getFileAsync(Office.FileType.Pdf,
     function(result) {
