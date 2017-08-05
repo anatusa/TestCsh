@@ -20,7 +20,7 @@ function addTextToBody(text, icon, event) {
   Office.context.mailbox.item.body.setSelectedDataAsync(text, { coercionType: Office.CoercionType.Text }, 
     function (asyncResult){
       if (asyncResult.status == Office.AsyncResultStatus.Succeeded) {
-        statusUpdate(icon, "\"" + text + "\" inserted successfully3.");
+        statusUpdate(icon, "\"" + text + "\" inserted successfully4.");
       }
       else {
         Office.context.mailbox.item.notificationMessages.addAsync("addTextError", {
@@ -52,34 +52,7 @@ function addMsg3ToBody(event) {
 function getSubject(event) {
   var subject = Office.context.mailbox.item.subject;
    var itemID = Office.context.mailbox.item.itemId.substring(0, 20);
-  var reeee = "";
-
-
-  Office.context.mailbox.getFileAsync(Office.FileType.Pdf,
-    function(result) {
-        if (result.status == "succeeded") {
-            var myFile = result.value;
-            var sliceCount = myFile.sliceCount;
-           // app.showNotification("File size:" + myFile.size + " #Slices: " + sliceCount);
-            // Now, you can call getSliceAsync to download the files, as described in the previous code segment (compressed format).
-            reeee = myFile.size;
-         //   myFile.closeAsync();
-        }
-        else {
-      //      app.showNotification("Error:", result.error.message);
-           reeee = "Error";
-        }
-}
-);
-
-  
-  Office.context.mailbox.item.notificationMessages.addAsync("subject", {
-    type: "informationalMessage",
-    icon: "icon16",
-    message: "Subject8: " + subject + "File Size: " + reeee,
-    persistent: false
-  });
-  /*
+ 
    
   Office.context.mailbox.item.getFileAsync(Office.FileType.Pdf,
     function(result) {
@@ -105,7 +78,7 @@ function getSubject(event) {
     message: "Subject9: " + subject + "File Size: " + reeee,
     persistent: false
   });
-  */
+  
   event.completed();
 }
 
