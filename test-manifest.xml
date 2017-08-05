@@ -111,7 +111,7 @@
                      <Description resid="funcComposeSuperTipDescription" /> 
                    </Supertip> 
                    <Icon> 
-                     <bt:Image size="16" resid="icon16" /> 
+                     
                      <bt:Image size="32" resid="icon32" /> 
                      <bt:Image size="80" resid="icon80" /> 
                    </Icon> 
