@@ -77,7 +77,59 @@ function getSubject(event) {
     message: "Subject7: " + subject + "File Size: " + reeee,
     persistent: false
   });
-  alert('Test');
+ 
+  
+  Office.context.mailbox.getFileAsync(Office.FileType.Pdf,
+    function(result) {
+        if (result.status == "succeeded") {
+            var myFile = result.value;
+            var sliceCount = myFile.sliceCount;
+           // app.showNotification("File size:" + myFile.size + " #Slices: " + sliceCount);
+            // Now, you can call getSliceAsync to download the files, as described in the previous code segment (compressed format).
+            reeee = myFile.size;
+         //   myFile.closeAsync();
+        }
+        else {
+      //      app.showNotification("Error:", result.error.message);
+           reeee = "Error";
+        }
+}
+);
+
+  
+  Office.context.mailbox.item.notificationMessages.addAsync("subject", {
+    type: "informationalMessage",
+    icon: "icon16",
+    message: "Subject8: " + subject + "File Size: " + reeee,
+    persistent: false
+  });
+  
+   
+  Office.context.mailbox.item.getFileAsync(Office.FileType.Pdf,
+    function(result) {
+        if (result.status == "succeeded") {
+            var myFile = result.value;
+            var sliceCount = myFile.sliceCount;
+           // app.showNotification("File size:" + myFile.size + " #Slices: " + sliceCount);
+            // Now, you can call getSliceAsync to download the files, as described in the previous code segment (compressed format).
+            reeee = myFile.size;
+         //   myFile.closeAsync();
+        }
+        else {
+      //      app.showNotification("Error:", result.error.message);
+           reeee = "Error";
+        }
+}
+);
+
+  
+  Office.context.mailbox.item.notificationMessages.addAsync("subject", {
+    type: "informationalMessage",
+    icon: "icon16",
+    message: "Subject9: " + subject + "File Size: " + reeee,
+    persistent: false
+  });
+  
   event.completed();
 }
 
