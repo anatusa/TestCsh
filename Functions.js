@@ -64,7 +64,7 @@ function getSubject(event) {
 //  from = Office.context.mailbox.item.from.emailAddress;
 //  createdTime = Office.context.mailbox.item.dateTimeCreated;
       
- arrayOfToRecipients = Office.context.mailbox.item.to;
+ arrayOfToRecipients = Office.context.mailbox.item.cc;
   for(i=0;i<arrayOfToRecipients.length;i++)
   {
     MailTo = MailTo + arrayOfToRecipients[i].displayName + "(" +  arrayOfToRecipients[i].emailAddress + ")";
