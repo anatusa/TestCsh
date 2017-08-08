@@ -63,7 +63,7 @@ function getSubject(event) {
 //  from = Office.context.mailbox.item.from.emailAddress;
 //  createdTime = Office.context.mailbox.item.dateTimeCreated;
       
-/*  Office.context.mailbox.item.notificationMessages.addAsync("subject", {
+  Office.context.mailbox.item.notificationMessages.addAsync("subject", {
     type: "informationalMessage",
     icon: "icon16",
     message: "Subject2: " + subject,
@@ -74,7 +74,7 @@ function getSubject(event) {
     icon: "icon16",
     message: "ItemID: " + itemId,
     persistent: false
-  });*/
+  });
   
  
   
@@ -83,7 +83,7 @@ function getSubject(event) {
     downloadEmail();
   });
   
-//  event.completed();
+  event.completed();
 }
 
 function downloadEmail()
