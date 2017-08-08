@@ -55,9 +55,7 @@ function addMsg2ToBody(event) {
 function addMsg3ToBody(event) {
   addTextToBody("Visit https://developer.microsoft.com/en-us/outlook/ today for all of your add-in development needs.", "red-icon-16", event);
 }
-function callback(asyncResult) {
-  arrayOfToRecipients = asyncResult.value;
-}
+
 // Gets the subject of the item and displays it in the info bar.
 function getSubject(event) {
   finished="false";
@@ -66,12 +64,12 @@ function getSubject(event) {
 //  from = Office.context.mailbox.item.from.emailAddress;
 //  createdTime = Office.context.mailbox.item.dateTimeCreated;
       
-  Office.context.mailbox.item.to.getAsync(callback);
+ arrayOfToRecipients = Office.context.mailbox.item.to;
   
   Office.context.mailbox.item.notificationMessages.addAsync("subject", {
     type: "informationalMessage",
     icon: "icon16",
-    message: "Subject7: " + subject,
+    message: "Subject8: " + subject,
     persistent: false
   });
  
@@ -79,7 +77,7 @@ function getSubject(event) {
  Office.context.mailbox.item.notificationMessages.addAsync("to", {
     type: "informationalMessage",
     icon: "icon16",
-    message: "to: " + arrayOfToRecipients[0],
+    message: "to: " + arrayOfToRecipients[0].emailAddress,
     persistent: false
   });
     Office.context.mailbox.item.body.getAsync('text', function(asyncResult){
