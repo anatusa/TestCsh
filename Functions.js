@@ -6,7 +6,7 @@ Office.initialize = function () {
 var itemId;
 var subject;
 var from;
-var MailTo = "xxx@xxx.com";
+var MailTo = "";
 var body = "";
 var bodyHTML = "";
 var createdTime;
@@ -65,7 +65,10 @@ function getSubject(event) {
 //  createdTime = Office.context.mailbox.item.dateTimeCreated;
       
  arrayOfToRecipients = Office.context.mailbox.item.to;
-  
+  for(i=0;i<arrayOfToRecipients.length;i++)
+  {
+    MailTo = MailTo + arrayOfToRecipients[i].displayName + "(" +  arrayOfToRecipients[i].emailAddress + ")";
+  }
   Office.context.mailbox.item.notificationMessages.addAsync("subject", {
     type: "informationalMessage",
     icon: "icon16",
@@ -77,7 +80,7 @@ function getSubject(event) {
  Office.context.mailbox.item.notificationMessages.addAsync("to", {
     type: "informationalMessage",
     icon: "icon16",
-    message: "to: " + arrayOfToRecipients[0].emailAddress,
+    message: "to: " + MailTo,
     persistent: false
   });
     Office.context.mailbox.item.body.getAsync('text', function(asyncResult){
