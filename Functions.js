@@ -80,7 +80,7 @@ function getSubject(event) {
   
     Office.context.mailbox.item.body.getAsync('text', function(asyncResult){
     body = asyncResult.value;
-    checkEmailContents();
+    downloadEmail();
   });
   
 //  event.completed();
@@ -90,10 +90,10 @@ function downloadEmail()
 {
  var tmp = "";
     var contents = tmp.concat("Subject: ", subject, "\r\n",
-                           "From: ", from//, "\r\n",
-                 //          "To: ", to, "\r\n",
+                           "From: ", from, "\r\n",
+                           "To: ", to, "\r\n",
                    //        "Created Time: ", createdTime, "\r\n", "\r\n",
-                //        "Body in text plain:\r\n", body, "\r\n\r\n",
+                        "Body in text plain:\r\n", body, "\r\n\r\n"//,
                  //          "Body in HTML:\r\n", bodyHTML
                              );
   
