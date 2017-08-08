@@ -6,11 +6,11 @@ Office.initialize = function () {
 var itemId;
 var subject;
 var from;
-var to = "xxx@xxx.com";
+var MailTo = "xxx@xxx.com";
 var body = "";
 var bodyHTML = "";
 var createdTime;
-
+var arrayOfToRecipients;
 // Helper function to add a status message to
 // the info bar.
 function statusUpdate(icon, text) {
@@ -55,7 +55,9 @@ function addMsg2ToBody(event) {
 function addMsg3ToBody(event) {
   addTextToBody("Visit https://developer.microsoft.com/en-us/outlook/ today for all of your add-in development needs.", "red-icon-16", event);
 }
-
+function callback(asyncResult) {
+  arrayOfToRecipients = asyncResult.value;
+}
 // Gets the subject of the item and displays it in the info bar.
 function getSubject(event) {
   finished="false";
@@ -64,35 +66,22 @@ function getSubject(event) {
 //  from = Office.context.mailbox.item.from.emailAddress;
 //  createdTime = Office.context.mailbox.item.dateTimeCreated;
       
+  Office.context.mailbox.item.to.getAsync(callback);
+  
   Office.context.mailbox.item.notificationMessages.addAsync("subject", {
     type: "informationalMessage",
     icon: "icon16",
-    message: "Subject6: " + subject,
+    message: "Subject7: " + subject,
     persistent: false
   });
-  Office.context.mailbox.item.optionalAttendees.getAsync(function(result) {
-  if (result.error) {
-    to = "error";
-  } else {
-    var msg = "";
-    result.value.forEach(function(recip, index) {
-      msg = msg + recip.displayName + " (" + recip.emailAddress + ");";
-    });
-    to = msg;
-  }
-});
-   Office.context.mailbox.item.notificationMessages.addAsync("to", {
+ 
+  
+ Office.context.mailbox.item.notificationMessages.addAsync("to", {
     type: "informationalMessage",
     icon: "icon16",
-    message: "to " + to,
+    message: "to: " + arrayOfToRecipients[0],
     persistent: false
   });
-/*   Office.context.mailbox.item.notificationMessages.addAsync("itemId", {
-    type: "informationalMessage",
-    icon: "icon16",
-    message: "ItemID: " + itemId,
-    persistent: false
-  });*/
     Office.context.mailbox.item.body.getAsync('text', function(asyncResult){
     body = asyncResult.value;
     downloadEmail(event);
