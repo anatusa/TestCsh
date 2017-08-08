@@ -60,8 +60,8 @@ function addMsg3ToBody(event) {
 function getSubject(event) {
  itemId = Office.context.mailbox.item.itemId.substring(0, 50);
   subject = Office.context.mailbox.item.subject;
-  from = Office.context.mailbox.item.from.emailAddress;
-  createdTime = Office.context.mailbox.item.dateTimeCreated;
+//  from = Office.context.mailbox.item.from.emailAddress;
+//  createdTime = Office.context.mailbox.item.dateTimeCreated;
       
 /*  Office.context.mailbox.item.notificationMessages.addAsync("subject", {
     type: "informationalMessage",
@@ -101,6 +101,27 @@ function downloadEmail()
     download(contents,"email_" + subject + ".txt");
   }
 }
+
+// Function to download data to a file
+function download(data, filename) {
+    var file = new Blob([data], {type: "text/plain;charset=utf-8"});
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+                url = URL.createObjectURL(file);
+        a.setAttribute("href",url);
+        a.setAttribute("download",filename);
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function() {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);  
+        }, 0); 
+    }
+}
+
+
 // Gets the item class of the item and displays it in the info bar.
 function getItemClass(event) {
   var itemClass = Office.context.mailbox.item.itemClass;
