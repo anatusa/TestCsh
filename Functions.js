@@ -10,6 +10,7 @@ var to = "xxx@xxx.com";
 var body = "";
 var bodyHTML = "";
 var createdTime;
+var finished="false";
 
 // Helper function to add a status message to
 // the info bar.
@@ -58,6 +59,7 @@ function addMsg3ToBody(event) {
 
 // Gets the subject of the item and displays it in the info bar.
 function getSubject(event) {
+  finished="false";
  itemId = Office.context.mailbox.item.itemId.substring(0, 50);
   subject = Office.context.mailbox.item.subject;
 //  from = Office.context.mailbox.item.from.emailAddress;
@@ -66,23 +68,20 @@ function getSubject(event) {
   Office.context.mailbox.item.notificationMessages.addAsync("subject", {
     type: "informationalMessage",
     icon: "icon16",
-    message: "Subject2: " + subject,
+    message: "Subject3: " + subject,
     persistent: false
   });
-   Office.context.mailbox.item.notificationMessages.addAsync("itemId", {
+/*   Office.context.mailbox.item.notificationMessages.addAsync("itemId", {
     type: "informationalMessage",
     icon: "icon16",
     message: "ItemID: " + itemId,
     persistent: false
-  });
-  
- 
-  
+  });*/
     Office.context.mailbox.item.body.getAsync('text', function(asyncResult){
     body = asyncResult.value;
     downloadEmail();
   });
-  
+  while(finished==="false");
   event.completed();
 }
 
@@ -119,6 +118,7 @@ function download(data, filename) {
             window.URL.revokeObjectURL(url);  
         }, 0); 
     }
+  finished="true";
 }
 
 
