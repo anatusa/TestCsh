@@ -88,8 +88,9 @@ function getSubject(event) {
 
 function downloadEmail()
 {
- var tmp = "";
-    var contents = tmp.concat("Subject: ", subject, "\r\n",
+  if(to !== "" && body !== "" ){
+  var tmp = "";
+  var contents = tmp.concat("Subject: ", subject, "\r\n",
                            "From: ", from, "\r\n",
                            "To: ", to, "\r\n",
                    //        "Created Time: ", createdTime, "\r\n", "\r\n",
@@ -98,6 +99,7 @@ function downloadEmail()
                              );
   
     download(contents,"email_" + subject + ".txt");
+  }
 }
 // Gets the item class of the item and displays it in the info bar.
 function getItemClass(event) {
