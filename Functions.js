@@ -67,9 +67,20 @@ function getSubject(event) {
   Office.context.mailbox.item.notificationMessages.addAsync("subject", {
     type: "informationalMessage",
     icon: "icon16",
-    message: "Subject4: " + subject,
+    message: "Subject5: " + subject,
     persistent: false
   });
+  Office.context.mailbox.item.optionalAttendees.getAsync(function(result) {
+  if (result.error) {
+    showMessage(result.error);
+  } else {
+    var msg = "";
+    result.value.forEach(function(recip, index) {
+      msg = msg + recip.displayName + " (" + recip.emailAddress + ");";
+    });
+    showMessage(msg);
+  }
+});
 /*   Office.context.mailbox.item.notificationMessages.addAsync("itemId", {
     type: "informationalMessage",
     icon: "icon16",
