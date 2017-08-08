@@ -88,11 +88,11 @@ function getSubject(event) {
 
 function downloadEmail()
 {
-  if(to !== "" && body !== "" ){
+  if(body !== "" ){
   var tmp = "";
-  var contents = tmp.concat("Subject: ", subject, "\r\n",
-                           "From: ", from, "\r\n",
-                           "To: ", to, "\r\n",
+  var contents = tmp.concat(//"Subject: ", subject, "\r\n",
+                   //        "From: ", from, "\r\n",
+                   //        "To: ", to, "\r\n",
                    //        "Created Time: ", createdTime, "\r\n", "\r\n",
                         "Body in text plain:\r\n", body, "\r\n\r\n"//,
                  //          "Body in HTML:\r\n", bodyHTML
