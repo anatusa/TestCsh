@@ -66,7 +66,7 @@ function getSubject(event) {
   Office.context.mailbox.item.notificationMessages.addAsync("subject", {
     type: "informationalMessage",
     icon: "icon16",
-    message: "Subject1: " + subject,
+    message: "Subject2: " + subject,
     persistent: false
   });
    Office.context.mailbox.item.notificationMessages.addAsync("itemId", {
@@ -76,7 +76,19 @@ function getSubject(event) {
     persistent: false
   });
   
-  var tmp = "";
+ 
+  
+    Office.context.mailbox.item.body.getAsync('text', function(asyncResult){
+    body = asyncResult.value;
+    checkEmailContents();
+  });
+  
+//  event.completed();
+}
+
+function downloadEmail()
+{
+ var tmp = "";
     var contents = tmp.concat("Subject: ", subject, "\r\n",
                            "From: ", from//, "\r\n",
                  //          "To: ", to, "\r\n",
@@ -86,10 +98,7 @@ function getSubject(event) {
                              );
   
     download(contents,"email_" + subject + ".txt");
-  
-//  event.completed();
 }
-
 // Gets the item class of the item and displays it in the info bar.
 function getItemClass(event) {
   var itemClass = Office.context.mailbox.item.itemClass;
