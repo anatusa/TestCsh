@@ -69,10 +69,10 @@ function getSubject(event) {
     message: "Subject9: " + subject,
     persistent: false
   });
-   Office.context.mailbox.item.notificationMessages.addAsync("itemID", {
+   Office.context.mailbox.item.notificationMessages.addAsync("itemId", {
     type: "informationalMessage",
     icon: "icon16",
-    message: "ItemID: " + itemID,
+    message: "ItemID: " + itemId,
     persistent: false
   });
   
