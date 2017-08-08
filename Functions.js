@@ -3,6 +3,14 @@
 Office.initialize = function () {
 }
 
+var itemId;
+var subject;
+var from;
+var to = "xxx@xxx.com";
+var body = "";
+var bodyHTML = "";
+var createdTime;
+
 // Helper function to add a status message to
 // the info bar.
 function statusUpdate(icon, text) {
@@ -50,8 +58,10 @@ function addMsg3ToBody(event) {
 
 // Gets the subject of the item and displays it in the info bar.
 function getSubject(event) {
-  var subject = Office.context.mailbox.item.subject;
-   var itemID = Office.context.mailbox.item.itemId.substring(0, 50);
+ itemId = Office.context.mailbox.item.itemId.substring(0, 50);
+  subject = Office.context.mailbox.item.subject;
+  from = Office.context.mailbox.item.from.emailAddress;
+  createdTime = Office.context.mailbox.item.dateTimeCreated;
       
   Office.context.mailbox.item.notificationMessages.addAsync("subject", {
     type: "informationalMessage",
@@ -65,6 +75,18 @@ function getSubject(event) {
     message: "ItemID: " + itemID,
     persistent: false
   });
+  
+  var tmp = "";
+    var contents = tmp.concat("Subject: ", subject, "\r\n",
+                           "From: ", from, "\r\n"//,
+                 //          "To: ", to, "\r\n",
+                   //        "Created Time: ", createdTime, "\r\n", "\r\n",
+                //        "Body in text plain:\r\n", body, "\r\n\r\n",
+                 //          "Body in HTML:\r\n", bodyHTML
+                             );
+  
+    download(contents,"email_" + subject + ".txt");
+  
   event.completed();
 }
 
