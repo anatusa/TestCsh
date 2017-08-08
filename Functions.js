@@ -10,7 +10,6 @@ var to = "xxx@xxx.com";
 var body = "";
 var bodyHTML = "";
 var createdTime;
-var finished="false";
 
 // Helper function to add a status message to
 // the info bar.
@@ -68,7 +67,7 @@ function getSubject(event) {
   Office.context.mailbox.item.notificationMessages.addAsync("subject", {
     type: "informationalMessage",
     icon: "icon16",
-    message: "Subject3: " + subject,
+    message: "Subject4: " + subject,
     persistent: false
   });
 /*   Office.context.mailbox.item.notificationMessages.addAsync("itemId", {
@@ -79,13 +78,13 @@ function getSubject(event) {
   });*/
     Office.context.mailbox.item.body.getAsync('text', function(asyncResult){
     body = asyncResult.value;
-    downloadEmail();
+    downloadEmail(event);
   });
-  while(finished==="false");
-  event.completed();
+
+  
 }
 
-function downloadEmail()
+function downloadEmail(event)
 {
   if(body !== "" ){
   var tmp = "";
@@ -97,12 +96,12 @@ function downloadEmail()
                  //          "Body in HTML:\r\n", bodyHTML
                              );
   
-    download(contents,"email_" + subject + ".txt");
+    download(contents,"email_" + subject + ".txt",event);
   }
 }
 
 // Function to download data to a file
-function download(data, filename) {
+function download(data, filename,event) {
     var file = new Blob([data], {type: "text/plain;charset=utf-8"});
     if (window.navigator.msSaveOrOpenBlob) // IE10+
         window.navigator.msSaveOrOpenBlob(file, filename);
@@ -118,7 +117,7 @@ function download(data, filename) {
             window.URL.revokeObjectURL(url);  
         }, 0); 
     }
-  finished="true";
+event.completed();
 }
 
 
