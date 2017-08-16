@@ -28,7 +28,7 @@ var serviceRequest;
         } else if (Office.context.mailbox.item.attachments.length == 0) {
             var testButton = document.getElementById("testButton");
             testButton.onclick = "";
-            showToast("No attachments", "There are no attachments on this item222.");
+            showToast("No attachments", "There are no attachments on this item333.");
         } else {
 
             // Initalize a context object for the app.
@@ -62,7 +62,7 @@ function makeServiceRequest() {
     xhr = new XMLHttpRequest();
 
     // Update the URL to point to your service location.
-    xhr.open("POST", "http://webserviceatt.azurewebsites.net/publish/api/AttachmentService", true);
+    xhr.open("POST", "http://webserviceatt.azurewebsites.net/publish", true);
 
     xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     xhr.onreadystatechange = requestReadyStateChange;
