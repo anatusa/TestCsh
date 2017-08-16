@@ -28,7 +28,7 @@ var serviceRequest;
         } else if (Office.context.mailbox.item.attachments.length == 0) {
             var testButton = document.getElementById("testButton");
             testButton.onclick = "";
-            showToast("No attachments", "There are no attachments on this item333.");
+            showToast("No attachments", "There are no attachments on this item444.");
         } else {
 
             // Initalize a context object for the app.
@@ -44,10 +44,12 @@ var serviceRequest;
 })();
 
 function testAttachments() {
+    showToast5("testAttachments", "start ");
     Office.context.mailbox.getCallbackTokenAsync(attachmentTokenCallback);
 };
 
 function attachmentTokenCallback(asyncResult, userContext) {
+    showToast5("attachmentTokenCallback", "start ");
     if (asyncResult.status == "succeeded") {
         serviceRequest.attachmentToken = asyncResult.value;
         makeServiceRequest();
@@ -58,12 +60,13 @@ function attachmentTokenCallback(asyncResult, userContext) {
 }
 
 function makeServiceRequest() {
+     showToast5("makeServiceRequest", "start ");
     var attachment;
     xhr = new XMLHttpRequest();
 
     // Update the URL to point to your service location.
     xhr.open("POST", "http://webserviceatt.azurewebsites.net/publish", true);
-
+ showToast5("makeServiceRequest", "called url ");
     xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     xhr.onreadystatechange = requestReadyStateChange;
 
@@ -130,6 +133,19 @@ function showToast(title, message) {
     window.setTimeout(function () { $("#footer").hide("slow") }, 10000);
 };
 
+// Displays a message for 5 seconds.
+function showToast5(title, message) {
+
+    var notice = document.getElementById("notice");
+    var output = document.getElementById('output');
+
+    notice.innerHTML = title;
+    output.innerHTML = message;
+
+    $("#footer").show("slow");
+
+    window.setTimeout(function () { $("#footer").hide("slow") }, 5000);
+};
 // *********************************************************
 //
 // Outlook-Add-in-Javascript-GetAttachments, https://github.com/OfficeDev/Outlook-Add-in-Javascript-GetAttachments
