@@ -28,7 +28,7 @@ var serviceRequest;
         } else if (Office.context.mailbox.item.attachments.length == 0) {
             var testButton = document.getElementById("testButton");
             testButton.onclick = "";
-            showToast("No attachments", "There are no attachments on this item222.");
+            showToast("No attachments", "There are no attachments on this item333.");
         } else {
 
             // Initalize a context object for the app.
@@ -37,6 +37,7 @@ var serviceRequest;
             serviceRequest = new Object();
             serviceRequest.attachmentToken = "";
             serviceRequest.ewsUrl = Office.context.mailbox.ewsUrl;
+            showToast("Office.context.mailbox.ewsUrl","ewsURL");
             serviceRequest.attachments = new Array();
         }
     };
@@ -44,12 +45,12 @@ var serviceRequest;
 })();
 
 function testAttachments() {
-    showToast5("testAttachments", "start ");
+   // showToast5("testAttachments", "start ");
     Office.context.mailbox.getCallbackTokenAsync(attachmentTokenCallback);
 };
 
 function attachmentTokenCallback(asyncResult, userContext) {
-    showToast5("attachmentTokenCallback", "start ");
+    //showToast5("attachmentTokenCallback", "start ");
     if (asyncResult.status == "succeeded") {
         serviceRequest.attachmentToken = asyncResult.value;
         makeServiceRequest();
@@ -60,10 +61,10 @@ function attachmentTokenCallback(asyncResult, userContext) {
 }
 
 function makeServiceRequest() {
-     showToast5("makeServiceRequest", "start ");
+  //   showToast5("makeServiceRequest", "start ");
     var attachment;
     xhr = new XMLHttpRequest();
-showToast5("makeServiceRequest", "xhr");
+//showToast5("makeServiceRequest", "xhr");
     // Update the URL to point to your service location.
     xhr.open("POST", "http://apiatt.azurewebsites.net/master/api/AttachmentService", true);
  showToast5("makeServiceRequest", "called url ");
