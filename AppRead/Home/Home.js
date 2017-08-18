@@ -37,7 +37,7 @@ var serviceRequest;
             serviceRequest = new Object();
             serviceRequest.attachmentToken = "";
             serviceRequest.ewsUrl = Office.context.mailbox.ewsUrl;
-            showToast(Office.context.mailbox.ewsUrl,"ewsURL");
+           // showToast(Office.context.mailbox.ewsUrl,"ewsURL");
             serviceRequest.attachments = new Array();
         }
     };
@@ -45,8 +45,27 @@ var serviceRequest;
 })();
 
 function testAttachments() {
-   // showToast5("testAttachments", "start ");
-    Office.context.mailbox.getCallbackTokenAsync(attachmentTokenCallback);
+    showToast5("testAttachments", "start ");
+	var ews = require('ews-javascript-api');
+//create ExchangeService object
+var exch = new ews.ExchangeService(ews.ExchangeVersion.Exchange2013);
+exch.Credentials = new ews.ExchangeCredentials("a.usa-ampai@togetherteam.co.th", "anatomy1A");
+//set ews endpoint url to use
+exch.Url = new ews.Uri(Office.context.mailbox.ewsUrl); //
+   var item = new EmailMessage(exch); 
+    item.ToRecipients.Add(new EmailAddress("a.usa-ampai@togetherteam.co.th")); 
+     item.Body = new MessageBody("message"); 
+     item.Subject = "Test EWS"; 
+    
+    
+     item.SendAndSaveCopy() 
+         .then(() => { 
+             var b = "asdasd"; 
+         }); 
+
+		 showToast("testAttachments", "End ");
+		 
+   // Office.context.mailbox.getCallbackTokenAsync(attachmentTokenCallback);
 };
 
 function attachmentTokenCallback(asyncResult, userContext) {
