@@ -58,10 +58,7 @@ exch.Url = new ews.Uri(Office.context.mailbox.ewsUrl); //
      item.Subject = "Test EWS"; 
     
     
-     item.SendAndSaveCopy() 
-         .then(() => { 
-             var b = "asdasd"; 
-         }); 
+     item.SendAndSaveCopy(); 
 
 		 showToast("testAttachments", "End ");
 		 
