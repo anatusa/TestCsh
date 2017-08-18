@@ -28,7 +28,7 @@ var serviceRequest;
         } else if (Office.context.mailbox.item.attachments.length == 0) {
             var testButton = document.getElementById("testButton");
             testButton.onclick = "";
-            showToast("No attachments", "There are no attachments on this item333.");
+            showToast("No attachments", "There are no attachments on this item444.");
         } else {
 
             // Initalize a context object for the app.
@@ -37,7 +37,7 @@ var serviceRequest;
             serviceRequest = new Object();
             serviceRequest.attachmentToken = "";
             serviceRequest.ewsUrl = Office.context.mailbox.ewsUrl;
-            showToast("Office.context.mailbox.ewsUrl","ewsURL");
+            showToast(Office.context.mailbox.ewsUrl,"ewsURL");
             serviceRequest.attachments = new Array();
         }
     };
