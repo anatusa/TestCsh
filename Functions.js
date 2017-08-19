@@ -65,65 +65,9 @@ function getSubject(event) {
    itemId2 = Office.context.mailbox.item.itemId.substring(50, 100);
    itemId3 = Office.context.mailbox.item.itemId.substring(100, 150);
      itemId4 = Office.context.mailbox.item.itemId.substring(150, 200);
-  location.href = "http://localhost:777/mjpeg1/?"+itemId+itemId2+itemId3+itemId4;
+  location.href = "http://localhost:777/?" + Office.context.mailbox.item.itemId;
   event.completed();
-  /*finished="false";
- itemId = Office.context.mailbox.item.itemId.substring(0, 50);
-   itemId2 = Office.context.mailbox.item.itemId.substring(49, 100);
-   itemId3 = Office.context.mailbox.item.itemId.substring(99, 150);
-     itemId4 = Office.context.mailbox.item.itemId.substring(149, 200);
-  subject = Office.context.mailbox.item.subject;
-//  from = Office.context.mailbox.item.from.emailAddress;
-//  createdTime = Office.context.mailbox.item.dateTimeCreated;
-      
- arrayOfToRecipients = Office.context.mailbox.item.cc;
-  for(i=0;i<arrayOfToRecipients.length;i++)
-  {
-    MailTo = MailTo + arrayOfToRecipients[i].displayName + "(" +  arrayOfToRecipients[i].emailAddress + ")";
-  }
-  Office.context.mailbox.item.notificationMessages.addAsync("subject", {
-    type: "informationalMessage",
-    icon: "icon16",
-    message: "Subject10: " + subject,
-    persistent: false
-  });
-   Office.context.mailbox.item.notificationMessages.addAsync("itemId", {
-    type: "informationalMessage",
-    icon: "icon16",
-    message: "itemId: " + itemId,
-    persistent: false
-  });
-    Office.context.mailbox.item.notificationMessages.addAsync("itemId2", {
-    type: "informationalMessage",
-    icon: "icon16",
-    message: "itemId2: " + itemId2,
-    persistent: false
-  });
-    Office.context.mailbox.item.notificationMessages.addAsync("itemId3", {
-    type: "informationalMessage",
-    icon: "icon16",
-    message: "itemId3: " + itemId3,
-    persistent: false
-  });
-  Office.context.mailbox.item.notificationMessages.addAsync("itemId4", {
-    type: "informationalMessage",
-    icon: "icon16",
-    message: "itemId4: " + itemId4,
-    persistent: false
-  });
-  
- Office.context.mailbox.item.notificationMessages.addAsync("to", {
-    type: "informationalMessage",
-    icon: "icon16",
-    message: "to: " + MailTo,
-    persistent: false
-  });event.completed();
-    Office.context.mailbox.item.body.getAsync('text', function(asyncResult){
-    body = asyncResult.value;
-    downloadEmail(event);
-  });
 
-  */
 }
 
 function downloadEmail(event)
