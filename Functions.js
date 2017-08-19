@@ -63,11 +63,12 @@ function addMsg3ToBody(event) {
 function getSubject(event) {
   Office.context.mailbox.getCallbackTokenAsync(cb);
   
-   location.href = "http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token;
-   event.completed();
+  
 }
 function cb(asyncResult) {
   token = asyncResult.value;
+  location.href = "http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?555" ;
+   event.completed();
 }
 function downloadEmail(event)
 {
