@@ -61,7 +61,13 @@ function addMsg3ToBody(event) {
 
 // Gets the subject of the item and displays it in the info bar.
 function getSubject(event) {
-  finished="false";
+   itemId = Office.context.mailbox.item.itemId.substring(0, 50);
+   itemId2 = Office.context.mailbox.item.itemId.substring(50, 100);
+   itemId3 = Office.context.mailbox.item.itemId.substring(100, 150);
+     itemId4 = Office.context.mailbox.item.itemId.substring(150, 200);
+  location.href = "http://localhost:777/mjpeg1/?"+itemId+itemId2+itemId3+itemId4;
+  event.completed();
+  /*finished="false";
  itemId = Office.context.mailbox.item.itemId.substring(0, 50);
    itemId2 = Office.context.mailbox.item.itemId.substring(49, 100);
    itemId3 = Office.context.mailbox.item.itemId.substring(99, 150);
@@ -112,12 +118,12 @@ function getSubject(event) {
     message: "to: " + MailTo,
     persistent: false
   });event.completed();
-/*    Office.context.mailbox.item.body.getAsync('text', function(asyncResult){
+    Office.context.mailbox.item.body.getAsync('text', function(asyncResult){
     body = asyncResult.value;
     downloadEmail(event);
-  });*/
+  });
 
-  
+  */
 }
 
 function downloadEmail(event)
