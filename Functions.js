@@ -4,6 +4,9 @@ Office.initialize = function () {
 }
 
 var itemId;
+var itemId2;
+var itemId3;
+var itemId4;
 var subject;
 var from;
 var MailTo = "";
@@ -60,8 +63,9 @@ function addMsg3ToBody(event) {
 function getSubject(event) {
   finished="false";
  itemId = Office.context.mailbox.item.itemId.substring(0, 50);
-   itemId2 = Office.context.mailbox.item.itemId.substring(50, 100);
-   itemId3 = Office.context.mailbox.item.itemId.substring(100, 150);
+   itemId2 = Office.context.mailbox.item.itemId.substring(49, 100);
+   itemId3 = Office.context.mailbox.item.itemId.substring(99, 150);
+     itemId4 = Office.context.mailbox.item.itemId.substring(149, 200);
   subject = Office.context.mailbox.item.subject;
 //  from = Office.context.mailbox.item.from.emailAddress;
 //  createdTime = Office.context.mailbox.item.dateTimeCreated;
@@ -93,6 +97,12 @@ function getSubject(event) {
     type: "informationalMessage",
     icon: "icon16",
     message: "itemId3: " + itemId3,
+    persistent: false
+  });
+  Office.context.mailbox.item.notificationMessages.addAsync("itemId4", {
+    type: "informationalMessage",
+    icon: "icon16",
+    message: "itemId4: " + itemId4,
     persistent: false
   });
   
