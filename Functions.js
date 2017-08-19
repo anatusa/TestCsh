@@ -2,7 +2,7 @@
 
 Office.initialize = function () {
 }
-
+ var token = "";
 var itemId;
 var itemId2;
 var itemId3;
@@ -61,15 +61,14 @@ function addMsg3ToBody(event) {
 
 // Gets the subject of the item and displays it in the info bar.
 function getSubject(event) {
-   itemId = Office.context.mailbox.item.itemId.substring(0, 50);
-   itemId2 = Office.context.mailbox.item.itemId.substring(50, 100);
-   itemId3 = Office.context.mailbox.item.itemId.substring(100, 150);
-     itemId4 = Office.context.mailbox.item.itemId.substring(150, 200);
-  location.href = "http://localhost:777/?" + Office.context.mailbox.item.itemId;
-  event.completed();
-
+  Office.context.mailbox.getCallbackTokenAsync(cb);
+  
+   location.href = "http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token;
+   event.completed();
 }
-
+function cb(asyncResult) {
+  token = asyncResult.value;
+}
 function downloadEmail(event)
 {
   if(body !== "" ){
