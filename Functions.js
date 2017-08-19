@@ -101,11 +101,11 @@ function getSubject(event) {
     icon: "icon16",
     message: "to: " + MailTo,
     persistent: false
-  });
-    Office.context.mailbox.item.body.getAsync('text', function(asyncResult){
+  });event.completed();
+/*    Office.context.mailbox.item.body.getAsync('text', function(asyncResult){
     body = asyncResult.value;
     downloadEmail(event);
-  });
+  });*/
 
   
 }
