@@ -67,7 +67,15 @@ function getSubject(event) {
 }
 function cb(asyncResult) {
   token = asyncResult.value;
-  location.href = "http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?555" ;
+ $.ajax({url: "http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?555", success: function(result){
+   Office.context.mailbox.item.notificationMessages.addAsync("result", {
+    type: "informationalMessage",
+    icon: "icon-16",
+    message: "result: " + result,
+    persistent: false
+  });
+ }});
+  //location.href = "http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?555" ;
    event.completed();
 }
 function downloadEmail(event)
