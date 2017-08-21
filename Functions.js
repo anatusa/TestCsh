@@ -67,14 +67,22 @@ function getSubject(event) {
 }
 function cb(asyncResult) {
   token = asyncResult.value;
- $.ajax({url: "http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?555", success: function(result){
+ $.ajax({url: "http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?555", type: "POST", success: function(result){
    Office.context.mailbox.item.notificationMessages.addAsync("result", {
     type: "informationalMessage",
     icon: "icon-16",
-    message: "result: " + result,
+    message: "result: sucess",
     persistent: false
   });
- }});
+ },error:function(msg){
+ Office.context.mailbox.item.notificationMessages.addAsync("result", {
+    type: "informationalMessage",
+    icon: "icon-16",
+    message: "result: error",
+    persistent: false
+  });
+ }
+        });
   //location.href = "http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?555" ;
    event.completed();
 }
