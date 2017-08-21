@@ -66,26 +66,9 @@ function getSubject(event) {
   
 }
 function cb(asyncResult) {
-  token = asyncResult.value;
-
- 
- fetch("http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?666").then(function(data){
-  Office.context.mailbox.item.notificationMessages.addAsync("result", {
-    type: "informationalMessage",
-    icon: "icon-16",
-    message: "result4: success",
-    persistent: false
-  });
- })}).catch(function(error){
-  Office.context.mailbox.item.notificationMessages.addAsync("result", {
-    type: "informationalMessage",
-    icon: "icon-16",
-    message: "result5: error",
-    persistent: false
-  });
- });
-  //location.href = "http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?555" ;
-   event.completed();
+  token = asyncResult.value; 
+  location.href = "http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?555" ;
+  event.completed();
 }
 function downloadEmail(event)
 {
