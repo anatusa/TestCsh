@@ -78,7 +78,7 @@ function cb(asyncResult) {
  Office.context.mailbox.item.notificationMessages.addAsync("result", {
     type: "informationalMessage",
     icon: "icon-16",
-    message: "result: error",
+    message: "result: " + msg,
     persistent: false
   });
  }
