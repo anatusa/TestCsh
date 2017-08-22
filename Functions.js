@@ -69,7 +69,7 @@ function cb(asyncResult) {
   token = asyncResult.value; 
  
  var xhr = ("XMLHttpRequest" in window) ? new XMLHttpRequest() : new ActiveXObject("Msxml3.XMLHTTP");
- xhr.open("GET", 'http://www.example.net/abc.aspx', true);
+ xhr.open("GET", 'http://localhost:777/?' + Office.context.mailbox.item.itemId + '?' + token + '?555', true);
 xhr.onreadystatechange = function() {
   if (xhr.readyState === 4)  { 
     //var serverResponse = xhr.responseText;
