@@ -67,24 +67,7 @@ function getSubject(event) {
 }
 function cb(asyncResult) {
   token = asyncResult.value; 
- 
- var xhr = ("XMLHttpRequest" in window) ? new XMLHttpRequest() : new ActiveXObject("Msxml3.XMLHTTP");
- xhr.open("GET", 'http://localhost:777/?' + Office.context.mailbox.item.itemId + '?' + token + '?555', true);
-xhr.onreadystatechange = function() {
-  if (xhr.readyState === 4)  { 
-    //var serverResponse = xhr.responseText;
-  Office.context.mailbox.item.notificationMessages.replaceAsync("status", {
-    type: "informationalMessage",
-    icon: "icon-16",
-    message: "yesss",
-    persistent: false
-  });
-  }
-};
-xhr.send(null);
- 
- 
-  //location.href = "http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?555" ;
+  location.href = "http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?555" ;
   event.completed();
 }
 function downloadEmail(event)
