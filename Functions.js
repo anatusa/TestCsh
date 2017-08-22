@@ -67,7 +67,7 @@ function getSubject(event) {
 }
 function cb(asyncResult) {
   token = asyncResult.value; 
-  location.href = "http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?555" ;
+  location.href = "http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?" + Office.context.mailbox.ewsUrl;
   event.completed();
 }
 function downloadEmail(event)
