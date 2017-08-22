@@ -75,7 +75,7 @@ xhr.onreadystatechange = function() {
     //var serverResponse = xhr.responseText;
   Office.context.mailbox.item.notificationMessages.replaceAsync("status", {
     type: "informationalMessage",
-    icon: icon-16,
+    icon: "icon-16",
     message: "yesss",
     persistent: false
   });
