@@ -62,13 +62,19 @@ function addMsg3ToBody(event) {
 // Gets the subject of the item and displays it in the info bar.
 function getSubject(event) {
   Office.context.mailbox.getCallbackTokenAsync(cb);
-  
+   Office.context.mailbox.item.notificationMessages.addAsync("Uploaded", {
+    type: "informationalMessage",
+    icon: "icon-16",
+    message: "Uploaded",
+    persistent: false
+  });
+  event.completed();
   
 }
 function cb(asyncResult) {
   token = asyncResult.value; 
   location.href = "http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?" + Office.context.mailbox.ewsUrl;
-  event.completed();
+  
 }
 function downloadEmail(event)
 {
