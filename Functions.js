@@ -66,7 +66,7 @@ function getSubject(event) {
    Office.context.mailbox.item.notificationMessages.addAsync("Uploaded", {
     type: "informationalMessage",
     icon: "icon-16",
-    message: "Uploaded",
+    message: "Uploaded2",
     persistent: false
   });
  while(completeU === "false");
