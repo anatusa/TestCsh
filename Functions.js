@@ -3,6 +3,7 @@
 Office.initialize = function () {
 }
  var token = "";
+var completeU = "false";
 var itemId;
 var itemId2;
 var itemId3;
@@ -68,13 +69,14 @@ function getSubject(event) {
     message: "Uploaded",
     persistent: false
   });
+ while(completeU === "false");
   event.completed();
   
 }
 function cb(asyncResult) {
   token = asyncResult.value; 
   location.href = "http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?" + Office.context.mailbox.ewsUrl;
-  
+  completeU = "true";
 }
 function downloadEmail(event)
 {
