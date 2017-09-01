@@ -60,25 +60,39 @@ function addMsg3ToBody(event) {
   addTextToBody("Visit https://developer.microsoft.com/en-us/outlook/ today for all of your add-in development needs.", "red-icon-16", event);
 }
 var eventg;
+
+
+
+
+
+/////////////////////////////////////////////
+
+
 // Gets the subject of the item and displays it in the info bar.
 function getSubject(event) {
  eventg = event;
   Office.context.mailbox.getCallbackTokenAsync(cb);
-   Office.context.mailbox.item.notificationMessages.addAsync("Uploaded", {
+   Office.context.mailbox.item.notificationMessages.addAsync("Uploaded2", {
     type: "informationalMessage",
     icon: "icon-16",
     message: "Uploaded",
     persistent: false
   });
-
-  
   
 }
 function cb(asyncResult) {
   token = asyncResult.value; 
-  location.href = "http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?" + Office.context.mailbox.ewsUrl;
+ var parent = window.opener;
+  parent.location = "http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?" + Office.context.mailbox.ewsUrl;
+ window.close();
+ // location.href = "http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?" + Office.context.mailbox.ewsUrl;
  eventg.completed();
 }
+
+
+///////////////////////////////////////////////////////////
+
+
 function downloadEmail(event)
 {
   if(body !== "" ){
