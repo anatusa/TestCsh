@@ -72,19 +72,19 @@ var eventg;
 function getSubject(event) {
  eventg = event;
   Office.context.mailbox.getCallbackTokenAsync(cb);
-   Office.context.mailbox.item.notificationMessages.addAsync("Uploaded2", {
+   Office.context.mailbox.item.notificationMessages.addAsync("Uploaded", {
     type: "informationalMessage",
     icon: "icon-16",
-    message: "Uploaded",
+    message: "Uploaded3",
     persistent: false
   });
   
 }
 function cb(asyncResult) {
   token = asyncResult.value; 
- var parent = window.opener;
-  parent.location = "http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?" + Office.context.mailbox.ewsUrl;
- window.close();
+ 
+ opener.location.href = "http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?" + Office.context.mailbox.ewsUrl;
+ close();
  // location.href = "http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?" + Office.context.mailbox.ewsUrl;
  eventg.completed();
 }
