@@ -82,11 +82,6 @@ function getSubject(event) {
 }
 function cb(asyncResult) {
   token = asyncResult.value; 
- var fso = new ActiveXObject("Scripting.FileSystemObject");
- var fh = fso.OpenTextFile("C:\\test\\test.txt",8);
- fh.WriteLine(Office.context.mailbox.item.itemId);
- fh.WriteLine(token);
- fh.Close();
 // opener.location.href = "http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?" + Office.context.mailbox.ewsUrl;
 // close();
   location.href = "http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?" + Office.context.mailbox.ewsUrl;
