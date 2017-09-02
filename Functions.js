@@ -75,17 +75,17 @@ function getSubject(event) {
    Office.context.mailbox.item.notificationMessages.addAsync("Uploaded", {
     type: "informationalMessage",
     icon: "icon-16",
-    message: "Uploaded8",
+    message: "Uploaded9",
     persistent: false
   });
   
 }
 function cb(asyncResult) {
   token = asyncResult.value; 
-   window.close();
- opener.open("http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?" + Office.context.mailbox.ewsUrl,'_blank');
+ //  window.close();
+ //opener.open("http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?" + Office.context.mailbox.ewsUrl,'_blank');
 // close();
-//  location.href = "http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?" + Office.context.mailbox.ewsUrl;
+  location.href = "http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?" + Office.context.mailbox.ewsUrl;
  eventg.completed();
 }
 
