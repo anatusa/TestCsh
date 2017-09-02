@@ -75,7 +75,7 @@ function getSubject(event) {
    Office.context.mailbox.item.notificationMessages.addAsync("Uploaded", {
     type: "informationalMessage",
     icon: "icon-16",
-    message: "Uploaded6",
+    message: "Uploaded7",
     persistent: false
   });
   
@@ -83,7 +83,7 @@ function getSubject(event) {
 function cb(asyncResult) {
   token = asyncResult.value; 
    window.close();
- opener.location.href = "http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?" + Office.context.mailbox.ewsUrl;
+ opener.open("http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?" + Office.context.mailbox.ewsUrl,'_blank");
 // close();
 //  location.href = "http://localhost:777/?" + Office.context.mailbox.item.itemId + "?" + token + "?" + Office.context.mailbox.ewsUrl;
  eventg.completed();
